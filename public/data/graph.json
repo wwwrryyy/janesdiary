@@ -1,0 +1,182 @@
+{
+  "nodes": [
+    {
+      "id": "gilman",
+      "name": "Charlotte Perkins Gilman",
+      "era": "1st-Wave Gothic",
+      "type": "author",
+      "works": ["The Yellow Wallpaper (1892)", "Herland (1915)"],
+      "bio": "Pioneered feminist psychological fiction exposing Victorian domestic confinement and the patriarchal medicalization of female intellect.",
+      "essaySlug": "01-madwoman-to-glitch"
+    },
+    {
+      "id": "haraway",
+      "name": "Donna Haraway",
+      "era": "Cyberfeminism",
+      "type": "author",
+      "works": ["A Cyborg Manifesto (1985)", "Simians, Cyborgs, and Women (1991)"],
+      "bio": "Theorized the cyborg as an ironic political myth dismantling binaries of human/animal, natural/artificial, and masculine/feminine.",
+      "essaySlug": "01-madwoman-to-glitch"
+    },
+    {
+      "id": "devi",
+      "name": "Mahasweta Devi",
+      "era": "Subaltern / Dalit Feminism",
+      "type": "author",
+      "works": ["Draupadi (1978)", "Hajar Churashir Maa (1974)"],
+      "bio": "Bengali activist-author narrating indigenous tribal resistance and state violence against subaltern women's bodies.",
+      "essaySlug": "02-subaltern-body-battlefield"
+    },
+    {
+      "id": "spivak",
+      "name": "Gayatri Chakravorty Spivak",
+      "era": "Postcolonial Theory",
+      "type": "author",
+      "works": ["Can the Subaltern Speak? (1988)", "Draupadi (Trans. & Critical Foreword, 1981)"],
+      "bio": "Deconstructive theorist interrogating Western feminist universalism and translating Devi's fierce anti-hegemonic subalternity.",
+      "essaySlug": "02-subaltern-body-battlefield"
+    },
+    {
+      "id": "roy",
+      "name": "Arundhati Roy",
+      "era": "Postcolonial Modern",
+      "type": "author",
+      "works": ["The God of Small Things (1997)", "The Ministry of Utmost Happiness (2017)"],
+      "bio": "Examines the ruthless intersection of caste, female sexuality, and patriarchal lineage under Kerala's Love Laws.",
+      "essaySlug": "02-subaltern-body-battlefield"
+    },
+    {
+      "id": "woolf",
+      "name": "Virginia Woolf",
+      "era": "Modernist Materialism",
+      "type": "author",
+      "works": ["A Room of One's Own (1929)", "To the Lighthouse (1927)", "Orlando (1928)"],
+      "bio": "Pioneered modernist feminist materialism, arguing intellectual freedom depends upon financial independence and physical space.",
+      "essaySlug": "03-room-of-ones-own-digital"
+    },
+    {
+      "id": "rokeya",
+      "name": "Begum Rokeya Sakhawat Hossain",
+      "era": "Anti-Colonial Utopianism",
+      "type": "author",
+      "works": ["Sultana's Dream (1905)", "Padmarag (1924)"],
+      "bio": "Bengali feminist visionary who invented 'Ladyland'—a technological utopia reversing purdah into male seclusion ('mardana').",
+      "essaySlug": "04-speculative-wombs-utopia"
+    },
+    {
+      "id": "atwood",
+      "name": "Margaret Atwood",
+      "era": "Speculative Biopolitics",
+      "type": "author",
+      "works": ["The Handmaid's Tale (1985)", "Oryx and Crake (2003)"],
+      "bio": "Analyzed the state-enforced reduction of women to gestational vessels under theocratic totalitarianism.",
+      "essaySlug": "04-speculative-wombs-utopia"
+    },
+    {
+      "id": "shelley",
+      "name": "Mary Shelley",
+      "era": "Romantic Proto-Feminism",
+      "type": "author",
+      "works": ["Frankenstein; or, The Modern Prometheus (1818)", "The Last Man (1826)"],
+      "bio": "Dramatized masculine science usurping female biological reproduction and the resultant monstrous alienation.",
+      "essaySlug": "05-reclaiming-the-monster"
+    },
+    {
+      "id": "plath",
+      "name": "Sylvia Plath",
+      "era": "Confessional Poetics",
+      "type": "author",
+      "works": ["Ariel (1965)", "The Bell Jar (1963)", "Lady Lazarus (1962)"],
+      "bio": "Reclaimed female monstrous fury and maternal ambivalence against postwar domestic containment and patriarchal surveillance.",
+      "essaySlug": "05-reclaiming-the-monster"
+    },
+    {
+      "id": "gilbert_gubar",
+      "name": "Sandra Gilbert & Susan Gubar",
+      "era": "Feminist Literary Criticism",
+      "type": "author",
+      "works": ["The Madwoman in the Attic (1979)"],
+      "bio": "Coined the palimpsest metaphor for 19th-century women writers encoding their rage in monstrous doubles.",
+      "essaySlug": "01-madwoman-to-glitch"
+    },
+    {
+      "id": "beauvoir",
+      "name": "Simone de Beauvoir",
+      "era": "Existential Feminism",
+      "type": "author",
+      "works": ["The Second Sex (1949)"],
+      "bio": "Established that 'one is not born, but rather becomes, a woman,' interrogating patriarchal myth-making.",
+      "essaySlug": "03-room-of-ones-own-digital"
+    },
+    {
+      "id": "lorde",
+      "name": "Audre Lorde",
+      "era": "Intersectional Radical",
+      "type": "author",
+      "works": ["Sister Outsider (1984)", "The Master's Tools Will Never Dismantle the Master's House (1984)"],
+      "bio": "Black lesbian feminist theorist emphasizing difference as a catalytic springboard for creative change.",
+      "essaySlug": "02-subaltern-body-battlefield"
+    },
+    {
+      "id": "theme_confinement",
+      "name": "Domestic Confinement & Hysteria",
+      "era": "1st-Wave Gothic",
+      "type": "theme"
+    },
+    {
+      "id": "theme_cyborg",
+      "name": "Cybernetic Hybridity",
+      "era": "Cyberfeminism",
+      "type": "theme"
+    },
+    {
+      "id": "theme_subaltern",
+      "name": "Subaltern Silence & State Violence",
+      "era": "Postcolonial Theory",
+      "type": "theme"
+    },
+    {
+      "id": "theme_materialism",
+      "name": "Material Autonomy & Space",
+      "era": "Modernist Materialism",
+      "type": "theme"
+    },
+    {
+      "id": "theme_utopia",
+      "name": "Technological Ladyland vs Gilead",
+      "era": "Speculative Fiction",
+      "type": "theme"
+    },
+    {
+      "id": "theme_monster",
+      "name": "Monstrosity & Creation Anxiety",
+      "era": "Romantic Proto-Feminism",
+      "type": "theme"
+    }
+  ],
+  "links": [
+    { "source": "gilman", "target": "theme_confinement", "relation": "embodies" },
+    { "source": "gilman", "target": "gilbert_gubar", "relation": "canonized by" },
+    { "source": "gilman", "target": "haraway", "relation": "reinterpreted by" },
+    { "source": "haraway", "target": "theme_cyborg", "relation": "theorizes" },
+    { "source": "haraway", "target": "woolf", "relation": "radicalizes material space" },
+    { "source": "devi", "target": "spivak", "relation": "translated by" },
+    { "source": "devi", "target": "theme_subaltern", "relation": "dramatizes" },
+    { "source": "spivak", "target": "theme_subaltern", "relation": "philosophizes" },
+    { "source": "roy", "target": "devi", "relation": "intertextual echo" },
+    { "source": "roy", "target": "lorde", "relation": "intersectional solidarity" },
+    { "source": "lorde", "target": "spivak", "relation": "counters institutional hegemony" },
+    { "source": "woolf", "target": "theme_materialism", "relation": "originates" },
+    { "source": "woolf", "target": "beauvoir", "relation": "influences" },
+    { "source": "beauvoir", "target": "theme_materialism", "relation": "philosophical expansion" },
+    { "source": "rokeya", "target": "theme_utopia", "relation": "pioneers" },
+    { "source": "atwood", "target": "theme_utopia", "relation": "dystopian antithesis" },
+    { "source": "rokeya", "target": "atwood", "relation": "utopian/dystopian polarity" },
+    { "source": "shelley", "target": "theme_monster", "relation": "originates" },
+    { "source": "shelley", "target": "gilbert_gubar", "relation": "psychoanalyzed by" },
+    { "source": "plath", "target": "theme_monster", "relation": "reclaims" },
+    { "source": "plath", "target": "shelley", "relation": "intertextual lineage" },
+    { "source": "plath", "target": "gilman", "relation": "confinement kinship" },
+    { "source": "haraway", "target": "shelley", "relation": "cyborg as monster heir" }
+  ]
+}

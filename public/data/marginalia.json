@@ -1,0 +1,111 @@
+{
+  "01-madwoman-to-glitch": [
+    {
+      "id": "sch-01-01",
+      "paragraphIndex": 1,
+      "highlightedQuote": "I personally believe that congenial work, with excitement and change, would do me good.",
+      "author": "Shawn Cherian (26BCE1820)",
+      "tag": "Biographical & Medical Criticism",
+      "comment": "Gilman directly critiques Dr. Silas Weir Mitchell's notorious 'Rest Cure' (to which Gilman herself was subjected in 1887). The patriarchal psychiatric establishment pathologized female intellectual ambition as nervous breakdown ('neurasthenia'), forbidding reading, writing, and creative labor.",
+      "timestamp": "2026-10-19"
+    },
+    {
+      "id": "sch-01-02",
+      "paragraphIndex": 3,
+      "highlightedQuote": "It is the pattern that keeps him so still. It is so puzzling.",
+      "author": "Shawn Cherian (26BCE1820)",
+      "tag": "Formalist & Gothic Doubling",
+      "comment": "The wallpaper functions as a physical textual palimpsest. The narrator's struggle to decipher its contradictory lines mirrors the 19th-century woman writer's challenge: deciphering an opaque, suffocating masculine literary tradition to locate her own trapped reflection.",
+      "timestamp": "2026-10-19"
+    },
+    {
+      "id": "sch-01-03",
+      "paragraphIndex": 6,
+      "highlightedQuote": "The cyborg does not dream of community on the model of the organic family.",
+      "author": "Shawn Cherian (26BCE1820)",
+      "tag": "Cyberfeminist Theory",
+      "comment": "Haraway rejects the Edenic myth of feminine purity. By embracing the cyborg—a creature of social reality and fiction—she refuses the patriarchal demand for organic wholeness, finding liberation in hybridity, code, and technological contamination.",
+      "timestamp": "2026-10-19"
+    }
+  ],
+  "02-subaltern-body-battlefield": [
+    {
+      "id": "sch-02-01",
+      "paragraphIndex": 2,
+      "highlightedQuote": "There is no man here that I should be ashamed. I will not let you put my cloth on me.",
+      "author": "Shawn Cherian (26BCE1820)",
+      "tag": "Subaltern Resistance & Bodily Subversion",
+      "comment": "Dopdi Mejhen subverts the classical Mahabharata trope of divine intervention (where Krishna miraculously replenishes Draupadi's sari). Stripped and brutalized by state forces, Dopdi refuses the patriarchal modesty code, converting her mutilated, naked flesh into an unconquerable weapon that terrifies the Senanayak.",
+      "timestamp": "2026-10-19"
+    },
+    {
+      "id": "sch-02-02",
+      "paragraphIndex": 4,
+      "highlightedQuote": "The Love Laws that lay down who should be loved, and how. And how much.",
+      "author": "Shawn Cherian (26BCE1820)",
+      "tag": "Caste & Patriarchal Biopolitics",
+      "comment": "Arundhati Roy exposes how the Syrian Christian feudal hierarchy and caste supremacy in Ayemenem police female desire. Ammu's transgressive love for Velutha (a Dalit carpenter) ruptures the foundational bedrock of caste purity, triggering punitive violence against both.",
+      "timestamp": "2026-10-19"
+    }
+  ],
+  "03-room-of-ones-own-digital": [
+    {
+      "id": "sch-03-01",
+      "paragraphIndex": 1,
+      "highlightedQuote": "A woman must have money and a room of her own if she is to write fiction.",
+      "author": "Shawn Cherian (26BCE1820)",
+      "tag": "Materialist Feminist Critique",
+      "comment": "Woolf grounds literary genius in cold economic reality. Without an independent income of £500 a year and a locked room, female creativity is choked by domestic interruptions, financial dependency, and psychological deference to patriarchal approval.",
+      "timestamp": "2026-10-19"
+    },
+    {
+      "id": "sch-03-02",
+      "paragraphIndex": 5,
+      "highlightedQuote": "The algorithmic platform promises boundless reach while enclosing creator labor within automated surveillance.",
+      "author": "Shawn Cherian (26BCE1820)",
+      "tag": "Digital Humanities & Platform Capitalism",
+      "comment": "Applying Woolf to 2026: The physical 'room' has transformed into algorithmic digital real estate (Substack, TikTok, digital archives). Yet the modern woman writer remains precarious—compelled to perform continuous affective labor under opaque, black-box recommendation engines.",
+      "timestamp": "2026-10-19"
+    }
+  ],
+  "04-speculative-wombs-utopia": [
+    {
+      "id": "sch-04-01",
+      "paragraphIndex": 2,
+      "highlightedQuote": "You need not fear, gentlemen; they are timid like sheep.",
+      "author": "Shawn Cherian (26BCE1820)",
+      "tag": "Anti-Colonial Satire & Gender Inversion",
+      "comment": "Begum Rokeya's 1905 novella uses sharp irony to reverse the patriarchal seclusion of purdah into 'mardana' (male domestic confinement). Rather than relying on physical violence, the women of Ladyland employ solar energy, cloud-harvesting science, and pacifist statecraft.",
+      "timestamp": "2026-10-19"
+    },
+    {
+      "id": "sch-04-02",
+      "paragraphIndex": 5,
+      "highlightedQuote": "We are two-legged wombs, that's all: sacred vessels, ambulatory chalices.",
+      "author": "Shawn Cherian (26BCE1820)",
+      "tag": "Biopolitical Enclosure",
+      "comment": "Atwood’s Gilead illustrates the ultimate nightmare of patriarchal statecraft: the stripping of female legal personhood, replaced by purely functional reproductive utility. Offred's resistance lies in the sensory retrieval of memories and clandestine linguistic play.",
+      "timestamp": "2026-10-19"
+    }
+  ],
+  "05-reclaiming-the-monster": [
+    {
+      "id": "sch-05-01",
+      "paragraphIndex": 2,
+      "highlightedQuote": "Did I request thee, Maker, from my clay to mould me man?",
+      "author": "Shawn Cherian (26BCE1820)",
+      "tag": "Female Creation Anxiety & Romantic Egoism",
+      "comment": "Mary Shelley, writing in the shadow of her mother Mary Wollstonecraft's death from childbirth fever and her own lost infants, critiques Victor Frankenstein's narcissistic attempt to bypass female sexual reproduction through sterile, masculine scientific ambition.",
+      "timestamp": "2026-10-19"
+    },
+    {
+      "id": "sch-05-02",
+      "paragraphIndex": 4,
+      "highlightedQuote": "Out of the ash / I rise with my red hair / And I eat men like air.",
+      "author": "Shawn Cherian (26BCE1820)",
+      "tag": "Confessional Poetics & Female Rage",
+      "comment": "Plath's 'Lady Lazarus' reclaims the archetype of the resurrected monster. The female speaker transforms her suicidal torment and medical voyeurism into terrifying, devouring theatrical power, explicitly consuming patriarchal tormentors.",
+      "timestamp": "2026-10-19"
+    }
+  ]
+}
