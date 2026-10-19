@@ -4,7 +4,7 @@
 **Author:** Shawn Shaibu Cherian (`26BCE1820`)  
 **Institution:** Vellore Institute of Technology (VIT), Chennai  
 **Deliverable:** English Digital Assignment (DA)  
-**Live Deployment URL:** `https://wwwrryyy.github.io/janesdiary/`
+**Live Deployment URL:** [https://wwwrryyy.github.io/janesdiary/](http://wwwrryyy.github.io/janesdiary/)
 
 ---
 
