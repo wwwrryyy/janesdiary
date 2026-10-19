@@ -1,0 +1,249 @@
+---
+import { withBase } from '../lib/url';
+import { ESSAY_ENTRIES } from '../data/entries';
+---
+
+<footer class="site-footer no-print" role="contentinfo">
+  <div class="container">
+    <div class="site-footer__grid">
+      <!-- Column 1: Brand & Academic Attribution -->
+      <div class="site-footer__col site-footer__col--brand">
+        <a href={withBase('/')} class="site-footer__wordmark">Jane’s Diary</a>
+        <p class="site-footer__desc">
+          An interactive digital archive of feminist literature—scraping back canonical erasures from Romantic proto-feminism to postcolonial subaltern studies and cyberfeminism.
+        </p>
+        <div class="site-footer__student-box">
+          <span class="badge-pill">Digital Assignment</span>
+          <p class="site-footer__student-name">Shawn Shaibu Cherian</p>
+          <p class="site-footer__student-meta">Reg. No. 26BCE1820 · VIT Chennai</p>
+        </div>
+      </div>
+
+      <!-- Column 2: Cornerstone Entries I–III -->
+      <div class="site-footer__col">
+        <h3 class="caption-uppercase site-footer__heading">Entries 01 – 03</h3>
+        <ul class="site-footer__list">
+          {ESSAY_ENTRIES.slice(0, 3).map((entry) => (
+            <li>
+              <a href={withBase(`/entries/${entry.slug}/`)} class="footer-link">
+                <span class="site-footer__num">{entry.number}.</span> {entry.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Column 3: Cornerstone Entries IV–V -->
+      <div class="site-footer__col">
+        <h3 class="caption-uppercase site-footer__heading">Entries 04 – 05</h3>
+        <ul class="site-footer__list">
+          {ESSAY_ENTRIES.slice(3, 5).map((entry) => (
+            <li>
+              <a href={withBase(`/entries/${entry.slug}/`)} class="footer-link">
+                <span class="site-footer__num">{entry.number}.</span> {entry.title}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href={withBase('/#bylines')} class="footer-link">
+              “By a Lady” Pseudonym Archive
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Interactive Humanities Lab -->
+      <div class="site-footer__col">
+        <h3 class="caption-uppercase site-footer__heading">Interactive Studio</h3>
+        <ul class="site-footer__list">
+          <li>
+            <a href={withBase('/blackout/')} class="footer-link">
+              Blackout Poetry Studio (PNG Export)
+            </a>
+          </li>
+          <li>
+            <a href={withBase('/entries/01-madwoman-to-glitch/#voice-player')} class="footer-link">
+              ElevenLabs Voice Read-Aloud Bar
+            </a>
+          </li>
+          <li>
+            <a href={withBase('/entries/01-madwoman-to-glitch/#critical-lens')} class="footer-link">
+              Critical Lens X-Ray (Surface / Subtext)
+            </a>
+          </li>
+          <li>
+            <a href={withBase('/entries/01-madwoman-to-glitch/#works-cited')} class="footer-link">
+              MLA 9th Works Cited Generator
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 5: Evaluator & Rubric -->
+      <div class="site-footer__col">
+        <h3 class="caption-uppercase site-footer__heading">Evaluator &amp; Rubric</h3>
+        <ul class="site-footer__list">
+          <li>
+            <a href={withBase('/about/')} class="footer-link">
+              DA Info &amp; Grading Rubric
+            </a>
+          </li>
+          <li>
+            <a href={withBase('/about/#edit-guide')} class="footer-link">
+              How to Fill In Your Essays
+            </a>
+          </li>
+          <li>
+            <a href={withBase('/about/#works-cited-master')} class="footer-link">
+              Consolidated Bibliography
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://wwwrryyy.github.io/janesdiary/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer-link"
+            >
+              Live GitHub Pages URL ↗
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p class="caption">
+        © {new Date().getFullYear()} Shawn Shaibu Cherian (26BCE1820) · Vellore Institute of Technology (VIT), Chennai. Built with Astro Static SSG for GitHub Pages.
+      </p>
+      <div class="site-footer__bottom-links">
+        <a href={withBase('/')} class="footer-link">Home</a>
+        <span aria-hidden="true">·</span>
+        <a href={withBase('/blackout/')} class="footer-link">Blackout Studio</a>
+        <span aria-hidden="true">·</span>
+        <a href={withBase('/about/')} class="footer-link">Rubric &amp; Guide</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-canvas);
+    color: var(--color-body);
+    border-top: 1px solid var(--color-hairline);
+    padding: 64px 0 48px;
+    font-size: 15px;
+    line-height: 1.47;
+    letter-spacing: 0.15px;
+  }
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1.6fr repeat(4, 1fr);
+    gap: var(--space-xl);
+    padding-bottom: var(--space-xxl);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .site-footer__wordmark {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--color-ink);
+    margin-bottom: var(--space-sm);
+  }
+
+  .site-footer__desc {
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.55;
+    margin-bottom: var(--space-base);
+  }
+
+  .site-footer__student-box {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-lg);
+    padding: var(--space-sm) var(--space-base);
+  }
+
+  .site-footer__student-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin-top: var(--space-xs);
+  }
+
+  .site-footer__student-meta {
+    font-size: 13px;
+    color: var(--color-muted);
+  }
+
+  .site-footer__heading {
+    color: var(--color-ink);
+    margin-bottom: var(--space-base);
+  }
+
+  .site-footer__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .site-footer__num {
+    color: var(--color-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .footer-link {
+    background-color: transparent;
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.45;
+    transition: color 0.15s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--color-ink);
+  }
+
+  .site-footer__bottom {
+    padding-top: var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-base);
+  }
+
+  .site-footer__bottom-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  @media (max-width: 1024px) {
+    .site-footer__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .site-footer__col--brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .site-footer {
+      padding: 48px 0 32px;
+    }
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+  }
+</style>

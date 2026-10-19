@@ -1,0 +1,593 @@
+/* ==========================================================================
+   JANE'S DIARY — ELEVENLABS EDITORIAL DESIGN SYSTEM
+   Reference: ~/.agents/design-md/design-md/elevenlabs/DESIGN.md
+   Author: Shawn Shaibu Cherian (26BCE1820) · VIT Chennai
+   ========================================================================== */
+
+:root {
+  /* Colors — Brand & Action */
+  --color-primary: #292524;
+  --color-primary-active: #0c0a09;
+  --color-ink: #0c0a09;
+  --color-body: #4e4e4e;
+  --color-body-strong: #292524;
+  --color-muted: #777169;
+  --color-muted-soft: #a8a29e;
+
+  /* Colors — Hairlines */
+  --color-hairline: #e7e5e4;
+  --color-hairline-soft: #f0efed;
+  --color-hairline-strong: #d6d3d1;
+
+  /* Colors — Surfaces */
+  --color-canvas: #f5f5f5;
+  --color-canvas-soft: #fafafa;
+  --color-canvas-deep: #0c0a09;
+  --color-surface-card: #ffffff;
+  --color-surface-strong: #f0efed;
+  --color-surface-dark: #0c0a09;
+  --color-surface-dark-elevated: #1c1917;
+  --color-on-primary: #ffffff;
+  --color-on-dark: #ffffff;
+  --color-on-dark-soft: #a8a29e;
+
+  /* Atmospheric Gradient Orbs (Background Decoration Only) */
+  --color-gradient-mint: #a7e5d3;
+  --color-gradient-peach: #f4c5a8;
+  --color-gradient-lavender: #c8b8e0;
+  --color-gradient-sky: #a8c8e8;
+  --color-gradient-rose: #e8b8c4;
+
+  /* Semantic */
+  --color-semantic-error: #dc2626;
+  --color-semantic-success: #16a34a;
+
+  /* Typography Families */
+  --font-display: 'Cormorant Garamond', 'EB Garamond', 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Border Radius Scale */
+  --radius-none: 0px;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-xxl: 24px;
+  --radius-pill: 9999px;
+  --radius-full: 9999px;
+
+  /* Spacing System */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-base: 16px;
+  --space-md: 20px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+  --space-section: 96px;
+
+  /* Elevation */
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.04);
+  --container-max: 1200px;
+}
+
+/* ==========================================================================
+   1. RESET & BASE CANVAS
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-canvas);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-canvas);
+  color: var(--color-body);
+  overflow-x: hidden;
+}
+
+main {
+  flex: 1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   2. TYPOGRAPHY HIERARCHY (Display Weight Strictly 300 — Never Bold)
+   ========================================================================== */
+
+.display-mega {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -1.92px;
+  color: var(--color-ink);
+}
+
+.display-xl {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.96px;
+  color: var(--color-ink);
+}
+
+.display-lg {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 1.17;
+  letter-spacing: -0.36px;
+  color: var(--color-ink);
+}
+
+.display-md {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1.13;
+  letter-spacing: -0.32px;
+  color: var(--color-ink);
+}
+
+.display-sm {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--color-ink);
+}
+
+.title-md {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--color-ink);
+}
+
+.title-sm {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.44;
+  letter-spacing: 0.18px;
+  color: var(--color-ink);
+}
+
+.body-md {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.16px;
+  color: var(--color-body);
+}
+
+.body-strong {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.16px;
+  color: var(--color-body-strong);
+}
+
+.body-sm {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.47;
+  letter-spacing: 0.15px;
+  color: var(--color-body);
+}
+
+.caption {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--color-muted);
+}
+
+.caption-uppercase {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   3. LAYOUT & CONTAINERS
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.section-band {
+  padding: var(--space-section) 0;
+  position: relative;
+}
+
+.section-band--soft {
+  background-color: var(--color-canvas-soft);
+  border-top: 1px solid var(--color-hairline);
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.section-header {
+  max-width: 720px;
+  margin-bottom: var(--space-xxl);
+}
+
+.section-header--centered {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.hairline-divider {
+  border: 0;
+  border-top: 1px solid var(--color-hairline);
+  margin: 0;
+}
+
+/* ==========================================================================
+   4. ATMOSPHERIC GRADIENT ORBS (Decorative Background Blooms Only)
+   ========================================================================== */
+
+.orb-stage {
+  position: relative;
+  overflow: hidden;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: var(--radius-full);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(56px);
+  opacity: 0.55;
+  animation: orb-drift 18s ease-in-out infinite alternate;
+}
+
+.ambient-orb--mint {
+  background: radial-gradient(circle, var(--color-gradient-mint) 0%, rgba(167, 229, 211, 0) 70%);
+}
+
+.ambient-orb--peach {
+  background: radial-gradient(circle, var(--color-gradient-peach) 0%, rgba(244, 197, 168, 0) 70%);
+}
+
+.ambient-orb--lavender {
+  background: radial-gradient(circle, var(--color-gradient-lavender) 0%, rgba(200, 184, 224, 0) 70%);
+}
+
+.ambient-orb--sky {
+  background: radial-gradient(circle, var(--color-gradient-sky) 0%, rgba(168, 200, 232, 0) 70%);
+}
+
+.ambient-orb--rose {
+  background: radial-gradient(circle, var(--color-gradient-rose) 0%, rgba(232, 184, 196, 0) 70%);
+}
+
+@keyframes orb-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(16px, -14px, 0) scale(1.06);
+  }
+}
+
+/* ==========================================================================
+   5. ELEVENLABS CORE COMPONENTS
+   ========================================================================== */
+
+/* Buttons */
+.button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  padding: 10px 20px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.18s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.button-primary:hover {
+  background-color: var(--color-primary-active);
+}
+
+.button-primary:active {
+  background-color: var(--color-primary-active);
+  transform: translateY(1px);
+}
+
+.button-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  background-color: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  padding: 9px 19px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-hairline-strong);
+  cursor: pointer;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+  white-space: nowrap;
+}
+
+.button-outline:hover {
+  border-color: var(--color-ink);
+  background-color: rgba(12, 10, 9, 0.03);
+}
+
+.button-outline[aria-pressed="true"],
+.button-outline.is-active {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border-color: var(--color-primary);
+}
+
+.button-tertiary-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.button-tertiary-text:hover {
+  opacity: 0.75;
+}
+
+/* Badges */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--color-surface-strong);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  padding: 4px 10px;
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+}
+
+.badge-dot--mint { background-color: var(--color-gradient-mint); }
+.badge-dot--peach { background-color: var(--color-gradient-peach); }
+.badge-dot--lavender { background-color: var(--color-gradient-lavender); }
+.badge-dot--sky { background-color: var(--color-gradient-sky); }
+.badge-dot--rose { background-color: var(--color-gradient-rose); }
+
+/* Cards */
+.feature-card {
+  background-color: var(--color-surface-card);
+  color: var(--color-ink);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-hairline-strong);
+}
+
+.gradient-orb-card {
+  background-color: var(--color-canvas-soft);
+  color: var(--color-ink);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-xxl);
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.audio-waveform-card {
+  background-color: var(--color-surface-card);
+  color: var(--color-ink);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-hover);
+}
+
+.voice-icon-circular {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink);
+}
+
+.text-input {
+  background-color: var(--color-surface-card);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  height: 40px;
+  border: 1px solid var(--color-hairline-strong);
+  transition: border-color 0.15s ease;
+}
+
+.text-input:focus {
+  outline: none;
+  border: 2px solid var(--color-ink);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE BREAKPOINTS & REDUCED MOTION
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .display-mega {
+    font-size: 48px;
+    letter-spacing: -0.96px;
+  }
+  .display-xl {
+    font-size: 40px;
+    letter-spacing: -0.64px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --space-section: 64px;
+  }
+  .display-mega {
+    font-size: 34px;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  .display-xl {
+    font-size: 32px;
+    letter-spacing: -0.36px;
+  }
+  .display-lg {
+    font-size: 28px;
+  }
+  .container {
+    padding: 0 var(--space-base);
+  }
+  .ambient-orb {
+    transform: scale(0.7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   7. PRINT STYLESHEET (Academic Grading Printout via window.print())
+   ========================================================================== */
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt;
+  }
+  .no-print,
+  header.top-nav,
+  .audio-waveform-card,
+  .sticky-reading-bar,
+  .entry-pager {
+    display: none !important;
+  }
+  .section-band {
+    padding: 24px 0 !important;
+  }
+  .feature-card,
+  .gradient-orb-card {
+    box-shadow: none !important;
+    border: 1px solid #cccccc !important;
+    break-inside: avoid;
+  }
+  .ambient-orb {
+    display: none !important;
+  }
+}

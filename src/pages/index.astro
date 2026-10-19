@@ -1,0 +1,827 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/url';
+import { ESSAY_ENTRIES } from '../data/entries';
+import { BYLINE_ARCHIVE } from '../data/bylines';
+---
+
+<BaseLayout
+  title="Jane’s Diary — An Interactive Archive of Feminist Literature"
+  currentPath="/"
+>
+  <!-- 1. HERO BAND -->
+  <section class="hero-band orb-stage" aria-labelledby="hero-heading">
+    <div class="ambient-orb ambient-orb--mint hero-orb-1" aria-hidden="true"></div>
+    <div class="ambient-orb ambient-orb--peach hero-orb-2" aria-hidden="true"></div>
+    <div class="ambient-orb ambient-orb--lavender hero-orb-3" aria-hidden="true"></div>
+
+    <div class="container hero-band__inner">
+      <div class="hero-band__eyebrow">
+        <span class="badge-pill">
+          <span class="badge-dot badge-dot--mint" aria-hidden="true"></span>
+          English Digital Assignment · VIT Chennai
+        </span>
+        <span class="caption hero-band__author-tag">
+          Shawn Shaibu Cherian · Reg. No. 26BCE1820
+        </span>
+      </div>
+
+      <h1 id="hero-heading" class="display-mega hero-band__title">
+        A diary for the voices the canon filed under <em>Anonymous</em>.
+      </h1>
+
+      <p class="body-md hero-band__subtitle">
+        Named after Sandra Gilbert and Susan Gubar’s palimpsest metaphor—scraping back polite patriarchal surfaces to uncover women’s submerged manuscripts—<strong>Jane’s Diary</strong> is an interactive literary archive by <strong>Shawn Shaibu Cherian</strong> tracing feminist literature across five movements.
+      </p>
+
+      <div class="hero-band__cta-row">
+        <a href={withBase('/#entries')} class="button-primary">
+          Read the 5 Entries
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href={withBase('/blackout/')} class="button-outline">
+          Try Blackout Studio
+        </a>
+      </div>
+
+      <div class="hero-band__metrics" role="list" aria-label="Archive Highlights">
+        <div class="hero-metric" role="listitem">
+          <span class="caption-uppercase hero-metric__label">05 Cornerstone Entries</span>
+          <span class="caption">1818 Romantic Gothic to 1997 Postcolonial Subaltern</span>
+        </div>
+        <div class="hero-metric" role="listitem">
+          <span class="caption-uppercase hero-metric__label">Critical Lens X-Ray</span>
+          <span class="caption">Toggle Surface Prose vs. Feminist Subtext</span>
+        </div>
+        <div class="hero-metric" role="listitem">
+          <span class="caption-uppercase hero-metric__label">Voice Synthesis Bar</span>
+          <span class="caption">ElevenLabs-style Web Speech Read-Aloud</span>
+        </div>
+        <div class="hero-metric" role="listitem">
+          <span class="caption-uppercase hero-metric__label">Blackout Studio</span>
+          <span class="caption">Interactive Erasure &amp; High-DPI PNG Export</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hairline-divider" />
+
+  <!-- 2. THE 5 CORNERSTONE ENTRIES GRID -->
+  <section id="entries" class="section-band" aria-labelledby="entries-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-pill">
+          <span class="badge-dot badge-dot--peach" aria-hidden="true"></span>
+          Curated Syllabus · 5 Cornerstone Entries
+        </span>
+        <h2 id="entries-heading" class="display-lg section-title">
+          Five inquiries into confinement, body, room, utopia, and creation.
+        </h2>
+        <p class="body-md section-lead">
+          Each entry combines structured critical essay sections (ready for author prose in <code>src/content/essays/</code>), an interactive <strong>Critical Lens (Surface vs. Subtext)</strong> reader, an ElevenLabs-inspired <strong>Read-Aloud Voice Bar</strong>, and MLA 9th bibliography.
+        </p>
+      </div>
+
+      <div class="entries-grid">
+        {ESSAY_ENTRIES.map((entry) => (
+          <article class={`feature-card entry-card entry-card--${entry.orb}`}>
+            <div class={`ambient-orb ambient-orb--${entry.orb} entry-card__orb`} aria-hidden="true"></div>
+            <div class="entry-card__content">
+              <div class="entry-card__top">
+                <span class="badge-pill">
+                  <span class={`badge-dot badge-dot--${entry.orb}`} aria-hidden="true"></span>
+                  Entry No. {entry.number}
+                </span>
+                <span class="caption entry-card__era">{entry.era}</span>
+              </div>
+
+              <h3 class="display-sm entry-card__title">
+                <a href={withBase(`/entries/${entry.slug}/`)} class="entry-card__title-link">
+                  {entry.title}
+                </a>
+              </h3>
+
+              <p class="body-sm entry-card__subtitle">
+                {entry.subtitle}
+              </p>
+
+              <div class="entry-card__works" aria-label="Primary Literary Works Analyzed">
+                <span class="caption-uppercase entry-card__works-heading">Primary Works Analyzed</span>
+                <ul class="entry-card__works-list">
+                  {entry.primaryWorks.map((work) => (
+                    <li>
+                      <em>{work.title}</em> — {work.author} ({work.year})
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="entry-card__footer">
+                <span class="caption">{entry.readingTime} · {entry.criticalLensPassages.length} Critical Lens Passages</span>
+                <a href={withBase(`/entries/${entry.slug}/`)} class="button-outline entry-card__btn">
+                  Open Entry {entry.number}
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+
+        <!-- Evaluator & Rubric Companion Card (6th slot in 2/3-up grid) -->
+        <aside class="feature-card entry-card entry-card--evaluator">
+          <div class="entry-card__content">
+            <div class="entry-card__top">
+              <span class="badge-pill">
+                <span class="badge-dot badge-dot--lavender" aria-hidden="true"></span>
+                Evaluator Guide
+              </span>
+              <span class="caption">Reg. No. 26BCE1820</span>
+            </div>
+
+            <h3 class="display-sm entry-card__title">
+              Academic Rubric &amp; Author’s Editing Guide
+            </h3>
+
+            <p class="body-sm entry-card__subtitle">
+              Inspect the Digital Assignment grading criteria, consolidated MLA 9th Works Cited, and step-by-step instructions for replacing the structured student essay prompts in <code>src/content/essays/</code>.
+            </p>
+
+            <div class="entry-card__works">
+              <span class="caption-uppercase entry-card__works-heading">Student Details</span>
+              <p class="body-sm">
+                <strong>Shawn Shaibu Cherian</strong><br />
+                Reg. No. 26BCE1820 · VIT Chennai
+              </p>
+            </div>
+
+            <div class="entry-card__footer">
+              <span class="caption">Print-ready academic stylesheet</span>
+              <a href={withBase('/about/')} class="button-primary entry-card__btn">
+                View DA Rubric
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. "BY A LADY" BYLINE REVEAL ARCHIVE -->
+  <section id="bylines" class="section-band section-band--soft" aria-labelledby="bylines-heading">
+    <div class="container">
+      <div class="bylines-header">
+        <div>
+          <span class="badge-pill">
+            <span class="badge-dot badge-dot--lavender" aria-hidden="true"></span>
+            Interactive Archival Recovery
+          </span>
+          <h2 id="bylines-heading" class="display-lg section-title">
+            “By a Lady”: The Pseudonym &amp; Anonymity Archive
+          </h2>
+          <p class="body-md section-lead">
+            Throughout the nineteenth century, women authors navigated patriarchal publishing houses and moralizing reviewers by signing title pages with male pseudonyms or polite anonymity. Click any archival card—or toggle <strong>Flip All Bylines</strong>—to reveal the author beneath the mask.
+          </p>
+        </div>
+
+        <div class="bylines-controls">
+          <button
+            type="button"
+            id="flip-all-bylines-btn"
+            class="button-primary"
+            aria-pressed="false"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2.5 5.5H12.5L10 3M13.5 10.5H3.5L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span id="flip-all-label">Flip All Bylines</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="bylines-grid">
+        {BYLINE_ARCHIVE.map((item) => (
+          <div class="byline-card" data-byline-card>
+            <div class={`ambient-orb ambient-orb--${item.orb} byline-card__orb`} aria-hidden="true"></div>
+
+            <div class="byline-card__top">
+              <span class="badge-pill">{item.year} Title Page</span>
+              <span class="caption byline-card__status" data-byline-status>Original Mask</span>
+            </div>
+
+            <!-- Front State: Published Pseudonym / Anonymity -->
+            <div class="byline-card__face byline-card__face--front" data-face-front>
+              <p class="caption-uppercase byline-card__eyebrow">Published Attribution</p>
+              <h3 class="display-md byline-card__pseudonym">{item.publishedByline}</h3>
+              <p class="title-sm byline-card__work"><em>{item.workTitle}</em> ({item.year})</p>
+              <p class="caption byline-card__imprint">{item.publisherLocation}</p>
+            </div>
+
+            <!-- Back State: True Author & Archival Note -->
+            <div class="byline-card__face byline-card__face--back" data-face-back hidden>
+              <p class="caption-uppercase byline-card__eyebrow byline-card__eyebrow--revealed">
+                True Historical Author
+              </p>
+              <h3 class="display-md byline-card__true-author">{item.trueAuthor}</h3>
+              <p class="title-sm byline-card__work"><em>{item.workTitle}</em> ({item.year})</p>
+              <p class="body-sm byline-card__note">{item.archivalNote}</p>
+            </div>
+
+            <div class="byline-card__actions">
+              <button
+                type="button"
+                class="button-outline byline-card__toggle"
+                data-byline-toggle
+                aria-pressed="false"
+                aria-label={`Reveal true author of ${item.workTitle}`}
+              >
+                <span data-toggle-text>Unmask Byline</span>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. BLACKOUT POETRY STUDIO TEASER CARD -->
+  <section class="section-band" aria-labelledby="blackout-teaser-heading">
+    <div class="container">
+      <div class="gradient-orb-card blackout-teaser">
+        <div class="ambient-orb ambient-orb--peach blackout-teaser__orb-1" aria-hidden="true"></div>
+        <div class="ambient-orb ambient-orb--rose blackout-teaser__orb-2" aria-hidden="true"></div>
+
+        <div class="blackout-teaser__inner">
+          <div class="blackout-teaser__copy">
+            <span class="badge-pill">
+              <span class="badge-dot badge-dot--rose" aria-hidden="true"></span>
+              Interactive Literary Erasure Lab
+            </span>
+            <h2 id="blackout-teaser-heading" class="display-lg blackout-teaser__title">
+              Erase patriarchal prose into feminist verse.
+            </h2>
+            <p class="body-md blackout-teaser__desc">
+              Step into the <strong>Blackout Poetry Studio</strong>. Select verified public-domain passages from Charlotte Perkins Gilman’s <em>The Yellow Wallpaper</em> (1892), Mary Shelley’s <em>Frankenstein</em> (1818), or Rokeya Sakhawat Hossain’s <em>Sultana’s Dream</em> (1905). Redact individual words in warm charcoal ink and export your emergent poem as a high-DPI archival PNG card.
+            </p>
+            <div class="blackout-teaser__ctas">
+              <a href={withBase('/blackout/')} class="button-primary">
+                Launch Blackout Studio
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a href={withBase('/about/')} class="button-outline">
+                Read DA Rubric &amp; Guide
+              </a>
+            </div>
+          </div>
+
+          <div class="blackout-teaser__preview" aria-hidden="true">
+            <div class="blackout-mini-card">
+              <div class="blackout-mini-card__header">
+                <span class="caption-uppercase">Specimen · Gilman (1892)</span>
+                <span class="caption">Isolate Mode</span>
+              </div>
+              <p class="blackout-mini-card__words">
+                <span class="redacted">By</span>
+                <span class="exposed">moonlight</span>
+                <span class="redacted">the moon</span>
+                <span class="exposed">shines</span>
+                <span class="redacted">in all night when there is a moon I would not know it was the same paper. At</span>
+                <span class="exposed">night</span>
+                <span class="redacted">in any kind of light, it</span>
+                <span class="exposed">becomes</span>
+                <span class="exposed">bars!</span>
+                <span class="redacted">The outside pattern I mean, and</span>
+                <span class="exposed">the</span>
+                <span class="exposed">woman</span>
+                <span class="redacted">behind it</span>
+                <span class="exposed">rises.</span>
+              </p>
+              <div class="blackout-mini-card__footer">
+                <span class="caption">Jane’s Diary · 26BCE1820</span>
+                <span class="badge-pill">PNG Ready</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function initBylineArchive() {
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-byline-card]'));
+    const flipAllBtn = document.getElementById('flip-all-bylines-btn');
+    const flipAllLabel = document.getElementById('flip-all-label');
+
+    function setCardState(card: HTMLElement, revealed: boolean) {
+      const front = card.querySelector<HTMLElement>('[data-face-front]');
+      const back = card.querySelector<HTMLElement>('[data-face-back]');
+      const toggleBtn = card.querySelector<HTMLButtonElement>('[data-byline-toggle]');
+      const toggleText = card.querySelector<HTMLElement>('[data-toggle-text]');
+      const statusText = card.querySelector<HTMLElement>('[data-byline-status]');
+
+      if (!front || !back || !toggleBtn) return;
+
+      front.hidden = revealed;
+      back.hidden = !revealed;
+      card.classList.toggle('is-revealed', revealed);
+      toggleBtn.setAttribute('aria-pressed', String(revealed));
+      if (toggleText) {
+        toggleText.textContent = revealed ? 'Show Original Byline' : 'Unmask Byline';
+      }
+      if (statusText) {
+        statusText.textContent = revealed ? 'Identity Restored' : 'Original Mask';
+      }
+    }
+
+    function syncFlipAllButton() {
+      if (!flipAllBtn || !flipAllLabel) return;
+      const allRevealed = cards.every((c) => c.classList.contains('is-revealed'));
+      flipAllBtn.setAttribute('aria-pressed', String(allRevealed));
+      flipAllLabel.textContent = allRevealed ? 'Restore Original Masks' : 'Flip All Bylines';
+    }
+
+    cards.forEach((card) => {
+      const toggleBtn = card.querySelector<HTMLButtonElement>('[data-byline-toggle]');
+      if (!toggleBtn) return;
+      toggleBtn.addEventListener('click', () => {
+        const currentlyRevealed = card.classList.contains('is-revealed');
+        setCardState(card, !currentlyRevealed);
+        syncFlipAllButton();
+      });
+    });
+
+    if (flipAllBtn) {
+      flipAllBtn.addEventListener('click', () => {
+        const allRevealed = cards.every((c) => c.classList.contains('is-revealed'));
+        const targetState = !allRevealed;
+        cards.forEach((card) => setCardState(card, targetState));
+        syncFlipAllButton();
+      });
+    }
+  }
+
+  initBylineArchive();
+</script>
+
+<style>
+  /* Hero Band */
+  .hero-band {
+    padding: var(--space-section) 0 80px;
+    background-color: var(--color-canvas);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .hero-orb-1 {
+    width: 440px;
+    height: 440px;
+    top: -80px;
+    left: 8%;
+  }
+
+  .hero-orb-2 {
+    width: 380px;
+    height: 380px;
+    top: 40px;
+    right: 10%;
+    animation-delay: -5s;
+  }
+
+  .hero-orb-3 {
+    width: 340px;
+    height: 340px;
+    bottom: -60px;
+    left: 38%;
+    animation-delay: -11s;
+  }
+
+  .hero-band__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 920px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-band__eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-band__author-tag {
+    color: var(--color-body-strong);
+    font-weight: 500;
+  }
+
+  .hero-band__title {
+    max-width: 840px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-band__title em {
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .hero-band__subtitle {
+    max-width: 680px;
+    color: var(--color-body);
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero-band__cta-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xxl);
+  }
+
+  .hero-band__metrics {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-base);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-hairline);
+    text-align: left;
+  }
+
+  .hero-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .hero-metric__label {
+    color: var(--color-ink);
+  }
+
+  /* Section Headings */
+  .section-title {
+    margin-top: var(--space-base);
+    margin-bottom: var(--space-sm);
+  }
+
+  .section-lead {
+    color: var(--color-body);
+  }
+
+  .section-lead code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 14px;
+    background-color: var(--color-surface-strong);
+    color: var(--color-ink);
+    padding: 2px 6px;
+    border-radius: var(--radius-xs);
+  }
+
+  /* 5 Cornerstone Entries Grid */
+  .entries-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .entry-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .entry-card__orb {
+    width: 240px;
+    height: 240px;
+    top: -90px;
+    right: -70px;
+    opacity: 0.45;
+  }
+
+  .entry-card__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .entry-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-base);
+  }
+
+  .entry-card__era {
+    font-weight: 500;
+  }
+
+  .entry-card__title {
+    margin-bottom: var(--space-sm);
+  }
+
+  .entry-card__title-link {
+    color: var(--color-ink);
+    transition: opacity 0.15s ease;
+  }
+
+  .entry-card__title-link:hover {
+    opacity: 0.78;
+  }
+
+  .entry-card__subtitle {
+    color: var(--color-body);
+    margin-bottom: var(--space-lg);
+  }
+
+  .entry-card__works {
+    margin-top: auto;
+    background-color: var(--color-canvas-soft);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-lg);
+    padding: var(--space-sm) var(--space-base);
+    margin-bottom: var(--space-lg);
+  }
+
+  .entry-card__works-heading {
+    display: block;
+    color: var(--color-muted);
+    margin-bottom: 6px;
+  }
+
+  .entry-card__works-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+    color: var(--color-ink);
+  }
+
+  .entry-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding-top: var(--space-base);
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .entry-card--evaluator {
+    background-color: var(--color-canvas-soft);
+    border-style: dashed;
+    border-color: var(--color-hairline-strong);
+  }
+
+  /* "By a Lady" Byline Reveal Section */
+  .bylines-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xxl);
+    flex-wrap: wrap;
+  }
+
+  .bylines-header > div:first-child {
+    max-width: 720px;
+  }
+
+  .bylines-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .byline-card {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 290px;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .byline-card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--color-hairline-strong);
+  }
+
+  .byline-card.is-revealed {
+    border-color: var(--color-ink);
+    background-color: var(--color-surface-card);
+  }
+
+  .byline-card__orb {
+    width: 180px;
+    height: 180px;
+    bottom: -60px;
+    right: -40px;
+    opacity: 0.4;
+  }
+
+  .byline-card__top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-base);
+  }
+
+  .byline-card__face {
+    position: relative;
+    z-index: 1;
+    margin-bottom: var(--space-lg);
+  }
+
+  .byline-card__eyebrow {
+    color: var(--color-muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  .byline-card__eyebrow--revealed {
+    color: var(--color-ink);
+  }
+
+  .byline-card__pseudonym,
+  .byline-card__true-author {
+    margin-bottom: var(--space-xs);
+  }
+
+  .byline-card__work {
+    margin-bottom: var(--space-xs);
+  }
+
+  .byline-card__imprint {
+    color: var(--color-muted);
+  }
+
+  .byline-card__note {
+    color: var(--color-body);
+    margin-top: var(--space-xs);
+  }
+
+  .byline-card__actions {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .byline-card__toggle {
+    width: 100%;
+  }
+
+  /* Blackout Teaser Card */
+  .blackout-teaser {
+    padding: var(--space-xxl);
+  }
+
+  .blackout-teaser__orb-1 {
+    width: 360px;
+    height: 360px;
+    top: -100px;
+    right: 18%;
+  }
+
+  .blackout-teaser__orb-2 {
+    width: 320px;
+    height: 320px;
+    bottom: -100px;
+    right: -40px;
+  }
+
+  .blackout-teaser__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: var(--space-xxl);
+    align-items: center;
+  }
+
+  .blackout-teaser__title {
+    margin-top: var(--space-base);
+    margin-bottom: var(--space-sm);
+  }
+
+  .blackout-teaser__desc {
+    margin-bottom: var(--space-xl);
+  }
+
+  .blackout-teaser__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .blackout-mini-card {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .blackout-mini-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-base);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .blackout-mini-card__words {
+    font-family: var(--font-display);
+    font-size: 21px;
+    line-height: 1.65;
+    color: var(--color-ink);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: var(--space-base);
+  }
+
+  .blackout-mini-card__words .redacted {
+    background-color: var(--color-ink);
+    color: var(--color-ink);
+    border-radius: 4px;
+    padding: 0 6px;
+    user-select: none;
+  }
+
+  .blackout-mini-card__words .exposed {
+    background-color: var(--color-surface-strong);
+    color: var(--color-ink);
+    border-radius: 4px;
+    padding: 0 6px;
+    border-bottom: 1.5px solid var(--color-ink);
+  }
+
+  .blackout-mini-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  @media (max-width: 1024px) {
+    .hero-band__metrics {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .bylines-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .blackout-teaser__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .entries-grid,
+    .bylines-grid {
+      grid-template-columns: 1fr;
+    }
+    .blackout-teaser {
+      padding: var(--space-lg);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-band__metrics {
+      grid-template-columns: 1fr;
+    }
+    .entry-card__footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .entry-card__btn {
+      width: 100%;
+    }
+  }
+</style>

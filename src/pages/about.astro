@@ -1,0 +1,530 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/url';
+import { ESSAY_ENTRIES } from '../data/entries';
+
+const consolidatedCitations = Array.from(
+  new Set(ESSAY_ENTRIES.flatMap((entry) => entry.worksCitedMLA))
+).sort();
+
+const masterBibliographyText = consolidatedCitations.join('\n\n');
+---
+
+<BaseLayout
+  title="About & DA Rubric — Shawn Shaibu Cherian (26BCE1820)"
+  description="Academic evaluator dossier, Digital Assignment grading rubric checklist, consolidated MLA 9th Works Cited, and author editing guide for Jane's Diary."
+  currentPath="/about/"
+>
+  <!-- 1. ABOUT & EVALUATOR HERO BAND -->
+  <section class="about-hero orb-stage" aria-labelledby="about-heading">
+    <div class="ambient-orb ambient-orb--lavender about-hero__orb-1" aria-hidden="true"></div>
+    <div class="ambient-orb ambient-orb--mint about-hero__orb-2" aria-hidden="true"></div>
+
+    <div class="container about-hero__inner">
+      <nav class="about-breadcrumb no-print" aria-label="Breadcrumb">
+        <a href={withBase('/')} class="about-breadcrumb__link">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page" class="about-breadcrumb__current">About &amp; DA Rubric</span>
+      </nav>
+
+      <div class="about-hero__header">
+        <div>
+          <span class="badge-pill">
+            <span class="badge-dot badge-dot--lavender" aria-hidden="true"></span>
+            Academic Evaluator Dossier
+          </span>
+          <h1 id="about-heading" class="display-xl about-hero__title">
+            Digital Assignment Rubric &amp; Editorial Guide
+          </h1>
+          <p class="body-md about-hero__subtitle">
+            Prepared for faculty evaluation at <strong>Vellore Institute of Technology (VIT), Chennai</strong>. This page documents student attribution, the five-movement feminist literary syllabus, interactive humanities components, and a step-by-step guide for editing essay prose.
+          </p>
+        </div>
+
+        <div class="about-hero__actions no-print">
+          <button type="button" id="print-dossier-btn" class="button-primary">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 5.5V2.5H12V5.5M4 12H2.5V7C2.5 6.17157 3.17157 5.5 4 5.5H12C12.8284 5.5 13.5 6.17157 13.5 7V12H12M4 9.5H12V13.5H4V9.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+            </svg>
+            Print Academic Dossier
+          </button>
+          <a href={withBase('/#entries')} class="button-outline">
+            Browse 5 Entries
+          </a>
+        </div>
+      </div>
+
+      <!-- Student & Assignment Metadata Card -->
+      <div class="feature-card student-meta-card">
+        <div class="student-meta-grid">
+          <div class="student-meta-item">
+            <span class="caption-uppercase">Student Author</span>
+            <p class="title-md">Shawn Shaibu Cherian</p>
+          </div>
+          <div class="student-meta-item">
+            <span class="caption-uppercase">Registration Number</span>
+            <p class="title-md">26BCE1820</p>
+          </div>
+          <div class="student-meta-item">
+            <span class="caption-uppercase">Institution</span>
+            <p class="title-sm">Vellore Institute of Technology (VIT), Chennai</p>
+          </div>
+          <div class="student-meta-item">
+            <span class="caption-uppercase">Deliverable Type</span>
+            <p class="title-sm">English Digital Assignment (DA) — Interactive Web Archive</p>
+          </div>
+          <div class="student-meta-item">
+            <span class="caption-uppercase">Live Deployment Target</span>
+            <p class="body-sm">
+              <a href="https://wwwrryyy.github.io/janesdiary/" target="_blank" rel="noopener noreferrer">
+                https://wwwrryyy.github.io/janesdiary/
+              </a>
+            </p>
+          </div>
+          <div class="student-meta-item">
+            <span class="caption-uppercase">Critical Framework</span>
+            <p class="body-sm">1st-Wave Gothic to Postcolonial Subaltern &amp; Cyberfeminism</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. INTERACTIVE EVALUATOR RUBRIC CHECKLIST -->
+  <section class="section-band" aria-labelledby="rubric-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-pill">
+          <span class="badge-dot badge-dot--mint" aria-hidden="true"></span>
+          Interactive Verification Matrix
+        </span>
+        <h2 id="rubric-heading" class="display-lg section-title">
+          Digital Assignment Rubric Checklist
+        </h2>
+        <p class="body-md section-lead">
+          Evaluators can check off each requirement below while reviewing the live deployment, or jump directly to the corresponding entry or interactive studio.
+        </p>
+      </div>
+
+      <div class="rubric-grid">
+        <label class="feature-card rubric-item">
+          <input type="checkbox" class="rubric-checkbox" checked />
+          <div class="rubric-item__body">
+            <div class="rubric-item__top">
+              <span class="badge-pill">Criterion 01</span>
+              <span class="caption">Historical &amp; Theoretical Breadth</span>
+            </div>
+            <h3 class="title-sm">Five Cornerstone Feminist Literary Movements Covered</h3>
+            <p class="body-sm">
+              Spans Romantic Proto-Feminism (1818), 1st-Wave Feminist Gothic (1892), Anti-Colonial Feminist Utopia (1905), Modernist Materialism (1929), Confessional Poetics (1965), Subaltern Studies (1978/1997), and Cyberfeminism (1985).
+            </p>
+          </div>
+        </label>
+
+        <label class="feature-card rubric-item">
+          <input type="checkbox" class="rubric-checkbox" checked />
+          <div class="rubric-item__body">
+            <div class="rubric-item__top">
+              <span class="badge-pill">Criterion 02</span>
+              <span class="caption">Close Reading &amp; Subtextual Analysis</span>
+            </div>
+            <h3 class="title-sm">Interactive Critical Lens (Surface vs. Subtext X-Ray)</h3>
+            <p class="body-sm">
+              Every essay entry features a global and per-passage Critical Lens switch contrasting verbatim public-domain passages (or fair-use slots) with feminist and psychoanalytic subtext prompts.
+            </p>
+          </div>
+        </label>
+
+        <label class="feature-card rubric-item">
+          <input type="checkbox" class="rubric-checkbox" checked />
+          <div class="rubric-item__body">
+            <div class="rubric-item__top">
+              <span class="badge-pill">Criterion 03</span>
+              <span class="caption">Digital Humanities Interactivity</span>
+            </div>
+            <h3 class="title-sm">Blackout Poetry Studio &amp; “By a Lady” Byline Recovery</h3>
+            <p class="body-sm">
+              Includes an interactive nineteenth-century pseudonym unmasking archive on the home page and a full Blackout Poetry Studio with high-DPI HTML5 Canvas PNG export.
+            </p>
+          </div>
+        </label>
+
+        <label class="feature-card rubric-item">
+          <input type="checkbox" class="rubric-checkbox" checked />
+          <div class="rubric-item__body">
+            <div class="rubric-item__top">
+              <span class="badge-pill">Criterion 04</span>
+              <span class="caption">Accessibility &amp; Scholarly Citation</span>
+            </div>
+            <h3 class="title-sm">ElevenLabs Read-Aloud Synthesis &amp; MLA 9th Citations</h3>
+            <p class="body-sm">
+              Features an ElevenLabs-styled Web Speech API voice player with speed and voice selection on every essay, plus 1-click MLA 9th Works Cited copy boxes.
+            </p>
+          </div>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. HOW TO FILL IN YOUR ESSAYS GUIDE -->
+  <section id="edit-guide" class="section-band section-band--soft" aria-labelledby="guide-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-pill">
+          <span class="badge-dot badge-dot--peach" aria-hidden="true"></span>
+          Author’s Workflow · Academic Integrity
+        </span>
+        <h2 id="guide-heading" class="display-lg section-title">
+          How to Fill In Your Original Essay Prose
+        </h2>
+        <p class="body-md section-lead">
+          To uphold academic integrity for this graded assignment, each entry is structured with scholarly section headings, guiding thesis prompts, and verified public-domain primary quotes—leaving the analytical prose ready for <strong>Shawn Shaibu Cherian</strong> to author directly.
+        </p>
+      </div>
+
+      <div class="guide-steps-grid">
+        <div class="feature-card guide-step-card">
+          <span class="badge-pill">Step 1 · Essay Body Sections</span>
+          <h3 class="display-sm guide-step-card__title">Edit the 5 Markdown Files</h3>
+          <p class="body-sm">
+            Open any file inside <code>src/content/essays/</code> in VS Code or your text editor and replace the blockquoted <code>[Author's Entry Section ...]</code> prompts with your own paragraphs:
+          </p>
+          <ul class="guide-file-list">
+            {ESSAY_ENTRIES.map((entry) => (
+              <li>
+                <code>src/content/essays/{entry.slug}.md</code>
+                <a href={withBase(`/entries/${entry.slug}/`)} class="button-tertiary-text">
+                  View Page →
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="feature-card guide-step-card">
+          <span class="badge-pill">Step 2 · Critical Lens &amp; Quotes</span>
+          <h3 class="display-sm guide-step-card__title">Fill In Subtext &amp; Fair-Use Slots</h3>
+          <p class="body-sm">
+            Open <code>src/data/entries.ts</code> to customize the <strong>Critical Lens (Subtext)</strong> analysis blocks:
+          </p>
+          <ul class="guide-bullet-list body-sm">
+            <li>
+              <strong>Public-Domain Works</strong> (Gilman 1892, Shelley 1818, Hossain 1905) already include verified verbatim quotes on the <em>Surface Text</em> tab. Replace <code>criticalLensPrompt</code> with your subtextual analysis.
+            </li>
+            <li>
+              <strong>Copyrighted Works</strong> (Haraway 1985, Devi/Spivak 1978, Roy 1997, Woolf 1929, Atwood 1985, Plath 1965) include a <code>[Primary Quote Placeholder]</code> slot where you can insert a brief fair-use quote and page number from your edition.
+            </li>
+          </ul>
+        </div>
+
+        <div class="feature-card guide-step-card">
+          <span class="badge-pill">Step 3 · Build &amp; Publish</span>
+          <h3 class="display-sm guide-step-card__title">Preview Locally or Push to GitHub</h3>
+          <p class="body-sm">
+            Run these commands in your terminal to preview your edits at <code>http://localhost:4321/janesdiary/</code> and verify zero build errors before pushing to GitHub Pages:
+          </p>
+          <pre class="guide-code-block"><code>npm run dev      # Live local preview at /janesdiary/
+npm run check    # Verify 0 TypeScript / Astro errors
+npm run build    # Build static site into dist/</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CONSOLIDATED MLA 9TH BIBLIOGRAPHY -->
+  <section id="works-cited-master" class="section-band" aria-labelledby="bib-heading">
+    <div class="container">
+      <div class="feature-card master-bib-card">
+        <div class="master-bib-card__header">
+          <div>
+            <span class="badge-pill">Master Bibliography · MLA 9th Edition</span>
+            <h2 id="bib-heading" class="display-md master-bib-card__title">
+              Consolidated Works Cited Across All 5 Entries
+            </h2>
+          </div>
+
+          <button
+            type="button"
+            id="copy-master-bib-btn"
+            class="button-primary no-print"
+            data-bib={masterBibliographyText}
+          >
+            <span id="copy-master-bib-label">Copy All MLA Citations</span>
+          </button>
+        </div>
+
+        <div class="master-bib-list">
+          {consolidatedCitations.map((citation) => (
+            <p class="mla-hanging-indent">{citation}</p>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function initAboutPage() {
+    const printBtn = document.getElementById('print-dossier-btn');
+    printBtn?.addEventListener('click', () => {
+      window.print();
+    });
+
+    const copyBibBtn = document.getElementById('copy-master-bib-btn');
+    const copyBibLabel = document.getElementById('copy-master-bib-label');
+    copyBibBtn?.addEventListener('click', async () => {
+      const bib = copyBibBtn.getAttribute('data-bib') || '';
+      try {
+        await navigator.clipboard.writeText(bib);
+        if (copyBibLabel) {
+          copyBibLabel.textContent = 'Copied Master Bibliography';
+          setTimeout(() => {
+            copyBibLabel.textContent = 'Copy All MLA Citations';
+          }, 2400);
+        }
+      } catch {
+        if (copyBibLabel) copyBibLabel.textContent = 'Select Text Below to Copy';
+      }
+    });
+  }
+
+  initAboutPage();
+</script>
+
+<style>
+  .about-hero {
+    padding: 64px 0 48px;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .about-hero__orb-1 {
+    width: 380px;
+    height: 380px;
+    top: -90px;
+    right: 10%;
+  }
+
+  .about-hero__orb-2 {
+    width: 320px;
+    height: 320px;
+    bottom: -80px;
+    left: 8%;
+  }
+
+  .about-hero__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--color-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .about-breadcrumb__link:hover {
+    color: var(--color-ink);
+  }
+
+  .about-breadcrumb__current {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .about-hero__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  .about-hero__header > div:first-child {
+    max-width: 740px;
+  }
+
+  .about-hero__title {
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .about-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .student-meta-card {
+    padding: var(--space-xl);
+  }
+
+  .student-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .student-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .student-meta-item .caption-uppercase {
+    color: var(--color-muted);
+  }
+
+  /* Rubric Checklist */
+  .section-title {
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-xs);
+  }
+
+  .rubric-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .rubric-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-base);
+    cursor: pointer;
+  }
+
+  .rubric-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-top: 4px;
+    accent-color: var(--color-ink);
+    cursor: pointer;
+  }
+
+  .rubric-item__body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .rubric-item__top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+  }
+
+  /* Editing Guide */
+  .guide-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .guide-step-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .guide-step-card code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 12.5px;
+    background-color: var(--color-surface-strong);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .guide-file-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: var(--space-xs);
+  }
+
+  .guide-file-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 10px;
+    background-color: var(--color-canvas-soft);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+  }
+
+  .guide-bullet-list {
+    padding-left: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .guide-code-block {
+    background-color: var(--color-surface-dark);
+    color: var(--color-on-dark);
+    padding: var(--space-base);
+    border-radius: var(--radius-lg);
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin-top: auto;
+  }
+
+  .guide-code-block code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+  }
+
+  /* Master Bibliography */
+  .master-bib-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding-bottom: var(--space-base);
+    margin-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .master-bib-card__title {
+    margin-top: 6px;
+  }
+
+  .master-bib-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .mla-hanging-indent {
+    padding-left: 32px;
+    text-indent: -32px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 1024px) {
+    .student-meta-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .guide-steps-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .rubric-grid,
+    .student-meta-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

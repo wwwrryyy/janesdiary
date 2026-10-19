@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { withBase } from '../lib/url';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentPath?: string;
+}
+
+const {
+  title,
+  description = "Jane's Diary: An Interactive Archive of Feminist Literature by Shawn Shaibu Cherian (26BCE1820), Vellore Institute of Technology (VIT), Chennai.",
+  currentPath = '/',
+} = Astro.props;
+
+const fullTitle = title.includes("Jane's Diary") || title.includes("Jane’s Diary")
+  ? title
+  : `${title} — Jane’s Diary (26BCE1820)`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Shawn Shaibu Cherian (26BCE1820)" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <Navbar currentPath={currentPath} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 999;
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .skip-link:focus {
+    top: 12px;
+  }
+</style>

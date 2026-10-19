@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/url';
+---
+
+<BaseLayout
+  title="404: Page Missing from the Archive — Jane’s Diary"
+  currentPath="/404"
+>
+  <section class="section-band not-found-band orb-stage" aria-labelledby="not-found-heading">
+    <div class="ambient-orb ambient-orb--lavender not-found__orb-1" aria-hidden="true"></div>
+    <div class="ambient-orb ambient-orb--peach not-found__orb-2" aria-hidden="true"></div>
+
+    <div class="container not-found__inner">
+      <div class="gradient-orb-card not-found-card">
+        <span class="badge-pill">
+          <span class="badge-dot badge-dot--rose" aria-hidden="true"></span>
+          Archival Gap · HTTP 404
+        </span>
+
+        <h1 id="not-found-heading" class="display-xl not-found-card__title">
+          This leaf appears to have been torn from the manuscript.
+        </h1>
+
+        <p class="body-md not-found-card__desc">
+          The page you requested could not be located under the <code>/janesdiary/</code> archive path. Return to the main index to explore the five cornerstone feminist literature entries or launch the Blackout Poetry Studio.
+        </p>
+
+        <div class="not-found-card__actions">
+          <a href={withBase('/')} class="button-primary">
+            Return to Jane’s Diary Home
+          </a>
+          <a href={withBase('/blackout/')} class="button-outline">
+            Open Blackout Studio
+          </a>
+          <a href={withBase('/about/')} class="button-outline">
+            DA Rubric &amp; Guide
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found-band {
+    min-height: 68vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .not-found__orb-1 {
+    width: 360px;
+    height: 360px;
+    top: 10%;
+    left: 15%;
+  }
+
+  .not-found__orb-2 {
+    width: 320px;
+    height: 320px;
+    bottom: 10%;
+    right: 15%;
+  }
+
+  .not-found__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+  }
+
+  .not-found-card {
+    text-align: center;
+    padding: var(--space-xxl);
+    background-color: var(--color-surface-card);
+  }
+
+  .not-found-card__title {
+    margin-top: var(--space-base);
+    margin-bottom: var(--space-base);
+  }
+
+  .not-found-card__desc {
+    max-width: 560px;
+    margin: 0 auto var(--space-xl);
+  }
+
+  .not-found-card__desc code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 14px;
+    background-color: var(--color-surface-strong);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .not-found-card__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+</style>

@@ -1,0 +1,817 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/url';
+import { BLACKOUT_PASSAGES } from '../data/blackoutPassages';
+
+const serializedPassages = JSON.stringify(BLACKOUT_PASSAGES);
+---
+
+<BaseLayout
+  title="Blackout Poetry Studio — Literary Erasure Lab"
+  description="Interactive feminist literary erasure studio by Shawn Shaibu Cherian (26BCE1820). Redact public-domain texts by Gilman, Shelley, and Hossain into emergent verse and export as a high-DPI PNG."
+  currentPath="/blackout/"
+>
+  <!-- 1. STUDIO HERO BAND -->
+  <section class="studio-hero orb-stage" aria-labelledby="studio-heading">
+    <div class="ambient-orb ambient-orb--rose studio-hero__orb-1" aria-hidden="true"></div>
+    <div class="ambient-orb ambient-orb--peach studio-hero__orb-2" aria-hidden="true"></div>
+    <div class="ambient-orb ambient-orb--mint studio-hero__orb-3" aria-hidden="true"></div>
+
+    <div class="container studio-hero__inner">
+      <nav class="studio-breadcrumb" aria-label="Breadcrumb">
+        <a href={withBase('/')} class="studio-breadcrumb__link">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page" class="studio-breadcrumb__current">Blackout Poetry Studio</span>
+      </nav>
+
+      <div class="studio-hero__badges">
+        <span class="badge-pill">
+          <span class="badge-dot badge-dot--rose" aria-hidden="true"></span>
+          Interactive Erasure Poetics
+        </span>
+        <span class="caption">Verified Public-Domain Texts · High-DPI PNG Export</span>
+      </div>
+
+      <h1 id="studio-heading" class="display-xl studio-hero__title">
+        Blackout Poetry Studio
+      </h1>
+
+      <p class="body-md studio-hero__subtitle">
+        Inspired by the palimpsest tradition of feminist literary criticism, select a verified nineteenth- or early-twentieth-century public-domain passage below. Click or press <strong>Enter / Space</strong> on any word to redact it in warm charcoal ink (<code>#0c0a09</code>) or leave it exposed as emergent verse.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. INTERACTIVE BLACKOUT WORKSPACE -->
+  <section class="section-band studio-workspace" aria-label="Blackout Poetry Editor">
+    <div class="container">
+      <!-- Top Control Bar -->
+      <div class="feature-card studio-toolbar">
+        <div class="studio-toolbar__group">
+          <span class="caption-uppercase studio-toolbar__label">1. Select Source Passage</span>
+          <div class="passage-pills" role="group" aria-label="Select Public-Domain Source Passage">
+            {BLACKOUT_PASSAGES.map((passage, idx) => (
+              <button
+                type="button"
+                class:list={['button-outline passage-pill', { 'is-active': idx === 0 }]}
+                data-passage-id={passage.id}
+                aria-pressed={idx === 0 ? 'true' : 'false'}
+              >
+                {passage.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div class="studio-toolbar__group">
+          <span class="caption-uppercase studio-toolbar__label">2. Redaction Actions</span>
+          <div class="action-pills">
+            <button type="button" id="preset-poem-btn" class="button-outline">
+              Specimen Poem
+            </button>
+            <button type="button" id="invert-selection-btn" class="button-outline">
+              Invert Selection
+            </button>
+            <button type="button" id="reset-passage-btn" class="button-outline">
+              Reset Passage
+            </button>
+            <button
+              type="button"
+              id="isolate-poem-btn"
+              class="button-outline"
+              aria-pressed="false"
+            >
+              Isolate Poem
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Studio Grid: Canvas Left, Emergent Poem & Export Right -->
+      <div class="studio-grid">
+        <!-- Left: Interactive Word Redaction Sheet -->
+        <div class="gradient-orb-card blackout-sheet" id="blackout-sheet">
+          <div class="ambient-orb ambient-orb--mint blackout-sheet__orb" id="sheet-orb" aria-hidden="true"></div>
+
+          <div class="blackout-sheet__inner">
+            <div class="blackout-sheet__header">
+              <div>
+                <span class="badge-pill" id="passage-era-badge">
+                  {BLACKOUT_PASSAGES[0].era}
+                </span>
+                <h2 class="display-sm blackout-sheet__title" id="passage-work-title">
+                  <em>{BLACKOUT_PASSAGES[0].workTitle}</em> ({BLACKOUT_PASSAGES[0].year})
+                </h2>
+                <p class="caption" id="passage-author-label">
+                  {BLACKOUT_PASSAGES[0].author}
+                </p>
+              </div>
+
+              <div class="blackout-sheet__stats" aria-live="polite">
+                <span class="badge-pill" id="word-count-badge">15 Words Exposed</span>
+              </div>
+            </div>
+
+            <p class="body-sm blackout-sheet__context" id="passage-context-text">
+              {BLACKOUT_PASSAGES[0].editorialContext}
+            </p>
+
+            <!-- Interactive Word Tokens Container -->
+            <div
+              id="word-tokens-grid"
+              class="word-tokens-grid"
+              role="group"
+              aria-label="Interactive words. Press Enter or Space to toggle blackout state."
+            >
+              <!-- Populated synchronously on load & hydrated for interaction -->
+              {BLACKOUT_PASSAGES[0].text.split(/\s+/).map((word, index) => {
+                const isExposed = BLACKOUT_PASSAGES[0].presetKeepIndices.includes(index);
+                return (
+                  <button
+                    type="button"
+                    class:list={['word-token', { 'is-blacked-out': !isExposed }]}
+                    data-word-index={index}
+                    aria-pressed={!isExposed ? 'true' : 'false'}
+                    title={!isExposed ? 'Blacked out (click to expose)' : 'Exposed word (click to black out)'}
+                  >
+                    {word}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div class="blackout-sheet__footer">
+              <p class="caption" id="passage-citation-label">
+                <strong>MLA 9th Source:</strong> {BLACKOUT_PASSAGES[0].citationMLA}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Emergent Verse Preview & High-DPI PNG Exporter -->
+        <aside class="studio-sidebar" aria-label="Emergent Poem Preview and Export">
+          <div class="feature-card emergent-card">
+            <div class="emergent-card__top">
+              <span class="badge-pill">
+                <span class="badge-dot badge-dot--mint" aria-hidden="true"></span>
+                Emergent Verse
+              </span>
+              <span class="caption" id="emergent-ratio-label">15 / 54 words</span>
+            </div>
+
+            <h3 class="display-sm emergent-card__heading">Your Extracted Poem</h3>
+
+            <blockquote class="emergent-poem-box" id="emergent-poem-preview" aria-live="polite">
+              moonlight shines night I would not know bars woman behind it as plain as can
+            </blockquote>
+
+            <div class="emergent-card__actions">
+              <button type="button" id="download-png-btn" class="button-primary emergent-card__btn">
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M8 2.5V10.5M8 10.5L4.5 7M8 10.5L11.5 7M2.5 13.5H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span id="download-png-label">Download Poem as PNG</span>
+              </button>
+
+              <button type="button" id="copy-poem-btn" class="button-outline emergent-card__btn">
+                <span id="copy-poem-label">Copy Emergent Verse</span>
+              </button>
+            </div>
+
+            <hr class="emergent-card__divider" />
+
+            <div class="emergent-card__guide">
+              <span class="caption-uppercase">Studio Tips</span>
+              <ul class="emergent-card__tips">
+                <li class="caption">Click any word token to toggle between <strong>Exposed</strong> and <strong>Redacted Ink</strong>.</li>
+                <li class="caption">Use <strong>Isolate Poem</strong> to dim redacted blocks so your remaining words float cleanly on the page.</li>
+                <li class="caption">Click <strong>Download Poem as PNG</strong> to render a high-resolution archival card via HTML5 Canvas.</li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hidden High-DPI Export Canvas -->
+  <canvas id="blackout-export-canvas" width="1200" height="800" hidden></canvas>
+  <script id="blackout-passages-data" type="application/json" set:html={serializedPassages}></script>
+</BaseLayout>
+
+<script>
+  interface PassageData {
+    id: string;
+    label: string;
+    workTitle: string;
+    author: string;
+    year: number;
+    era: string;
+    orb: string;
+    citationMLA: string;
+    editorialContext: string;
+    presetKeepIndices: number[];
+    text: string;
+  }
+
+  function initBlackoutStudio() {
+    const dataEl = document.getElementById('blackout-passages-data');
+    if (!dataEl || !dataEl.textContent) return;
+    const passages: PassageData[] = JSON.parse(dataEl.textContent);
+
+    const passageBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-passage-id]'));
+    const presetBtn = document.getElementById('preset-poem-btn');
+    const invertBtn = document.getElementById('invert-selection-btn');
+    const resetBtn = document.getElementById('reset-passage-btn');
+    const isolateBtn = document.getElementById('isolate-poem-btn');
+    const downloadPngBtn = document.getElementById('download-png-btn');
+    const downloadPngLabel = document.getElementById('download-png-label');
+    const copyPoemBtn = document.getElementById('copy-poem-btn');
+    const copyPoemLabel = document.getElementById('copy-poem-label');
+
+    const gridEl = document.getElementById('word-tokens-grid');
+    const eraBadge = document.getElementById('passage-era-badge');
+    const workTitleEl = document.getElementById('passage-work-title');
+    const authorLabel = document.getElementById('passage-author-label');
+    const contextText = document.getElementById('passage-context-text');
+    const citationLabel = document.getElementById('passage-citation-label');
+    const wordCountBadge = document.getElementById('word-count-badge');
+    const emergentRatioLabel = document.getElementById('emergent-ratio-label');
+    const emergentPreview = document.getElementById('emergent-poem-preview');
+    const sheetOrb = document.getElementById('sheet-orb');
+    const canvas = document.getElementById('blackout-export-canvas') as HTMLCanvasElement | null;
+
+    if (!gridEl) return;
+
+    let currentPassage: PassageData = passages[0];
+    let words: string[] = currentPassage.text.split(/\s+/);
+    // true = blacked out (#0c0a09), false = exposed word
+    let blackedOut: boolean[] = words.map((_, i) => !currentPassage.presetKeepIndices.includes(i));
+    let isolateMode = false;
+
+    function getExposedWords(): string[] {
+      return words.filter((_, i) => !blackedOut[i]);
+    }
+
+    function renderWords() {
+      if (!gridEl) return;
+      gridEl.innerHTML = '';
+      gridEl.classList.toggle('is-isolated', isolateMode);
+
+      words.forEach((word, index) => {
+        const isRedacted = blackedOut[index];
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `word-token${isRedacted ? ' is-blacked-out' : ''}`;
+        btn.setAttribute('data-word-index', String(index));
+        btn.setAttribute('aria-pressed', String(isRedacted));
+        btn.title = isRedacted
+          ? 'Blacked out (click to expose)'
+          : 'Exposed word (click to black out)';
+        btn.textContent = word;
+
+        btn.addEventListener('click', () => {
+          blackedOut[index] = !blackedOut[index];
+          btn.classList.toggle('is-blacked-out', blackedOut[index]);
+          btn.setAttribute('aria-pressed', String(blackedOut[index]));
+          updateStatsAndPreview();
+        });
+
+        gridEl.appendChild(btn);
+      });
+
+      updateStatsAndPreview();
+    }
+
+    function updateStatsAndPreview() {
+      const exposed = getExposedWords();
+      const exposedCount = exposed.length;
+      const totalCount = words.length;
+
+      if (wordCountBadge) {
+        wordCountBadge.textContent = `${exposedCount} ${exposedCount === 1 ? 'Word' : 'Words'} Exposed`;
+      }
+      if (emergentRatioLabel) {
+        emergentRatioLabel.textContent = `${exposedCount} / ${totalCount} words`;
+      }
+      if (emergentPreview) {
+        if (exposedCount === 0) {
+          emergentPreview.textContent = '[All words blacked out — click words on the left to expose your poem.]';
+        } else {
+          emergentPreview.textContent = exposed.join(' ');
+        }
+      }
+    }
+
+    function loadPassage(passage: PassageData, usePreset = true) {
+      currentPassage = passage;
+      words = passage.text.split(/\s+/);
+      blackedOut = words.map((_, i) => (usePreset ? !passage.presetKeepIndices.includes(i) : false));
+
+      if (eraBadge) eraBadge.textContent = passage.era;
+      if (workTitleEl) workTitleEl.innerHTML = `<em>${passage.workTitle}</em> (${passage.year})`;
+      if (authorLabel) authorLabel.textContent = passage.author;
+      if (contextText) contextText.textContent = passage.editorialContext;
+      if (citationLabel) {
+        citationLabel.innerHTML = `<strong>MLA 9th Source:</strong> ${passage.citationMLA}`;
+      }
+      if (sheetOrb) {
+        sheetOrb.className = `ambient-orb ambient-orb--${passage.orb} blackout-sheet__orb`;
+      }
+
+      passageBtns.forEach((btn) => {
+        const active = btn.getAttribute('data-passage-id') === passage.id;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', String(active));
+      });
+
+      renderWords();
+    }
+
+    passageBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-passage-id');
+        const found = passages.find((p) => p.id === id);
+        if (found) loadPassage(found, true);
+      });
+    });
+
+    presetBtn?.addEventListener('click', () => {
+      loadPassage(currentPassage, true);
+    });
+
+    invertBtn?.addEventListener('click', () => {
+      blackedOut = blackedOut.map((state) => !state);
+      renderWords();
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      blackedOut = words.map(() => false);
+      renderWords();
+    });
+
+    isolateBtn?.addEventListener('click', () => {
+      isolateMode = !isolateMode;
+      isolateBtn.classList.toggle('is-active', isolateMode);
+      isolateBtn.setAttribute('aria-pressed', String(isolateMode));
+      gridEl.classList.toggle('is-isolated', isolateMode);
+    });
+
+    copyPoemBtn?.addEventListener('click', async () => {
+      const exposed = getExposedWords().join(' ');
+      const payload = `"${exposed}"\n— Erasure poem after ${currentPassage.author}, ${currentPassage.workTitle} (${currentPassage.year}) · Jane's Diary (26BCE1820)`;
+      try {
+        await navigator.clipboard.writeText(payload);
+        if (copyPoemLabel) {
+          copyPoemLabel.textContent = 'Copied to Clipboard';
+          setTimeout(() => {
+            copyPoemLabel.textContent = 'Copy Emergent Verse';
+          }, 2200);
+        }
+      } catch {
+        if (copyPoemLabel) copyPoemLabel.textContent = 'Copy Failed';
+      }
+    });
+
+    // High-DPI Editorial PNG Export on HTML5 Canvas
+    downloadPngBtn?.addEventListener('click', () => {
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const width = 1200;
+      const height = 860;
+      canvas.width = width;
+      canvas.height = height;
+
+      // 1. Off-white ElevenLabs Canvas Background (#f5f5f5)
+      ctx.fillStyle = '#f5f5f5';
+      ctx.fillRect(0, 0, width, height);
+
+      // 2. Subtle Atmospheric Radial Orb Bloom
+      const orbColors: Record<string, string> = {
+        mint: 'rgba(167, 229, 211, 0.45)',
+        peach: 'rgba(244, 197, 168, 0.45)',
+        lavender: 'rgba(200, 184, 224, 0.45)',
+        sky: 'rgba(168, 200, 232, 0.45)',
+        rose: 'rgba(232, 184, 196, 0.45)',
+      };
+      const radial = ctx.createRadialGradient(980, 160, 20, 980, 160, 320);
+      radial.addColorStop(0, orbColors[currentPassage.orb] || orbColors.mint);
+      radial.addColorStop(1, 'rgba(245, 245, 245, 0)');
+      ctx.fillStyle = radial;
+      ctx.fillRect(0, 0, width, height);
+
+      // 3. White Editorial Surface Card (#ffffff) with Hairline (#e7e5e4)
+      const cardX = 56;
+      const cardY = 48;
+      const cardW = width - 112;
+      const cardH = height - 96;
+      ctx.fillStyle = '#ffffff';
+      ctx.strokeStyle = '#e7e5e4';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect(cardX, cardY, cardW, cardH, 24);
+      ctx.fill();
+      ctx.stroke();
+
+      // 4. Header Metadata
+      ctx.fillStyle = '#777169';
+      ctx.font = '600 13px Inter, -apple-system, sans-serif';
+      ctx.fillText(
+        `JANE’S DIARY · BLACKOUT POETRY SPECIMEN · ${currentPassage.era.toUpperCase()}`,
+        cardX + 48,
+        cardY + 56
+      );
+
+      ctx.fillStyle = '#0c0a09';
+      ctx.font = '300 36px "Cormorant Garamond", "EB Garamond", Georgia, serif';
+      ctx.fillText(
+        `${currentPassage.workTitle} (${currentPassage.year}) — ${currentPassage.author}`,
+        cardX + 48,
+        cardY + 102
+      );
+
+      // Divider hairline
+      ctx.strokeStyle = '#e7e5e4';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(cardX + 48, cardY + 126);
+      ctx.lineTo(cardX + cardW - 48, cardY + 126);
+      ctx.stroke();
+
+      // 5. Render Passage Word Tokens (Redacted #0c0a09 vs Exposed)
+      ctx.font = '400 23px "Cormorant Garamond", "EB Garamond", Georgia, serif';
+      let cursorX = cardX + 48;
+      let cursorY = cardY + 178;
+      const maxRight = cardX + cardW - 48;
+      const lineHeight = 44;
+
+      words.forEach((word, idx) => {
+        const metrics = ctx.measureText(word);
+        const tokenW = metrics.width + 18;
+        const tokenH = 32;
+
+        if (cursorX + tokenW > maxRight) {
+          cursorX = cardX + 48;
+          cursorY += lineHeight;
+        }
+
+        if (blackedOut[idx]) {
+          ctx.fillStyle = isolateMode ? '#e7e5e4' : '#0c0a09';
+          ctx.beginPath();
+          ctx.roundRect(cursorX, cursorY - 23, tokenW, tokenH, 5);
+          ctx.fill();
+        } else {
+          ctx.fillStyle = '#f0efed';
+          ctx.beginPath();
+          ctx.roundRect(cursorX, cursorY - 23, tokenW, tokenH, 5);
+          ctx.fill();
+
+          ctx.fillStyle = '#0c0a09';
+          ctx.fillText(word, cursorX + 9, cursorY);
+        }
+
+        cursorX += tokenW + 8;
+      });
+
+      // 6. Emergent Poem Box at Bottom of Card
+      const poemBoxY = cardY + cardH - 210;
+      ctx.fillStyle = '#fafafa';
+      ctx.strokeStyle = '#d6d3d1';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(cardX + 48, poemBoxY, cardW - 96, 112, 14);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#777169';
+      ctx.font = '600 12px Inter, -apple-system, sans-serif';
+      ctx.fillText('EMERGENT VERSE', cardX + 72, poemBoxY + 30);
+
+      const emergentStr = getExposedWords().join(' ') || '[Silent Erasure]';
+      ctx.fillStyle = '#0c0a09';
+      ctx.font = 'italic 300 24px "Cormorant Garamond", "EB Garamond", Georgia, serif';
+
+      // Wrap emergent poem text across up to 2 lines
+      const poemWords = emergentStr.split(' ');
+      let line1 = '';
+      let line2 = '';
+      const maxPoemWidth = cardW - 144;
+      poemWords.forEach((pw) => {
+        const test = line1 ? `${line1} ${pw}` : pw;
+        if (ctx.measureText(test).width < maxPoemWidth && !line2) {
+          line1 = test;
+        } else {
+          line2 = line2 ? `${line2} ${pw}` : pw;
+        }
+      });
+      ctx.fillText(`“${line1}${line2 ? '' : '”'}`, cardX + 72, poemBoxY + 64);
+      if (line2) {
+        ctx.fillText(`${line2}”`, cardX + 72, poemBoxY + 94);
+      }
+
+      // 7. Footer Attribution Watermark
+      ctx.fillStyle = '#777169';
+      ctx.font = '400 13px Inter, -apple-system, sans-serif';
+      ctx.fillText(
+        `Source: ${currentPassage.citationMLA}`,
+        cardX + 48,
+        cardY + cardH - 52
+      );
+      ctx.fillStyle = '#292524';
+      ctx.font = '500 13px Inter, -apple-system, sans-serif';
+      ctx.fillText(
+        'Jane’s Diary · Shawn Shaibu Cherian (26BCE1820) · VIT Chennai · wwwrryyy.github.io/janesdiary/',
+        cardX + 48,
+        cardY + cardH - 26
+      );
+
+      // Trigger PNG Download
+      const dataUrl = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.download = `janes-diary-blackout-${currentPassage.id}.png`;
+      link.href = dataUrl;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      if (downloadPngLabel) {
+        downloadPngLabel.textContent = 'Exported High-DPI PNG';
+        setTimeout(() => {
+          downloadPngLabel.textContent = 'Download Poem as PNG';
+        }, 2400);
+      }
+    });
+
+    // Attach click listeners to initial SSR tokens
+    renderWords();
+  }
+
+  initBlackoutStudio();
+</script>
+
+<style>
+  .studio-hero {
+    padding: 64px 0 48px;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .studio-hero__orb-1 {
+    width: 380px;
+    height: 380px;
+    top: -100px;
+    left: 10%;
+  }
+
+  .studio-hero__orb-2 {
+    width: 320px;
+    height: 320px;
+    top: 20px;
+    right: 12%;
+  }
+
+  .studio-hero__orb-3 {
+    width: 260px;
+    height: 260px;
+    bottom: -80px;
+    left: 45%;
+  }
+
+  .studio-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+  }
+
+  .studio-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--color-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .studio-breadcrumb__link:hover {
+    color: var(--color-ink);
+  }
+
+  .studio-breadcrumb__current {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .studio-hero__badges {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-sm);
+  }
+
+  .studio-hero__title {
+    margin-bottom: var(--space-sm);
+  }
+
+  .studio-hero__subtitle code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 14px;
+    background-color: var(--color-surface-strong);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* Studio Workspace */
+  .studio-workspace {
+    padding-top: var(--space-xxl);
+  }
+
+  .studio-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  .studio-toolbar__group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .studio-toolbar__label {
+    color: var(--color-muted);
+  }
+
+  .passage-pills,
+  .action-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .studio-grid {
+    display: grid;
+    grid-template-columns: 1.45fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .blackout-sheet {
+    background-color: var(--color-surface-card);
+  }
+
+  .blackout-sheet__orb {
+    width: 280px;
+    height: 280px;
+    top: -80px;
+    right: -60px;
+    opacity: 0.4;
+  }
+
+  .blackout-sheet__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .blackout-sheet__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .blackout-sheet__title {
+    margin-top: 6px;
+  }
+
+  .blackout-sheet__context {
+    color: var(--color-muted);
+    padding-bottom: var(--space-base);
+    margin-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .word-tokens-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: var(--space-lg);
+    background-color: var(--color-canvas-soft);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  :global(.word-token) {
+    font-family: var(--font-display);
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 1.25;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-hairline-strong);
+    background-color: var(--color-surface-card);
+    color: var(--color-ink);
+    cursor: pointer;
+    transition: background-color 0.14s ease, color 0.14s ease, opacity 0.2s ease, transform 0.1s ease;
+  }
+
+  :global(.word-token:hover) {
+    border-color: var(--color-ink);
+  }
+
+  :global(.word-token.is-blacked-out) {
+    background-color: var(--color-ink);
+    color: var(--color-ink);
+    border-color: var(--color-ink);
+    user-select: none;
+  }
+
+  :global(.word-token.is-blacked-out:hover) {
+    background-color: var(--color-primary);
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  :global(.word-tokens-grid.is-isolated .word-token.is-blacked-out) {
+    background-color: var(--color-hairline);
+    color: transparent;
+    border-color: transparent;
+    opacity: 0.25;
+  }
+
+  .blackout-sheet__footer {
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  /* Emergent Verse Card */
+  .studio-sidebar {
+    position: sticky;
+    top: 88px;
+  }
+
+  .emergent-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+  }
+
+  .emergent-card__heading {
+    margin-bottom: var(--space-base);
+  }
+
+  .emergent-poem-box {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.45;
+    color: var(--color-ink);
+    background-color: var(--color-canvas-soft);
+    border-left: 2px solid var(--color-ink);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    min-height: 120px;
+  }
+
+  .emergent-card__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .emergent-card__btn {
+    width: 100%;
+  }
+
+  .emergent-card__divider {
+    border: 0;
+    border-top: 1px solid var(--color-hairline);
+    margin: var(--space-lg) 0;
+  }
+
+  .emergent-card__tips {
+    margin-top: var(--space-xs);
+    padding-left: var(--space-base);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  @media (max-width: 1024px) {
+    .studio-grid {
+      grid-template-columns: 1fr;
+    }
+    .studio-sidebar {
+      position: static;
+    }
+  }
+</style>
