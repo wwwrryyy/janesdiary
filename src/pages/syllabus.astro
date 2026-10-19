@@ -1,0 +1,565 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/url';
+
+interface SyllabusModule {
+  week: string;
+  topic: string;
+  primaryReading: string;
+  secondaryTheory: string;
+  seminarPrompt: string;
+}
+
+interface SyllabusTrack {
+  id: string;
+  number: string;
+  title: string;
+  subtitle: string;
+  focus: string;
+  level: string;
+  duration: string;
+  orb: 'mint' | 'lavender' | 'peach' | 'sky' | 'rose';
+  relatedEssaySlug: string;
+  relatedEssayTitle: string;
+  modules: SyllabusModule[];
+  recommendedBibliography: string[];
+}
+
+const SYLLABUS_TRACKS: SyllabusTrack[] = [
+  {
+    id: 'track-01-confinement',
+    number: 'Track 01',
+    title: 'The Architecture of Domestic Confinement',
+    subtitle: 'From Victorian Medical Panopticons to Cybernetic Boundary Refusal',
+    focus: 'Victorian Gothic, Institutional Psychiatry, & Cyberfeminism',
+    level: 'Advanced Undergraduate / Graduate Seminar',
+    duration: '4-Week Intensive Module',
+    orb: 'mint',
+    relatedEssaySlug: '01-madwoman-to-glitch',
+    relatedEssayTitle: 'The Madwoman in the Attic vs. The Glitch in the Machine',
+    modules: [
+      {
+        week: 'Week 1',
+        topic: 'The Rest Cure & Spatial Surveillance in the 19th Century',
+        primaryReading: 'Charlotte Perkins Gilman, The Yellow Wallpaper (1892)',
+        secondaryTheory: 'Dr. Silas Weir Mitchell, Fat and Blood (1877); Michel Foucault, Discipline and Punish (Ch. 3 "Panopticism")',
+        seminarPrompt: 'In what ways does the domestic nursery operate as an institutional panopticon rather than a therapeutic retreat? How does John’s paternal affection function as surveillance?',
+      },
+      {
+        week: 'Week 2',
+        topic: 'The Textual Palimpsest & The Double Behind the Wall',
+        primaryReading: 'Sandra Gilbert & Susan Gubar, The Madwoman in the Attic (1979, selections)',
+        secondaryTheory: 'Sigmund Freud, "The Uncanny" (1919); Elaine Showalter, The Female Malady (1985)',
+        seminarPrompt: 'How does the narrator’s destruction of the physical wallpaper strip-by-strip invert nineteenth-century medical diagnoses of female hysteria into radical embodied authorship?',
+      },
+      {
+        week: 'Week 3',
+        topic: 'From Organic Monster to Cybernetic Resistance',
+        primaryReading: 'Donna Haraway, "A Cyborg Manifesto: Science, Technology, and Socialist-Feminism in the Late Twentieth Century" (1985)',
+        secondaryTheory: 'Sadie Plant, Zeros + Ones: Digital Women and the New Technoculture (1997)',
+        seminarPrompt: 'Haraway famously states: "I would rather be a cyborg than a goddess." How does the cyborg’s rejection of naturalized origins liberate feminist thought from the domestic biological mandate of the womb?',
+      },
+    ],
+    recommendedBibliography: [
+      'Gilman, Charlotte Perkins. The Yellow Wallpaper. New England Magazine, 1892.',
+      'Gilbert, Sandra M., and Susan Gubar. The Madwoman in the Attic. Yale University Press, 1979.',
+      'Haraway, Donna J. Simians, Cyborgs, and Women: The Reinvention of Nature. Routledge, 1991.',
+    ],
+  },
+  {
+    id: 'track-02-subaltern',
+    number: 'Track 02',
+    title: 'Bodily Sovereignty & Subaltern Refusal',
+    subtitle: 'Custodial Violence, Tribal Insurgency, and the Limits of Representation',
+    focus: 'Postcolonial Feminist Theory, Subaltern Studies, & Caste Inscription',
+    level: 'Graduate Colloquium',
+    duration: '4-Week Intensive Module',
+    orb: 'lavender',
+    relatedEssaySlug: '02-subaltern-body-battlefield',
+    relatedEssayTitle: 'Subaltern Voices & The Body as a Battlefield',
+    modules: [
+      {
+        week: 'Week 1',
+        topic: 'Can the Subaltern Speak? The Ideological Architecture of Silence',
+        primaryReading: 'Gayatri Chakravorty Spivak, "Can the Subaltern Speak?" (1988)',
+        secondaryTheory: 'Ranajit Guha, Subaltern Studies I (1982, Preface); Jacques Derrida, Of Grammatology (selections)',
+        seminarPrompt: 'Why does Spivak insist that the subaltern woman cannot speak within imperialist or nationalist historiography? What distinguishes political speech from institutional ventriloquism?',
+      },
+      {
+        week: 'Week 2',
+        topic: 'The Wounded Body as Counter-Monument in Draupadi',
+        primaryReading: 'Mahasweta Devi, "Draupadi" (1978; translated with critical introduction by Gayatri Spivak, Critical Inquiry, 1981)',
+        secondaryTheory: 'Achille Mbembe, Necropolitics (2003)',
+        seminarPrompt: 'Analyze Dopdi Mejhen’s final confrontation with Senanayak. How does her refusal to clothe her bleeding, violated flesh dismantle the carceral and sexual mastery of counter-insurgency?',
+      },
+      {
+        week: 'Week 3',
+        topic: 'The Love Laws & Domestic Feudalism in The God of Small Things',
+        primaryReading: 'Arundhati Roy, The God of Small Things (1997, selections)',
+        secondaryTheory: 'B.R. Ambedkar, Annihilation of Caste (1936); Sharmila Rege, Writing Caste, Writing Gender (2006)',
+        seminarPrompt: 'How do the "Love Laws"—which prescribe "who should be loved, and how, and how much"—police the intersection of female sexuality and caste purity in postcolonial Kerala?',
+      },
+    ],
+    recommendedBibliography: [
+      'Devi, Mahasweta. "Draupadi." Translated by Gayatri Chakravorty Spivak, Critical Inquiry, vol. 8, no. 2, 1981, pp. 381–402.',
+      'Roy, Arundhati. The God of Small Things. IndiaInk, 1997.',
+      'Spivak, Gayatri Chakravorty. "Can the Subaltern Speak?" Marxism and the Interpretation of Culture, 1988.',
+    ],
+  },
+  {
+    id: 'track-03-ecofeminism',
+    number: 'Track 03',
+    title: 'The Vessel & The Living Seed: Ecofeminist Materialism',
+    subtitle: 'Collecting the Earth Against the Spear of Monocultural Extraction',
+    focus: 'Ecofeminism, Narrative Theory, Indigenous Commons, & Anti-Colonial Utopias',
+    level: 'Undergraduate / Independent Seminar',
+    duration: '4-Week Intensive Module',
+    orb: 'mint',
+    relatedEssaySlug: '07-carrier-bag-ecofeminist-commons',
+    relatedEssayTitle: 'The Carrier Bag vs. The Spear: Collecting the Earth',
+    modules: [
+      {
+        week: 'Week 1',
+        topic: 'De-centering the Mammoth Hunter: The Narrative Carrier Bag',
+        primaryReading: 'Ursula K. Le Guin, "The Carrier Bag Theory of Fiction" (1986)',
+        secondaryTheory: 'Elizabeth Fisher, Woman’s Creation: Sexual Evolution and the Shaping of Society (1979)',
+        seminarPrompt: 'How does Le Guin’s substitution of the basket/gourd for the spear transform the structure of narrative conflict, hero worship, and apocalyptic progression in modern literature?',
+      },
+      {
+        week: 'Week 2',
+        topic: 'Monocultures of the Mind & Seed Sovereignty',
+        primaryReading: 'Vandana Shiva, Staying Alive: Women, Ecology and Development (1988, Ch. 1–3)',
+        secondaryTheory: 'Maria Mies and Vandana Shiva, Ecofeminism (1993)',
+        seminarPrompt: 'What is the relationship between corporate patent monopolies on agricultural seeds and the patriarchal subjugation of rural women’s indigenous ecological knowledge in the Global South?',
+      },
+      {
+        week: 'Week 3',
+        topic: 'Technological Liberation in Ladyland: Solar Energy & Purdah Inversion',
+        primaryReading: 'Begum Rokeya Sakhawat Hossain, Sultana’s Dream (1905)',
+        secondaryTheory: 'Roushan Jahan, Introduction to Sultana’s Dream and Padmarag (1988)',
+        seminarPrompt: 'How does Rokeya’s depiction of solar-powered agriculture, cloud condensers, and peaceful female universities challenge colonial British assumptions regarding South Asian Muslim women?',
+      },
+    ],
+    recommendedBibliography: [
+      'Hossain, Rokeya Sakhawat. Sultana’s Dream. The Indian Ladies’ Magazine, 1905.',
+      'Le Guin, Ursula K. Dancing at the Edge of the World: Thoughts on Words, Women, Places. Grove Press, 1989.',
+      'Shiva, Vandana. Staying Alive: Women, Ecology and Development. Zed Books, 1988.',
+    ],
+  },
+  {
+    id: 'track-04-borderlands',
+    number: 'Track 04',
+    title: 'Unruly Grammars: Decolonial Borders & Somatic Memory',
+    subtitle: 'The Master’s Tools, Rememory, and Queer Mestiza Consciousness',
+    focus: 'Black Feminist Thought, Chicana Decolonial Theory, & Somatic Inscription',
+    level: 'Advanced Undergraduate / Graduate Seminar',
+    duration: '4-Week Intensive Module',
+    orb: 'peach',
+    relatedEssaySlug: '06-womanist-poetics-somatic-memory',
+    relatedEssayTitle: 'The Master’s Tools & The Flesh of Memory',
+    modules: [
+      {
+        week: 'Week 1',
+        topic: 'Dismantling the House: The Erotic as Epistemological Weapon',
+        primaryReading: 'Audre Lorde, Sister Outsider: Essays and Speeches (1984, selections)',
+        secondaryTheory: 'Combahee River Collective, "A Black Feminist Statement" (1977); bell hooks, Ain’t I a Woman? (1981)',
+        seminarPrompt: 'How does Lorde’s reclamation of the erotic strip it of patriarchal commodification, redefining it as an internal compass of self-sovereignty and anti-racist solidarity?',
+      },
+      {
+        week: 'Week 2',
+        topic: 'The Sacredness of the Flesh: Rememory & The Clearing in Beloved',
+        primaryReading: 'Toni Morrison, Beloved (1987, selections)',
+        secondaryTheory: 'Christina Sharpe, In the Wake: On Blackness and Being (2016); Hortense Spillers, "Mama’s Baby, Papa’s Maybe" (1987)',
+        seminarPrompt: 'Analyze Baby Suggs’s sermon at the Clearing. Why is the commandment to love one’s own physical flesh an act of supreme insurrection against the plantation order and the master’s measuring ink?',
+      },
+      {
+        week: 'Week 3',
+        topic: 'The Open Wound: Gloria Anzaldúa & The New Mestiza Consciousness',
+        primaryReading: 'Gloria Anzaldúa, Borderlands / La Frontera: The New Mestiza (1987, Ch. 1, 2, 5 & 7)',
+        secondaryTheory: 'Cherríe Moraga, Loving in the War Years (1983); Chela Sandoval, Methodology of the Oppressed (2000)',
+        seminarPrompt: 'How does Anzaldúa’s concept of nepantla and linguistic code-switching dismantle the rigid dualisms of colonial cartography and monolingual white academic gatekeeping?',
+      },
+    ],
+    recommendedBibliography: [
+      'Anzaldúa, Gloria. Borderlands / La Frontera: The New Mestiza. Spinsters / Aunt Lute, 1987.',
+      'Lorde, Audre. Sister Outsider: Essays and Speeches. Crossing Press, 1984.',
+      'Morrison, Toni. Beloved. Alfred A. Knopf, 1987.',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Curated Syllabi & Seminar Tracks — Jane's Diary"
+  description="Academic reading rooms, thematic seminar modules, and comprehensive bibliographies designed for university classrooms, independent researchers, and reading circles."
+  currentPath="/syllabus/"
+>
+  <!-- 1. HERO BAND -->
+  <section class="syllabus-hero orb-stage" aria-labelledby="syllabus-heading">
+    <div class="ambient-orb ambient-orb--peach syllabus-hero__orb-1" aria-hidden="true"></div>
+    <div class="ambient-orb ambient-orb--lavender syllabus-hero__orb-2" aria-hidden="true"></div>
+
+    <div class="container syllabus-hero__inner">
+      <nav class="syllabus-breadcrumb no-print" aria-label="Breadcrumb">
+        <a href={withBase('/')} class="syllabus-breadcrumb__link">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page" class="syllabus-breadcrumb__current">Curated Syllabi</span>
+      </nav>
+
+      <div class="syllabus-hero__header">
+        <span class="badge-pill">
+          <span class="badge-dot badge-dot--peach" aria-hidden="true"></span>
+          Academic Reading Rooms &amp; Curricular Design
+        </span>
+        <h1 id="syllabus-heading" class="display-xl syllabus-hero__title">
+          Thematic seminar tracks, reading lists, &amp; critical inquiries.
+        </h1>
+        <p class="body-md syllabus-hero__lead">
+          Structured pedagogical frameworks curated by founding editor Shawn Shaibu Cherian for university literature departments, cultural foundations, and independent study circles. Each track includes primary readings, theoretical anchors, and seminar discussion prompts.
+        </p>
+
+        <div class="syllabus-hero__actions no-print">
+          <button type="button" class="button-primary" onclick="window.print()">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 6V2H12V6M4 12H3C2.44772 12 2 11.5523 2 11V8C2 7.44772 2.44772 7 3 7H13C13.5523 7 14 7.44772 14 8V11C14 11.5523 13.5523 12 13 12H12M4 10H12V14H4V10Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Print / Export All Syllabi
+          </button>
+          <a href={withBase('/contact/')} class="button-outline">
+            Commission a Custom University Syllabus
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. TRACKS CATALOG -->
+  <section class="section-band" aria-labelledby="tracks-catalog-heading">
+    <div class="container">
+      <h2 id="tracks-catalog-heading" class="sr-only">Four Thematic Syllabus Tracks</h2>
+
+      <div class="syllabus-tracks-list">
+        {SYLLABUS_TRACKS.map((track) => (
+          <article class="feature-card syllabus-track-card" id={track.id}>
+            <div class="syllabus-track-card__header">
+              <div class="syllabus-track-card__badges">
+                <span class="badge-pill">
+                  <span class={`badge-dot badge-dot--${track.orb}`} aria-hidden="true"></span>
+                  {track.number}
+                </span>
+                <span class="caption">{track.level}</span>
+                <span class="caption">{track.duration}</span>
+              </div>
+
+              <h3 class="display-sm syllabus-track-card__title">
+                {track.title}
+              </h3>
+
+              <p class="title-sm syllabus-track-card__subtitle">
+                {track.subtitle}
+              </p>
+
+              <div class="syllabus-track-card__meta">
+                <span class="caption-uppercase">Core Discipline:</span>
+                <span class="body-sm text-body">{track.focus}</span>
+              </div>
+            </div>
+
+            <!-- Modules Breakdown -->
+            <div class="syllabus-track-card__modules">
+              <h4 class="caption-uppercase syllabus-modules-heading">Seminar Modules &amp; Weekly Inquiries</h4>
+
+              <div class="syllabus-modules-grid">
+                {track.modules.map((mod) => (
+                  <div class="syllabus-module-item">
+                    <div class="syllabus-module-item__week">
+                      <span class="badge-pill">{mod.week}</span>
+                      <h5 class="title-xs syllabus-module-item__topic">{mod.topic}</h5>
+                    </div>
+
+                    <div class="syllabus-module-item__readings">
+                      <p class="body-sm">
+                        <strong>Primary Reading:</strong> {mod.primaryReading}
+                      </p>
+                      <p class="body-sm text-muted">
+                        <strong>Secondary Theory:</strong> {mod.secondaryTheory}
+                      </p>
+                    </div>
+
+                    <blockquote class="syllabus-module-item__prompt">
+                      <strong>Discussion Prompt:</strong> {mod.seminarPrompt}
+                    </blockquote>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Footer: Recommended Bibliography & Related Essay -->
+            <div class="syllabus-track-card__footer">
+              <div class="syllabus-track-card__biblio">
+                <span class="caption-uppercase">Required Core Editions:</span>
+                <ul class="body-xs text-muted syllabus-biblio-list">
+                  {track.recommendedBibliography.map((bib) => (
+                    <li>{bib}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="syllabus-track-card__actions no-print">
+                <a
+                  href={withBase(`/entries/${track.relatedEssaySlug}/`)}
+                  class="button-primary"
+                >
+                  Read Companion Essay ({track.relatedEssaySlug.slice(0, 2)}) →
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CUSTOM SYLLABUS COMMISSION CALLOUT -->
+  <section class="section-band section-band--soft no-print" aria-labelledby="custom-syllabus-heading">
+    <div class="container">
+      <div class="feature-card syllabus-commission-card">
+        <div class="syllabus-commission-card__content">
+          <span class="badge-pill">Curricular Consultation</span>
+          <h2 id="custom-syllabus-heading" class="display-sm syllabus-commission-card__title">
+            Need a bespoke syllabus or guest lecture module for your institution?
+          </h2>
+          <p class="body-sm text-body">
+            Shawn Shaibu Cherian provides syllabus design, primary archival selection, and lecture outlines for literature departments, independent cultural centers, and reading communities. Standard turnaround for a tailored 6-week module is under 5 business days.
+          </p>
+          <div class="syllabus-commission-card__actions">
+            <a href={withBase('/contact/')} class="button-primary">
+              Inquire About Curricular Consulting →
+            </a>
+            <a href={withBase('/archive/')} class="button-outline">
+              Explore The Palimpsest Archive
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .syllabus-hero {
+    padding: var(--space-xxxl) 0 var(--space-xl);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .syllabus-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 13px;
+    color: var(--color-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .syllabus-breadcrumb__link {
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .syllabus-breadcrumb__link:hover {
+    color: var(--color-ink);
+  }
+
+  .syllabus-breadcrumb__current {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .syllabus-hero__header {
+    max-width: 880px;
+  }
+
+  .syllabus-hero__title {
+    margin-top: var(--space-base);
+    margin-bottom: var(--space-base);
+    line-height: 1.1;
+  }
+
+  .syllabus-hero__lead {
+    color: var(--color-body);
+    line-height: 1.6;
+    margin-bottom: var(--space-xl);
+  }
+
+  .syllabus-hero__actions {
+    display: flex;
+    gap: var(--space-base);
+    flex-wrap: wrap;
+  }
+
+  .syllabus-tracks-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xxl);
+    margin-top: var(--space-xl);
+  }
+
+  .syllabus-track-card {
+    padding: var(--space-xl);
+  }
+
+  .syllabus-track-card__header {
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .syllabus-track-card__badges {
+    display: flex;
+    align-items: center;
+    gap: var(--space-base);
+    margin-bottom: var(--space-base);
+    flex-wrap: wrap;
+  }
+
+  .syllabus-track-card__title {
+    margin-bottom: var(--space-xs);
+    color: var(--color-ink);
+  }
+
+  .syllabus-track-card__subtitle {
+    color: var(--color-muted);
+    margin-bottom: var(--space-base);
+    font-weight: 400;
+  }
+
+  .syllabus-track-card__meta {
+    display: flex;
+    gap: var(--space-xs);
+    align-items: baseline;
+    font-size: 13px;
+  }
+
+  .syllabus-track-card__modules {
+    padding: var(--space-xl) 0;
+  }
+
+  .syllabus-modules-heading {
+    color: var(--color-muted);
+    margin-bottom: var(--space-base);
+    letter-spacing: 0.08em;
+  }
+
+  .syllabus-modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  @media (max-width: 960px) {
+    .syllabus-modules-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .syllabus-module-item {
+    background-color: var(--color-canvas-soft);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: var(--space-base);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .syllabus-module-item__week {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    align-items: flex-start;
+  }
+
+  .syllabus-module-item__topic {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--color-ink);
+  }
+
+  .syllabus-module-item__readings {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .syllabus-module-item__prompt {
+    margin-top: auto;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-hairline);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--color-body);
+  }
+
+  .syllabus-track-card__footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-hairline);
+    flex-wrap: wrap;
+  }
+
+  .syllabus-track-card__biblio {
+    max-width: 640px;
+  }
+
+  .syllabus-biblio-list {
+    list-style: none;
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+  }
+
+  .syllabus-commission-card {
+    background: linear-gradient(135deg, var(--color-surface-card) 0%, var(--color-canvas-soft) 100%);
+    padding: var(--space-xxl);
+  }
+
+  .syllabus-commission-card__content {
+    max-width: 720px;
+  }
+
+  .syllabus-commission-card__title {
+    margin-top: var(--space-base);
+    margin-bottom: var(--space-sm);
+    line-height: 1.2;
+  }
+
+  .syllabus-commission-card__actions {
+    display: flex;
+    gap: var(--space-base);
+    margin-top: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+
+    .syllabus-hero {
+      padding: 0 0 var(--space-lg) 0;
+      border: none;
+    }
+
+    .syllabus-modules-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

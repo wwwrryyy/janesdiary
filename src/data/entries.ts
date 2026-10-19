@@ -30,6 +30,16 @@ export interface EssaySectionPrompt {
   suggestedWords: string;
 }
 
+export interface ArchivalImage {
+  src: string;
+  alt: string;
+  caption: string;
+  credit: string;
+  secondarySrc?: string;
+  secondaryAlt?: string;
+  secondaryCaption?: string;
+}
+
 export interface EssayEntry {
   number: string;
   slug: string;
@@ -39,10 +49,14 @@ export interface EssayEntry {
   orb: OrbColor;
   readingTime: string;
   publishedAt: string;
+  subsection: string;
+  subsectionSlug: string;
+  subsectionDescription: string;
+  archivalImage: ArchivalImage;
   primaryWorks: PrimaryWork[];
   editorialAbstract: string;
-  sections: EssaySectionPrompt[];
-  criticalLensPassages: CriticalLensPassage[];
+  sections?: EssaySectionPrompt[];
+  criticalLensPassages?: CriticalLensPassage[];
   worksCitedMLA: string[];
 }
 
@@ -57,6 +71,18 @@ export const ESSAY_ENTRIES: EssayEntry[] = [
     orb: 'mint',
     readingTime: '8 min read',
     publishedAt: '2026-10-19',
+    subsection: 'Victorian Gothic & Confinement',
+    subsectionSlug: 'gothic-confinement',
+    subsectionDescription: 'Medical surveillance, the patriarchal rest cure, and domestic imprisonment from 1892 to cybernetic resistance.',
+    archivalImage: {
+      src: '/images/archival/charlotte-perkins-gilman-c-1900.jpg',
+      alt: 'Charlotte Perkins Gilman photographic portrait c. 1900',
+      caption: 'Charlotte Perkins Gilman (c. 1900), whose autobiographical Gothic novella challenged Dr. Silas Weir Mitchell\'s medicalized rest cure.',
+      credit: 'Charles Fletcher Lummis / Adam Cuerden, public domain, via Wikimedia Commons',
+      secondarySrc: '/images/archival/willow-bough.jpg',
+      secondaryAlt: 'William Morris Willow Bough wallpaper pattern (1887)',
+      secondaryCaption: 'Victorian domestic wallpaper design (William Morris, 1887, Met Museum CC0), evoking the claustrophobic nursery patterns of the 1892 narrative.',
+    },
     primaryWorks: [
       {
         title: 'The Yellow Wallpaper',
@@ -175,6 +201,15 @@ export const ESSAY_ENTRIES: EssayEntry[] = [
     orb: 'lavender',
     readingTime: '9 min read',
     publishedAt: '2026-10-19',
+    subsection: 'Postcolonial & Subaltern Bodies',
+    subsectionSlug: 'subaltern-bodies',
+    subsectionDescription: 'State violence, tribal insurgency, and the politicized female body across postcolonial South Asia.',
+    archivalImage: {
+      src: '/images/archival/kolkata-0.jpg',
+      alt: 'Kolkata collotype postcard c. 1900',
+      caption: 'Bengal in the early twentieth century (collotype postcard, CC BY 4.0), setting the geopolitical backdrop for Mahasweta Devi\'s subaltern literature.',
+      credit: 'W. Roessler, Kolkata, CC BY 4.0, via Wikimedia Commons',
+    },
     primaryWorks: [
       {
         title: 'Draupadi',
@@ -278,6 +313,15 @@ export const ESSAY_ENTRIES: EssayEntry[] = [
     orb: 'peach',
     readingTime: '7 min read',
     publishedAt: '2026-10-19',
+    subsection: 'Materialist Modernism & Digital Labor',
+    subsectionSlug: 'materialist-modernism',
+    subsectionDescription: 'The political economy of female literary production: from Woolf\'s 500 pounds to the 2026 algorithmic creator economy.',
+    archivalImage: {
+      src: '/images/archival/george-charles-beresford-virginia-woolf-in-1902.jpg',
+      alt: 'Virginia Woolf portrait in 1902 by George Charles Beresford',
+      caption: 'Virginia Woolf in 1902 (George Charles Beresford restoration), who articulated the materialist necessity of money and space for women writers.',
+      credit: 'George Charles Beresford / Adam Cuerden, public domain, via Wikimedia Commons',
+    },
     primaryWorks: [
       {
         title: "A Room of One's Own",
@@ -372,6 +416,15 @@ export const ESSAY_ENTRIES: EssayEntry[] = [
     orb: 'sky',
     readingTime: '8 min read',
     publishedAt: '2026-10-19',
+    subsection: 'Speculative Utopias & Dystopian Biopolitics',
+    subsectionSlug: 'speculative-dystopias',
+    subsectionDescription: 'Alternative female political governance, anti-colonial science, and theocratic reproductive control.',
+    archivalImage: {
+      src: '/images/archival/kolkata-0.jpg',
+      alt: 'Kolkata collotype postcard c. 1900',
+      caption: 'Colonial Bengal at the turn of the twentieth century, the world Begum Rokeya Sakhawat Hossain inverted in Sultana\'s Dream (Madras, 1905).',
+      credit: 'W. Roessler, Kolkata, CC BY 4.0, via Wikimedia Commons',
+    },
     primaryWorks: [
       {
         title: "Sultana's Dream",
@@ -490,6 +543,18 @@ export const ESSAY_ENTRIES: EssayEntry[] = [
     orb: 'rose',
     readingTime: '8 min read',
     publishedAt: '2026-10-19',
+    subsection: 'Romantic Monstrosity & Confessional Poetics',
+    subsectionSlug: 'romantic-monstrosity',
+    subsectionDescription: 'Creation anxiety, maternal bereavement, and poetic rebellion from nineteenth-century Geneva to twentieth-century confessional verse.',
+    archivalImage: {
+      src: '/images/archival/mary-wollstonecraft-shelley.jpg',
+      alt: 'Mary Wollstonecraft Shelley 1840 portrait by Richard Rothwell',
+      caption: 'Mary Wollstonecraft Shelley (Richard Rothwell, 1840, National Portrait Gallery, public domain), who wrote Frankenstein at eighteen.',
+      credit: 'Richard Rothwell, public domain, via Wikimedia Commons',
+      secondarySrc: '/images/archival/frankenstein-1818-edition-title-page.jpg',
+      secondaryAlt: 'Frankenstein first edition title page (1818)',
+      secondaryCaption: 'Original 1818 anonymous title page of Frankenstein; or, The Modern Prometheus, published by Lackington, Hughes, Harding.',
+    },
     primaryWorks: [
       {
         title: 'Frankenstein; or, The Modern Prometheus',
@@ -597,6 +662,138 @@ export const ESSAY_ENTRIES: EssayEntry[] = [
       'Mellor, Anne K. Mary Shelley: Her Life, Her Fiction, Her Monsters. Methuen, 1988.',
       'Plath, Sylvia. Ariel. Faber and Faber, 1965.',
       'Shelley, Mary Wollstonecraft. Frankenstein; or, The Modern Prometheus. 1818. Edited by J. Paul Hunter, W. W. Norton, 2012.',
+    ],
+  },
+  {
+    number: '06',
+    slug: '06-womanist-poetics-somatic-memory',
+    title: 'The Master’s Tools & The Flesh of Memory',
+    subtitle:
+      'Audre Lorde’s erotic lifeforce and Toni Morrison’s rememory confronting the racialized archive of slavery and maternal trauma.',
+    era: 'Black Feminist Thought & Womanist Poetics',
+    orb: 'lavender',
+    readingTime: '8 min read',
+    publishedAt: '2026-10-20',
+    subsection: 'Black Feminist Thought & Somatic Archiving',
+    subsectionSlug: 'black-feminism-somatic',
+    subsectionDescription:
+      'Interlocking oppressions, the erotic as an epistemological instrument, and reclaiming the wounded Black maternal body.',
+    archivalImage: {
+      src: '/images/archival/audre-lorde.jpg',
+      alt: 'Audre Lorde portrait circa 1980 by K. Kendall',
+      caption: 'Audre Lorde (circa 1980), poet, essayist, and warrior who theorized the erotic as power and exposed the limits of institutional white feminism.',
+      credit: 'K. Kendall, CC BY-SA 3.0, via Wikimedia Commons',
+      secondarySrc: '/images/archival/toni-morrison.jpg',
+      secondaryAlt: 'Toni Morrison photograph by John Mathew Smith',
+      secondaryCaption: 'Toni Morrison (photo by John Mathew Smith, 1986), Nobel laureate whose novel Beloved inscribed the unspeakable trauma of the enslaved maternal body.',
+    },
+    primaryWorks: [
+      {
+        title: 'Sister Outsider: Essays and Speeches',
+        author: 'Audre Lorde',
+        year: 1984,
+        copyrightStatus: 'Copyrighted (Fair-Use Citation)',
+      },
+      {
+        title: 'Beloved',
+        author: 'Toni Morrison',
+        year: 1987,
+        copyrightStatus: 'Copyrighted (Fair-Use Citation)',
+      },
+    ],
+    editorialAbstract:
+      'Entry 06 bridges Audre Lorde’s 1979 warning that the master’s tools will never dismantle the master’s house with Toni Morrison’s profound excavation of chattel slavery in Beloved. Tracing how Schoolteacher’s pseudo-scientific ledger reduces the maternal body to livestock, the essay explores Baby Suggs’s sermon at the Clearing as the supreme reclamation of the sacred flesh.',
+    worksCitedMLA: [
+      'Lorde, Audre. Sister Outsider: Essays and Speeches. Crossing Press, 1984.',
+      'Morrison, Toni. Beloved. Alfred A. Knopf, 1987.',
+      'Sharpe, Christina. In the Wake: On Blackness and Being. Duke University Press, 2016.',
+    ],
+  },
+  {
+    number: '07',
+    slug: '07-carrier-bag-ecofeminist-commons',
+    title: 'The Carrier Bag vs. The Spear: Collecting the Earth',
+    subtitle:
+      'Ursula K. Le Guin’s narrative gathering vessel and Vandana Shiva’s seed sovereignty dismantling the patriarchal conqueror.',
+    era: 'Ecofeminist Theory & Narrative Materialism',
+    orb: 'mint',
+    readingTime: '8 min read',
+    publishedAt: '2026-10-20',
+    subsection: 'Ecofeminism & The Carrier Bag Theory',
+    subsectionSlug: 'ecofeminism-carrier-bag',
+    subsectionDescription:
+      'Rejecting the phallocentric hero-weapon narrative in favor of communal gathering, soil ecology, and living seed biodiversity.',
+    archivalImage: {
+      src: '/images/archival/ursula-le-guin.jpg',
+      alt: 'Ursula K. Le Guin portrait by Marian Wood Kolisch',
+      caption: 'Ursula K. Le Guin (Oregon State University, CC BY-SA 2.0), whose Carrier Bag Theory re-imagined literature as an unheroic vessel of sustenance.',
+      credit: 'Marian Wood Kolisch / Oregon State University, CC BY-SA 2.0, via Wikimedia Commons',
+      secondarySrc: '/images/archival/vandana-shiva.jpg',
+      secondaryAlt: 'Dr. Vandana Shiva portrait by Daniel Schwen',
+      secondaryCaption: 'Dr. Vandana Shiva (photo by Daniel Schwen, 2007), environmental activist and philosopher who mobilized rural women for seed sovereignty and bio-commons.',
+    },
+    primaryWorks: [
+      {
+        title: 'The Carrier Bag Theory of Fiction',
+        author: 'Ursula K. Le Guin',
+        year: 1986,
+        copyrightStatus: 'Copyrighted (Fair-Use Citation)',
+      },
+      {
+        title: 'Staying Alive: Women, Ecology and Development',
+        author: 'Vandana Shiva',
+        year: 1988,
+        copyrightStatus: 'Copyrighted (Fair-Use Citation)',
+      },
+    ],
+    editorialAbstract:
+      'Entry 07 investigates the structural link between the techno-heroic conqueror narrative and planetary ecological crisis. Pairing Ursula K. Le Guin’s Carrier Bag Theory of Fiction with Vandana Shiva’s ecofeminist critique of industrial seed monopolies, the essay examines how peasant women in the Chipko movement embodied a radical politics of holding and sustenance against the spear of corporate extraction.',
+    worksCitedMLA: [
+      'Le Guin, Ursula K. "The Carrier Bag Theory of Fiction." 1986. Dancing at the Edge of the World, Grove Press, 1989, pp. 165–170.',
+      'Mies, Maria, and Vandana Shiva. Ecofeminism. Fernwood Publications / Zed Books, 1993.',
+      'Shiva, Vandana. Staying Alive: Women, Ecology and Development. Zed Books, 1988.',
+    ],
+  },
+  {
+    number: '08',
+    slug: '08-borderlands-queer-mestiza',
+    title: 'La Facultad at the Edge of Empire',
+    subtitle:
+      'Gloria Anzaldúa’s border wound and Cherríe Moraga’s theory in the flesh establishing mestiza consciousness and queer decolonial defiance.',
+    era: 'Chicana & Decolonial Queer Feminism',
+    orb: 'peach',
+    readingTime: '8 min read',
+    publishedAt: '2026-10-20',
+    subsection: 'Borderlands & Queer Mestiza Consciousness',
+    subsectionSlug: 'borderlands-mestiza',
+    subsectionDescription:
+      'Linguistic code-switching, nepantla, somatic queer resistance, and refusing colonial cartographies.',
+    archivalImage: {
+      src: '/images/archival/gloria-anzaldua.jpg',
+      alt: 'Gloria Anzaldúa archival portrait',
+      caption: 'Gloria Anzaldúa (circa 1987), Chicana tejana theorist who redefined borders as bleeding somatic wounds and theorized the new mestiza consciousness.',
+      credit: 'Archival documentation plate, educational fair use',
+    },
+    primaryWorks: [
+      {
+        title: 'Borderlands / La Frontera: The New Mestiza',
+        author: 'Gloria Anzaldúa',
+        year: 1987,
+        copyrightStatus: 'Copyrighted (Fair-Use Citation)',
+      },
+      {
+        title: 'Loving in the War Years: Lo Que Nunca Pasó Por Sus Labios',
+        author: 'Cherríe Moraga',
+        year: 1983,
+        copyrightStatus: 'Copyrighted (Fair-Use Citation)',
+      },
+    ],
+    editorialAbstract:
+      'Entry 08 examines the 1,950-mile US-Mexico border as a somatic laceration in Gloria Anzaldúa’s Borderlands and Cherríe Moraga’s theory in the flesh. Analyzing the transformative state of nepantla and the refusal to tame the wild bilingual tongue, the essay charts how queer Chicana writers transformed geographic exclusion into a liberating counter-cartography.',
+    worksCitedMLA: [
+      'Anzaldúa, Gloria. Borderlands / La Frontera: The New Mestiza. Spinsters / Aunt Lute, 1987.',
+      'Moraga, Cherríe. Loving in the War Years: Lo Que Nunca Pasó Por Sus Labios. South End Press, 1983.',
+      'Moraga, Cherríe, and Gloria Anzaldúa, editors. This Bridge Called My Back: Writings by Radical Women of Color. Persephone Press, 1981.',
     ],
   },
 ];

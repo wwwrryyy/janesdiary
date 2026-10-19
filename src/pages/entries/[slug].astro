@@ -22,18 +22,18 @@ interface Props {
 
 const { entry, prevEntry, nextEntry } = Astro.props;
 
-// Load the corresponding student Markdown file from src/content/essays/<slug>.md
+// Load the corresponding essay Markdown file from src/content/essays/<slug>.md
 const markdownFiles = import.meta.glob('../../content/essays/*.md', { eager: true });
 const mdKey = `../../content/essays/${entry.slug}.md`;
 const mdModule = markdownFiles[mdKey] as { Content?: any } | undefined;
 const MarkdownContent = mdModule?.Content;
 
-const studentEssayCitation = `Cherian, Shawn Shaibu. "${entry.title}." Jane's Diary: An Interactive Archive of Feminist Literature, 19 Oct. 2026, https://wwwrryyy.github.io/janesdiary/entries/${entry.slug}/.`;
-const allCitationsText = [studentEssayCitation, ...entry.worksCitedMLA].join('\n\n');
+const essayCitation = `Cherian, Shawn Shaibu. "${entry.title}." Jane's Diary: A Journal of Feminist Literature & Archival Studies, Oct. 2026, https://wwwrryyy.github.io/janesdiary/entries/${entry.slug}/.`;
+const allCitationsText = [essayCitation, ...entry.worksCitedMLA].join('\n\n');
 ---
 
 <BaseLayout
-  title={`Entry ${entry.number}: ${entry.title}`}
+  title={`${entry.title} — Jane's Diary`}
   description={entry.subtitle}
   currentPath={`/entries/${entry.slug}/`}
 >
@@ -46,18 +46,18 @@ const allCitationsText = [studentEssayCitation, ...entry.worksCitedMLA].join('\n
       <nav class="entry-breadcrumb" aria-label="Breadcrumb">
         <a href={withBase('/')} class="entry-breadcrumb__link">Home</a>
         <span aria-hidden="true">/</span>
-        <a href={withBase('/#entries')} class="entry-breadcrumb__link">Entries</a>
+        <a href={withBase('/blogs/')} class="entry-breadcrumb__link">Essays</a>
         <span aria-hidden="true">/</span>
-        <span aria-current="page" class="entry-breadcrumb__current">Entry {entry.number}</span>
+        <span aria-current="page" class="entry-breadcrumb__current">Essay {entry.number}</span>
       </nav>
 
       <div class="entry-hero__badges">
         <span class="badge-pill">
           <span class={`badge-dot badge-dot--${entry.orb}`} aria-hidden="true"></span>
-          Entry No. {entry.number}
+          Essay {entry.number}
         </span>
-        <span class="badge-pill">{entry.era}</span>
-        <span class="caption">{entry.readingTime} · Shawn Shaibu Cherian (26BCE1820)</span>
+        <span class="badge-pill">{entry.subsection}</span>
+        <span class="caption">{entry.readingTime} · By Shawn Shaibu Cherian</span>
       </div>
 
       <h1 id="entry-title" class="display-xl entry-hero__title">
@@ -86,116 +86,56 @@ const allCitationsText = [studentEssayCitation, ...entry.worksCitedMLA].join('\n
           </div>
         ))}
       </div>
-    </div>
-  </section>
 
-  <!-- 2. STICKY READING TOOLBAR + ELEVENLABS VOICE BAR -->
-  <section class="reading-controls-band no-print" aria-label="Interactive Reading Controls">
-    <div class="container">
-      <!-- ElevenLabs Signature Audio Waveform Card -->
-      <div id="voice-player" class="audio-waveform-card voice-player">
-        <div class="voice-player__header">
-          <div class="voice-player__identity">
-            <div class="voice-icon-circular" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M8 2V14M5 5V11M11 4V12M2 7V9M14 6.5V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div>
-              <div class="voice-player__title-row">
-                <span class="body-strong">ElevenLabs Editorial Read-Aloud</span>
-                <span class="badge-pill" id="voice-status-badge">Ready</span>
-              </div>
-              <p class="caption" id="voice-progress-label">
-                Reads the entry abstract, essay sections, and active Critical Lens passages aloud via Web Speech synthesis.
-              </p>
-            </div>
-          </div>
-
-          <!-- Animated SVG Waveform Bars -->
-          <div class="voice-waveform" id="voice-waveform" data-playing="false" aria-hidden="true">
-            {Array.from({ length: 28 }).map((_, i) => (
-              <span
-                class="voice-waveform__bar"
-                style={`--bar-index: ${i}; --bar-height: ${28 + ((i * 19) % 65)}%`}
+      <!-- Archival Portrait & Historical Material Gallery -->
+      <div class="entry-archival-hero">
+        <div class="feature-card archival-hero-card">
+          <div class="archival-hero-card__grid">
+            <div class="archival-hero-card__frame">
+              <img
+                src={withBase(entry.archivalImage.src)}
+                alt={entry.archivalImage.alt}
+                class="archival-hero-card__img"
+                loading="eager"
+                decoding="async"
               />
-            ))}
-          </div>
-        </div>
-
-        <div class="voice-player__controls">
-          <div class="voice-player__buttons">
-            <button type="button" id="voice-play-btn" class="button-primary">
-              <svg id="voice-play-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M3.5 2.5L11.5 7L3.5 11.5V2.5Z" fill="currentColor"/>
-              </svg>
-              <span id="voice-play-label">Listen to Entry</span>
-            </button>
-            <button type="button" id="voice-stop-btn" class="button-outline" disabled>
-              Stop
-            </button>
-          </div>
-
-          <div class="voice-player__settings">
-            <div class="voice-speed-group" role="group" aria-label="Playback Speed">
-              {[0.75, 1, 1.25, 1.5].map((rate) => (
-                <button
-                  type="button"
-                  class="button-outline voice-speed-pill"
-                  data-speech-rate={rate}
-                  aria-pressed={rate === 1 ? 'true' : 'false'}
-                >
-                  {rate}x
-                </button>
-              ))}
             </div>
+            <div class="archival-hero-card__info">
+              <div class="badge-pill">
+                <span class={`badge-dot badge-dot--${entry.orb}`} aria-hidden="true"></span>
+                Archival Plate · {entry.subsection}
+              </div>
+              <blockquote class="archival-hero-card__caption">
+                {entry.archivalImage.caption}
+              </blockquote>
+              <p class="caption text-muted archival-hero-card__credit">
+                <strong>Source:</strong> {entry.archivalImage.credit}
+              </p>
 
-            <div class="voice-select-wrap">
-              <label for="voice-selector" class="sr-only">Select Voice</label>
-              <select id="voice-selector" class="text-input voice-select" aria-label="Speech Synthesis Voice">
-                <option value="">Default System Editorial Voice</option>
-              </select>
+              {entry.archivalImage.secondarySrc && (
+                <div class="archival-hero-card__secondary">
+                  <div class="archival-hero-card__secondary-frame">
+                    <img
+                      src={withBase(entry.archivalImage.secondarySrc)}
+                      alt={entry.archivalImage.secondaryAlt || 'Historical document plate'}
+                      class="archival-hero-card__secondary-img"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <p class="caption text-body">
+                    <strong>Primary Artifact:</strong> {entry.archivalImage.secondaryCaption}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
-        </div>
-
-        <p id="voice-fallback-msg" class="caption voice-player__fallback" hidden>
-          Web Speech API synthesis is not available in this browser environment. You can still explore all interactive Critical Lens passages below.
-        </p>
-      </div>
-
-      <!-- Sticky Global Critical Lens Switch Bar -->
-      <div class="sticky-lens-bar" id="critical-lens">
-        <div class="sticky-lens-bar__info">
-          <span class="badge-pill">
-            <span class={`badge-dot badge-dot--${entry.orb}`} aria-hidden="true"></span>
-            Subtext X-Ray
-          </span>
-          <span class="body-sm sticky-lens-bar__text">
-            Global Critical Lens Mode: <strong id="global-lens-state-label">Surface Text</strong>
-          </span>
-        </div>
-
-        <div class="sticky-lens-bar__controls">
-          <button
-            type="button"
-            id="global-lens-switch"
-            class="lens-switch-pill"
-            role="switch"
-            aria-checked="false"
-            aria-label="Toggle all passages between Surface Text and Critical Lens Subtext"
-          >
-            <span class="lens-switch-pill__option is-selected" data-lens-opt="surface">
-              Surface Text
-            </span>
-            <span class="lens-switch-pill__option" data-lens-opt="subtext">
-              Critical Lens (Subtext)
-            </span>
-          </button>
         </div>
       </div>
     </div>
   </section>
+
+
 
   <!-- 3. ESSAY BODY & INTERACTIVE CRITICAL LENS PASSAGES -->
   <section class="section-band entry-body-band">
@@ -203,141 +143,48 @@ const allCitationsText = [studentEssayCitation, ...entry.worksCitedMLA].join('\n
       <!-- Left / Main Editorial Column -->
       <div class="entry-main" id="readable-essay-container">
         <!-- Editorial Abstract Card -->
-        <div class="gradient-orb-card entry-abstract-card" data-speech-segment="Abstract">
+        <div class="gradient-orb-card entry-abstract-card">
           <div class={`ambient-orb ambient-orb--${entry.orb} entry-abstract-card__orb`} aria-hidden="true"></div>
           <div class="entry-abstract-card__inner">
-            <span class="caption-uppercase">Editorial Framing · Entry {entry.number}</span>
+            <span class="caption-uppercase">Editorial Framing · Essay {entry.number}</span>
             <p class="display-sm entry-abstract-card__text">
               {entry.editorialAbstract}
             </p>
           </div>
         </div>
 
-        <!-- Student Essay Prose (Compiled from src/content/essays/<slug>.md) -->
-        <div class="essay-markdown-section">
-          <div class="essay-markdown-header">
-            <div>
-              <span class="badge-pill">Author’s Manuscript · Editable Markdown</span>
-              <h2 class="display-md essay-markdown-title">
-                Essay Body &amp; Analytical Sections
-              </h2>
-            </div>
-            <span class="caption">
-              Source: <code>src/content/essays/{entry.slug}.md</code>
-            </span>
-          </div>
-
-          <div class="markdown-prose" data-speech-segment="Author Essay Prose">
+        <!-- Full Published Essay Prose -->
+        <article class="essay-article-body">
+          <div class="markdown-prose">
             {MarkdownContent && <MarkdownContent />}
           </div>
+        </article>
 
-          <!-- Structured Section Prompts Reference Grid -->
-          <div class="section-blueprints">
-            {entry.sections.map((sec) => (
-              <div class="feature-card blueprint-card" data-speech-segment={`Section ${sec.numeral}: ${sec.heading}`}>
-                <div class="blueprint-card__top">
-                  <span class="badge-pill">Section {sec.numeral}</span>
-                  <span class="caption">Target length: {sec.suggestedWords}</span>
-                </div>
-                <h3 class="title-md blueprint-card__heading">{sec.heading}</h3>
-                <p class="body-sm blueprint-card__placeholder">{sec.promptPlaceholder}</p>
-                <ul class="blueprint-card__list">
-                  {sec.guidingPoints.map((pt) => (
-                    <li class="body-sm">{pt}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <!-- Interactive Critical Lens Passages -->
-        <div class="critical-lens-section" aria-labelledby="lens-section-heading">
-          <div class="critical-lens-section__header">
-            <span class="badge-pill">
-              <span class={`badge-dot badge-dot--${entry.orb}`} aria-hidden="true"></span>
-              Interactive Text X-Ray
-            </span>
-            <h2 id="lens-section-heading" class="display-md critical-lens-section__title">
-              Critical Lens Passages: Surface vs. Subtext
-            </h2>
-            <p class="body-sm critical-lens-section__desc">
-              Public-domain works display verbatim historical quotations on the <strong>Surface Text</strong> tab. Copyrighted works provide structured fair-use quotation slots alongside subtextual analysis prompts. Use the global switch above or toggle individual passages below.
+        <!-- Author Bio Card -->
+        <div class="feature-card author-bio-card">
+          <div class="author-bio-card__avatar" aria-hidden="true">SC</div>
+          <div class="author-bio-card__content">
+            <span class="caption-uppercase author-bio-card__eyebrow">Written by</span>
+            <h3 class="display-xs author-bio-card__name">Shawn Shaibu Cherian</h3>
+            <p class="body-sm author-bio-card__bio">
+              Literary essayist, researcher, and founding editor of <em>Jane’s Diary</em>. His critical work explores the intersections of feminist theory, postcolonial subalternity, Victorian gothic confinement, and archival recovery.
             </p>
-          </div>
-
-          <div class="lens-cards-stack">
-            {entry.criticalLensPassages.map((passage) => (
-              <article
-                class="feature-card lens-card"
-                data-lens-card
-                data-speech-segment={`Passage ${passage.passageNumber} from ${passage.workTitle}`}
-              >
-                <div class="lens-card__top">
-                  <div class="lens-card__meta">
-                    <span class="badge-pill">Passage {passage.passageNumber}</span>
-                    <span class="caption">{passage.contextLabel}</span>
-                  </div>
-
-                  <div class="lens-card__tabs" role="group" aria-label={`View mode for Passage ${passage.passageNumber}`}>
-                    <button
-                      type="button"
-                      class="button-outline lens-tab-btn is-active"
-                      data-lens-tab="surface"
-                      aria-pressed="true"
-                    >
-                      Surface Text
-                    </button>
-                    <button
-                      type="button"
-                      class="button-outline lens-tab-btn"
-                      data-lens-tab="subtext"
-                      aria-pressed="false"
-                    >
-                      Critical Lens (Subtext)
-                    </button>
-                  </div>
-                </div>
-
-                <h3 class="title-sm lens-card__work">
-                  <em>{passage.workTitle}</em> — {passage.author} ({passage.year})
-                </h3>
-
-                <!-- Surface Tab Content -->
-                <div class="lens-card__pane lens-card__pane--surface" data-lens-pane="surface">
-                  <blockquote class:list={['lens-quote', { 'lens-quote--placeholder': !passage.isPublicDomain }]}>
-                    {passage.surfaceQuote}
-                  </blockquote>
-                  <p class="caption lens-card__citation">
-                    <strong>Source:</strong> {passage.surfaceCitation}
-                  </p>
-                </div>
-
-                <!-- Critical Lens (Subtext) Tab Content -->
-                <div class="lens-card__pane lens-card__pane--subtext" data-lens-pane="subtext" hidden>
-                  <div class="subtext-box">
-                    <span class="caption-uppercase subtext-box__eyebrow">
-                      Feminist &amp; Psychoanalytic Subtext Prompt
-                    </span>
-                    <p class="body-md subtext-box__prompt">
-                      {passage.criticalLensPrompt}
-                    </p>
-                    <div class="subtext-box__question">
-                      <span class="caption-uppercase">Guiding Seminar Question:</span>
-                      <p class="body-sm">{passage.guidingQuestion}</p>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
+            <div class="author-bio-card__actions">
+              <a href={withBase('/contact/')} class="button-outline">
+                Commission an Essay or Inquire →
+              </a>
+              <a href={withBase('/about/')} class="button-tertiary">
+                Read Publication Manifesto
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- 4. MLA 9TH WORKS CITED BOX -->
+        <!-- MLA 9TH WORKS CITED BOX -->
         <div id="works-cited" class="feature-card works-cited-card">
           <div class="works-cited-card__header">
             <div>
-              <span class="badge-pill">Academic Bibliography</span>
+              <span class="badge-pill">Scholarly Bibliography</span>
               <h2 class="display-sm works-cited-card__title">
                 MLA 9th Edition Works Cited
               </h2>
@@ -358,7 +205,7 @@ const allCitationsText = [studentEssayCitation, ...entry.worksCitedMLA].join('\n
 
           <div class="works-cited-list">
             <p class="mla-hanging-indent">
-              {studentEssayCitation}
+              {essayCitation}
             </p>
             {entry.worksCitedMLA.map((citation) => (
               <p class="mla-hanging-indent">{citation}</p>
@@ -367,30 +214,30 @@ const allCitationsText = [studentEssayCitation, ...entry.worksCitedMLA].join('\n
         </div>
       </div>
 
-      <!-- Right Sidebar: Author & Quick Navigation -->
-      <aside class="entry-sidebar" aria-label="Entry Metadata and Quick Jump">
+      <!-- Right Sidebar: Editorial Profile & Archive -->
+      <aside class="entry-sidebar" aria-label="Editorial Details and Issue Directory">
         <div class="feature-card sidebar-card">
-          <span class="caption-uppercase sidebar-card__heading">Author Attribution</span>
-          <p class="title-sm sidebar-card__name">Shawn Shaibu Cherian</p>
-          <p class="caption">Reg. No. 26BCE1820</p>
-          <p class="caption">Vellore Institute of Technology (VIT), Chennai</p>
+          <span class="caption-uppercase sidebar-card__heading">Publication Details</span>
+          <p class="title-sm sidebar-card__name">Jane’s Diary</p>
+          <p class="caption">An Independent Journal of Feminist Literature</p>
+          <p class="caption">Edited by Shawn Shaibu Cherian</p>
           <hr class="sidebar-divider" />
-          <span class="caption-uppercase sidebar-card__heading">How to Edit This Entry</span>
+          <span class="caption-uppercase sidebar-card__heading">Client &amp; Editorial Inquiries</span>
           <p class="body-sm sidebar-card__note">
-            Open <code>src/content/essays/{entry.slug}.md</code> to write your essay sections, or update <code>src/data/entries.ts</code> for Critical Lens notes.
+            Available for cultural writing commissions, literary essays, guest lectures, and archival collaborations.
           </p>
           <div class="sidebar-card__actions">
-            <a href={withBase('/about/#edit-guide')} class="button-outline sidebar-btn">
-              Full Editing Guide
+            <a href={withBase('/contact/')} class="button-primary sidebar-btn">
+              Contact Editorial Desk
             </a>
-            <a href={withBase('/blackout/')} class="button-outline sidebar-btn">
-              Blackout Studio
+            <a href={withBase('/archive/')} class="button-outline sidebar-btn">
+              The Palimpsest Archive
             </a>
           </div>
         </div>
 
         <div class="feature-card sidebar-card">
-          <span class="caption-uppercase sidebar-card__heading">All 5 Cornerstone Entries</span>
+          <span class="caption-uppercase sidebar-card__heading">All 8 Cornerstone Essays</span>
           <ul class="sidebar-entry-list">
             {ESSAY_ENTRIES.map((item) => (
               <li>
@@ -430,63 +277,7 @@ const allCitationsText = [studentEssayCitation, ...entry.worksCitedMLA].join('\n
 </BaseLayout>
 
 <script>
-  // 1. CRITICAL LENS SWITCH CONTROLLER (Global + Per-Passage)
-  function initCriticalLens() {
-    const globalSwitch = document.getElementById('global-lens-switch');
-    const globalStateLabel = document.getElementById('global-lens-state-label');
-    const lensCards = Array.from(document.querySelectorAll<HTMLElement>('[data-lens-card]'));
-
-    function setCardMode(card: HTMLElement, mode: 'surface' | 'subtext') {
-      const surfacePane = card.querySelector<HTMLElement>('[data-lens-pane="surface"]');
-      const subtextPane = card.querySelector<HTMLElement>('[data-lens-pane="subtext"]');
-      const surfaceBtn = card.querySelector<HTMLButtonElement>('[data-lens-tab="surface"]');
-      const subtextBtn = card.querySelector<HTMLButtonElement>('[data-lens-tab="subtext"]');
-
-      if (!surfacePane || !subtextPane || !surfaceBtn || !subtextBtn) return;
-
-      const isSubtext = mode === 'subtext';
-      surfacePane.hidden = isSubtext;
-      subtextPane.hidden = !isSubtext;
-
-      surfaceBtn.classList.toggle('is-active', !isSubtext);
-      surfaceBtn.setAttribute('aria-pressed', String(!isSubtext));
-
-      subtextBtn.classList.toggle('is-active', isSubtext);
-      subtextBtn.setAttribute('aria-pressed', String(isSubtext));
-    }
-
-    function setGlobalMode(mode: 'surface' | 'subtext') {
-      const isSubtext = mode === 'subtext';
-      if (globalSwitch) {
-        globalSwitch.setAttribute('aria-checked', String(isSubtext));
-        const surfOpt = globalSwitch.querySelector('[data-lens-opt="surface"]');
-        const subOpt = globalSwitch.querySelector('[data-lens-opt="subtext"]');
-        surfOpt?.classList.toggle('is-selected', !isSubtext);
-        subOpt?.classList.toggle('is-selected', isSubtext);
-      }
-      if (globalStateLabel) {
-        globalStateLabel.textContent = isSubtext ? 'Critical Lens (Subtext)' : 'Surface Text';
-      }
-      lensCards.forEach((card) => setCardMode(card, mode));
-    }
-
-    if (globalSwitch) {
-      globalSwitch.addEventListener('click', () => {
-        const checked = globalSwitch.getAttribute('aria-checked') === 'true';
-        setGlobalMode(checked ? 'surface' : 'subtext');
-      });
-    }
-
-    lensCards.forEach((card) => {
-      const surfaceBtn = card.querySelector<HTMLButtonElement>('[data-lens-tab="surface"]');
-      const subtextBtn = card.querySelector<HTMLButtonElement>('[data-lens-tab="subtext"]');
-
-      surfaceBtn?.addEventListener('click', () => setCardMode(card, 'surface'));
-      subtextBtn?.addEventListener('click', () => setCardMode(card, 'subtext'));
-    });
-  }
-
-  // 2. MLA CITATION COPY CONTROLLER
+  // MLA CITATION COPY CONTROLLER
   function initCitationCopy() {
     const copyBtn = document.getElementById('copy-mla-btn');
     const copyLabel = document.getElementById('copy-mla-label');
@@ -506,187 +297,7 @@ const allCitationsText = [studentEssayCitation, ...entry.worksCitedMLA].join('\n
     });
   }
 
-  // 3. ELEVENLABS WEB SPEECH API READ-ALOUD CONTROLLER
-  function initVoicePlayer() {
-    const playBtn = document.getElementById('voice-play-btn') as HTMLButtonElement | null;
-    const stopBtn = document.getElementById('voice-stop-btn') as HTMLButtonElement | null;
-    const playLabel = document.getElementById('voice-play-label');
-    const statusBadge = document.getElementById('voice-status-badge');
-    const progressLabel = document.getElementById('voice-progress-label');
-    const waveform = document.getElementById('voice-waveform');
-    const voiceSelect = document.getElementById('voice-selector') as HTMLSelectElement | null;
-    const fallbackMsg = document.getElementById('voice-fallback-msg');
-    const speedBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-speech-rate]'));
-
-    if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
-      if (fallbackMsg) fallbackMsg.hidden = false;
-      if (playBtn) playBtn.disabled = true;
-      if (statusBadge) statusBadge.textContent = 'Unsupported';
-      return;
-    }
-
-    const synth = window.speechSynthesis;
-    let voices: SpeechSynthesisVoice[] = [];
-    let currentRate = 1;
-    let isPlaying = false;
-    let isPaused = false;
-    let currentSegmentIndex = 0;
-    let segments: HTMLElement[] = [];
-
-    function populateVoices() {
-      voices = synth.getVoices();
-      if (!voiceSelect || voices.length === 0) return;
-      const currentVal = voiceSelect.value;
-      voiceSelect.innerHTML = '<option value="">Default System Editorial Voice</option>';
-      voices
-        .filter((v) => v.lang.startsWith('en'))
-        .forEach((voice) => {
-          const opt = document.createElement('option');
-          opt.value = voice.name;
-          opt.textContent = `${voice.name} (${voice.lang})`;
-          voiceSelect.appendChild(opt);
-        });
-      if (currentVal) voiceSelect.value = currentVal;
-    }
-
-    populateVoices();
-    if (synth.onvoiceschanged !== undefined) {
-      synth.onvoiceschanged = populateVoices;
-    }
-
-    function collectSegments(): HTMLElement[] {
-      const container = document.getElementById('readable-essay-container');
-      if (!container) return [];
-      return Array.from(container.querySelectorAll<HTMLElement>('[data-speech-segment]'));
-    }
-
-    function clearHighlights() {
-      document.querySelectorAll('.is-speaking-active').forEach((el) => {
-        el.classList.remove('is-speaking-active');
-      });
-    }
-
-    function updateUI(state: 'idle' | 'playing' | 'paused') {
-      isPlaying = state === 'playing';
-      isPaused = state === 'paused';
-
-      if (waveform) {
-        waveform.setAttribute('data-playing', state === 'playing' ? 'true' : 'false');
-      }
-      if (stopBtn) {
-        stopBtn.disabled = state === 'idle';
-      }
-      if (playLabel) {
-        playLabel.textContent =
-          state === 'playing' ? 'Pause Read-Aloud' : state === 'paused' ? 'Resume Read-Aloud' : 'Listen to Entry';
-      }
-      if (statusBadge) {
-        statusBadge.textContent =
-          state === 'playing' ? 'Speaking' : state === 'paused' ? 'Paused' : 'Ready';
-      }
-      if (state === 'idle') {
-        clearHighlights();
-        if (progressLabel) {
-          progressLabel.textContent =
-            'Reads the entry abstract, essay sections, and active Critical Lens passages aloud via Web Speech synthesis.';
-        }
-      }
-    }
-
-    function speakSegment(index: number) {
-      if (index >= segments.length) {
-        synth.cancel();
-        currentSegmentIndex = 0;
-        updateUI('idle');
-        return;
-      }
-
-      currentSegmentIndex = index;
-      const targetEl = segments[index];
-      clearHighlights();
-      targetEl.classList.add('is-speaking-active');
-
-      const segLabel = targetEl.getAttribute('data-speech-segment') || `Section ${index + 1}`;
-      if (progressLabel) {
-        progressLabel.textContent = `Reading ${index + 1} of ${segments.length}: ${segLabel}`;
-      }
-
-      const textToRead = (targetEl.innerText || targetEl.textContent || '').replace(/\s+/g, ' ').trim();
-      if (!textToRead) {
-        speakSegment(index + 1);
-        return;
-      }
-
-      const utterance = new SpeechSynthesisUtterance(textToRead);
-      utterance.rate = currentRate;
-
-      if (voiceSelect && voiceSelect.value) {
-        const chosen = voices.find((v) => v.name === voiceSelect.value);
-        if (chosen) utterance.voice = chosen;
-      }
-
-      utterance.onend = () => {
-        if (isPlaying && !isPaused) {
-          speakSegment(index + 1);
-        }
-      };
-
-      utterance.onerror = () => {
-        updateUI('idle');
-      };
-
-      synth.speak(utterance);
-    }
-
-    playBtn?.addEventListener('click', () => {
-      if (isPlaying) {
-        synth.pause();
-        updateUI('paused');
-        return;
-      }
-      if (isPaused) {
-        synth.resume();
-        updateUI('playing');
-        return;
-      }
-      synth.cancel();
-      segments = collectSegments();
-      if (segments.length === 0) return;
-      updateUI('playing');
-      speakSegment(0);
-    });
-
-    stopBtn?.addEventListener('click', () => {
-      synth.cancel();
-      currentSegmentIndex = 0;
-      updateUI('idle');
-    });
-
-    speedBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const rate = parseFloat(btn.getAttribute('data-speech-rate') || '1');
-        currentRate = rate;
-        speedBtns.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-        if (isPlaying) {
-          synth.cancel();
-          speakSegment(currentSegmentIndex);
-        }
-      });
-    });
-
-    const cleanupSpeech = () => {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-    };
-
-    window.addEventListener('pagehide', cleanupSpeech);
-    window.addEventListener('beforeunload', cleanupSpeech);
-  }
-
-  initCriticalLens();
   initCitationCopy();
-  initVoicePlayer();
 </script>
 
 <style>
@@ -791,164 +402,102 @@ const allCitationsText = [studentEssayCitation, ...entry.worksCitedMLA].join('\n
     margin-bottom: 4px;
   }
 
-  /* 2. ElevenLabs Voice Bar + Sticky Critical Lens Switch */
-  .reading-controls-band {
-    padding: var(--space-lg) 0;
-    background-color: var(--color-canvas-soft);
-    border-bottom: 1px solid var(--color-hairline);
-    position: sticky;
-    top: 64px;
-    z-index: 40;
+  /* Archival Hero Card Showcase */
+  .entry-archival-hero {
+    margin-top: var(--space-xl);
   }
 
-  .voice-player {
-    margin-bottom: var(--space-base);
+  .archival-hero-card {
+    padding: var(--space-xl);
   }
 
-  .voice-player__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-lg);
-    margin-bottom: var(--space-base);
-    flex-wrap: wrap;
+  .archival-hero-card__grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-xl);
+    align-items: start;
   }
 
-  .voice-player__identity {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-sm);
-  }
-
-  .voice-player__title-row {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    margin-bottom: 2px;
-  }
-
-  .voice-waveform {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    height: 32px;
-    padding: 0 var(--space-sm);
-  }
-
-  .voice-waveform__bar {
-    width: 3px;
-    height: var(--bar-height, 40%);
-    background-color: var(--color-hairline-strong);
-    border-radius: var(--radius-pill);
-    transition: background-color 0.2s ease, height 0.2s ease;
-  }
-
-  .voice-waveform[data-playing='true'] .voice-waveform__bar {
-    background-color: var(--color-ink);
-    animation: waveform-pulse 0.9s ease-in-out infinite alternate;
-    animation-delay: calc(var(--bar-index) * 45ms);
-  }
-
-  @keyframes waveform-pulse {
-    0% {
-      transform: scaleY(0.45);
-    }
-    100% {
-      transform: scaleY(1.15);
-    }
-  }
-
-  .voice-player__controls {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    padding-top: var(--space-sm);
-    border-top: 1px solid var(--color-hairline);
-  }
-
-  .voice-player__buttons {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-  }
-
-  .voice-player__settings {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-  }
-
-  .voice-speed-group {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .voice-speed-pill {
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 13px;
-  }
-
-  .voice-select {
-    height: 34px;
-    font-size: 13px;
-    padding: 4px 10px;
-    max-width: 220px;
-  }
-
-  .voice-player__fallback {
-    margin-top: var(--space-xs);
-    color: var(--color-semantic-error);
-  }
-
-  /* Sticky Lens Bar */
-  .sticky-lens-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    background-color: var(--color-surface-card);
+  .archival-hero-card__frame {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface-strong);
     border: 1px solid var(--color-hairline);
-    border-radius: var(--radius-pill);
-    padding: 8px 16px;
+    aspect-ratio: 4 / 5;
   }
 
-  .sticky-lens-bar__info {
+  .archival-hero-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: sepia(10%) contrast(102%);
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+
+  .archival-hero-card:hover .archival-hero-card__img {
+    transform: scale(1.02);
+    filter: sepia(0%) contrast(105%);
+  }
+
+  .archival-hero-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .archival-hero-card__caption {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--color-ink);
+    margin: 8px 0;
+    padding-left: 16px;
+    border-left: 2px solid var(--color-primary);
+  }
+
+  .archival-hero-card__credit {
+    font-size: 12px;
+  }
+
+  .archival-hero-card__secondary {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--color-hairline);
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    flex-wrap: wrap;
+    gap: 16px;
   }
 
-  .lens-switch-pill {
-    display: inline-flex;
-    align-items: center;
-    background-color: var(--color-surface-strong);
-    border: 1px solid var(--color-hairline-strong);
-    border-radius: var(--radius-pill);
-    padding: 3px;
-    cursor: pointer;
-    gap: 4px;
+  .archival-hero-card__secondary-frame {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--color-hairline);
+    flex-shrink: 0;
   }
 
-  .lens-switch-pill__option {
-    font-size: 13px;
-    font-weight: 500;
-    padding: 6px 14px;
-    border-radius: var(--radius-pill);
-    color: var(--color-body);
-    transition: background-color 0.15s ease, color 0.15s ease;
+  .archival-hero-card__secondary-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
-  .lens-switch-pill__option.is-selected {
-    background-color: var(--color-primary);
-    color: var(--color-on-primary);
+  @media (max-width: 768px) {
+    .archival-hero-card__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .archival-hero-card__frame {
+      aspect-ratio: 16 / 9;
+      max-height: 240px;
+    }
   }
+
+
 
   /* 3. Main Entry Layout */
   .entry-body-band {
@@ -968,10 +517,6 @@ const allCitationsText = [studentEssayCitation, ...entry.worksCitedMLA].join('\n
     gap: var(--space-xxl);
   }
 
-  .is-speaking-active {
-    outline: 2px solid var(--color-ink);
-    outline-offset: 4px;
-  }
 
   .entry-abstract-card__orb {
     width: 240px;
@@ -989,21 +534,6 @@ const allCitationsText = [studentEssayCitation, ...entry.worksCitedMLA].join('\n
     margin-top: var(--space-xs);
   }
 
-  /* Editable Markdown Prose & Section Blueprints */
-  .essay-markdown-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-lg);
-    padding-bottom: var(--space-sm);
-    border-bottom: 1px solid var(--color-hairline);
-  }
-
-  .essay-markdown-title {
-    margin-top: var(--space-xs);
-  }
 
   .markdown-prose {
     background-color: var(--color-surface-card);
@@ -1057,140 +587,63 @@ const allCitationsText = [studentEssayCitation, ...entry.worksCitedMLA].join('\n
     border-radius: var(--radius-xs);
   }
 
-  .section-blueprints {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-base);
+  .essay-article-body {
+    width: 100%;
   }
 
-  .blueprint-card {
-    background-color: var(--color-canvas-soft);
-    border-style: dashed;
-    border-color: var(--color-hairline-strong);
-  }
-
-  .blueprint-card__top {
+  .author-bio-card {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--space-xs);
-  }
-
-  .blueprint-card__heading {
-    margin-bottom: var(--space-xs);
-  }
-
-  .blueprint-card__placeholder {
-    color: var(--color-ink);
-    font-weight: 500;
+    align-items: flex-start;
+    gap: var(--space-lg);
     background-color: var(--color-surface-card);
     border: 1px solid var(--color-hairline);
-    border-radius: var(--radius-md);
-    padding: var(--space-sm);
-    margin-bottom: var(--space-sm);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    margin: var(--space-xl) 0;
   }
 
-  .blueprint-card__list {
-    padding-left: var(--space-lg);
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  /* Critical Lens Passages */
-  .critical-lens-section__header {
-    margin-bottom: var(--space-lg);
-  }
-
-  .critical-lens-section__title {
-    margin-top: var(--space-xs);
-    margin-bottom: var(--space-xs);
-  }
-
-  .lens-cards-stack {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-  }
-
-  .lens-card__top {
+  .author-bio-card__avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-ink);
+    color: var(--color-on-primary);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-sm);
-    padding-bottom: var(--space-sm);
-    border-bottom: 1px solid var(--color-hairline);
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 400;
+    flex-shrink: 0;
   }
 
-  .lens-card__meta {
+  .author-bio-card__content {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: var(--space-xs);
-    flex-wrap: wrap;
   }
 
-  .lens-card__tabs {
-    display: flex;
-    gap: 6px;
-  }
-
-  .lens-tab-btn {
-    height: 34px;
-    padding: 6px 14px;
-    font-size: 13px;
-  }
-
-  .lens-card__work {
-    margin-bottom: var(--space-base);
-  }
-
-  .lens-quote {
+  .author-bio-card__name {
     font-family: var(--font-display);
     font-size: 24px;
     font-weight: 300;
-    line-height: 1.38;
     color: var(--color-ink);
-    padding: var(--space-base) var(--space-lg);
-    background-color: var(--color-canvas-soft);
-    border-left: 2px solid var(--color-ink);
-    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  }
+
+  .author-bio-card__bio {
+    color: var(--color-body);
+    line-height: 1.6;
     margin-bottom: var(--space-sm);
   }
 
-  .lens-quote--placeholder {
-    font-family: var(--font-sans);
-    font-size: 15px;
-    font-weight: 500;
-    border-left-style: dashed;
+  .author-bio-card__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
   }
 
-  .subtext-box {
-    background-color: var(--color-surface-strong);
-    border: 1px solid var(--color-hairline-strong);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
-  }
 
-  .subtext-box__eyebrow {
-    display: block;
-    color: var(--color-ink);
-    margin-bottom: var(--space-xs);
-  }
-
-  .subtext-box__prompt {
-    color: var(--color-ink);
-    font-weight: 500;
-    margin-bottom: var(--space-base);
-  }
-
-  .subtext-box__question {
-    background-color: var(--color-surface-card);
-    border: 1px solid var(--color-hairline);
-    border-radius: var(--radius-md);
-    padding: var(--space-sm) var(--space-base);
-  }
 
   /* Works Cited Card */
   .works-cited-card__header {

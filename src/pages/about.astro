@@ -11,11 +11,11 @@ const masterBibliographyText = consolidatedCitations.join('\n\n');
 ---
 
 <BaseLayout
-  title="About & DA Rubric — Shawn Shaibu Cherian (26BCE1820)"
-  description="Academic evaluator dossier, Digital Assignment grading rubric checklist, consolidated MLA 9th Works Cited, and author editing guide for Jane's Diary."
+  title="About the Journal"
+  description="The editorial manifesto, masthead, critical methodology, and archival mission of Jane's Diary: an independent journal of feminist literature."
   currentPath="/about/"
 >
-  <!-- 1. ABOUT & EVALUATOR HERO BAND -->
+  <!-- 1. ABOUT HERO BAND -->
   <section class="about-hero orb-stage" aria-labelledby="about-heading">
     <div class="ambient-orb ambient-orb--lavender about-hero__orb-1" aria-hidden="true"></div>
     <div class="ambient-orb ambient-orb--mint about-hero__orb-2" aria-hidden="true"></div>
@@ -24,223 +24,216 @@ const masterBibliographyText = consolidatedCitations.join('\n\n');
       <nav class="about-breadcrumb no-print" aria-label="Breadcrumb">
         <a href={withBase('/')} class="about-breadcrumb__link">Home</a>
         <span aria-hidden="true">/</span>
-        <span aria-current="page" class="about-breadcrumb__current">About &amp; DA Rubric</span>
+        <span aria-current="page" class="about-breadcrumb__current">About the Journal</span>
       </nav>
 
       <div class="about-hero__header">
         <div>
           <span class="badge-pill">
             <span class="badge-dot badge-dot--lavender" aria-hidden="true"></span>
-            Academic Evaluator Dossier
+            Publication Manifesto
           </span>
           <h1 id="about-heading" class="display-xl about-hero__title">
-            Digital Assignment Rubric &amp; Editorial Guide
+            Scraping back canonical erasures to uncover submerged manuscripts.
           </h1>
           <p class="body-md about-hero__subtitle">
-            Prepared for faculty evaluation at <strong>Vellore Institute of Technology (VIT), Chennai</strong>. This page documents student attribution, the five-movement feminist literary syllabus, interactive humanities components, and a step-by-step guide for editing essay prose.
+            <strong>Jane’s Diary</strong> is an independent digital journal and cultural archive dedicated to feminist literary criticism, archival recovery, and subversive poetics. Founded and edited by <strong>Shawn Shaibu Cherian</strong>, the publication traces the continuous tradition of women tearing through patriarchal containment—from Romantic gothic revolt to postcolonial subaltern resistance and cyberfeminism.
           </p>
         </div>
 
         <div class="about-hero__actions no-print">
-          <button type="button" id="print-dossier-btn" class="button-primary">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M4 5.5V2.5H12V5.5M4 12H2.5V7C2.5 6.17157 3.17157 5.5 4 5.5H12C12.8284 5.5 13.5 6.17157 13.5 7V12H12M4 9.5H12V13.5H4V9.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
-            </svg>
-            Print Academic Dossier
-          </button>
-          <a href={withBase('/#entries')} class="button-outline">
-            Browse 5 Entries
+          <a href={withBase('/blogs/')} class="button-primary">
+            Explore All Essays →
+          </a>
+          <a href={withBase('/contact/')} class="button-outline">
+            Editorial Inquiries
           </a>
         </div>
       </div>
 
-      <!-- Student & Assignment Metadata Card -->
-      <div class="feature-card student-meta-card">
-        <div class="student-meta-grid">
-          <div class="student-meta-item">
-            <span class="caption-uppercase">Student Author</span>
+      <!-- Journal Pillars Grid -->
+      <div class="feature-card journal-overview-card">
+        <div class="journal-overview-grid">
+          <div class="journal-stat-item">
+            <span class="caption-uppercase">Publication</span>
+            <p class="title-md">Jane’s Diary</p>
+            <span class="caption">Independent Literary Journal</span>
+          </div>
+          <div class="journal-stat-item">
+            <span class="caption-uppercase">Founding Editor</span>
             <p class="title-md">Shawn Shaibu Cherian</p>
+            <span class="caption">Essayist &amp; Archival Researcher</span>
           </div>
-          <div class="student-meta-item">
-            <span class="caption-uppercase">Registration Number</span>
-            <p class="title-md">26BCE1820</p>
+          <div class="journal-stat-item">
+            <span class="caption-uppercase">Editorial Focus</span>
+            <p class="title-sm">Feminist Criticism &amp; Cultural Theory</p>
+            <span class="caption">1818 to the Contemporary Era</span>
           </div>
-          <div class="student-meta-item">
-            <span class="caption-uppercase">Institution</span>
-            <p class="title-sm">Vellore Institute of Technology (VIT), Chennai</p>
-          </div>
-          <div class="student-meta-item">
-            <span class="caption-uppercase">Deliverable Type</span>
-            <p class="title-sm">English Digital Assignment (DA) — Interactive Web Archive</p>
-          </div>
-          <div class="student-meta-item">
-            <span class="caption-uppercase">Live Deployment Target</span>
-            <p class="body-sm">
-              <a href="https://wwwrryyy.github.io/janesdiary/" target="_blank" rel="noopener noreferrer">
-                https://wwwrryyy.github.io/janesdiary/
-              </a>
-            </p>
-          </div>
-          <div class="student-meta-item">
-            <span class="caption-uppercase">Critical Framework</span>
-            <p class="body-sm">1st-Wave Gothic to Postcolonial Subaltern &amp; Cyberfeminism</p>
+          <div class="journal-stat-item">
+            <span class="caption-uppercase">Archival Provenance</span>
+            <p class="title-sm">Public-Domain Plates &amp; Primary Documents</p>
+            <span class="caption">High-Resolution Curated Artifacts</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 2. INTERACTIVE EVALUATOR RUBRIC CHECKLIST -->
-  <section class="section-band" aria-labelledby="rubric-heading">
+  <!-- 2. THE EDITORIAL MANIFESTO: THE PALIMPSEST PRINCIPLE -->
+  <section class="section-band" aria-labelledby="manifesto-heading">
+    <div class="container">
+      <div class="manifesto-layout">
+        <div class="manifesto-sidebar">
+          <span class="badge-pill">
+            <span class="badge-dot badge-dot--peach" aria-hidden="true"></span>
+            Theoretical Foundation
+          </span>
+          <h2 id="manifesto-heading" class="display-lg manifesto-title">
+            The Palimpsest Principle
+          </h2>
+          <p class="body-sm text-muted">
+            Why we read against the grain of the conventional literary canon.
+          </p>
+        </div>
+
+        <div class="manifesto-content">
+          <blockquote class="manifesto-pullquote">
+            “The woman writer does not rewrite the male text; she reads it as a palimpsest, uncovering the erased feminine script beneath its patriarchal surfaces.”
+          </blockquote>
+
+          <div class="manifesto-prose body-md">
+            <p>
+              In their monumental 1979 work <em>The Madwoman in the Attic</em>, feminist theorists Sandra Gilbert and Susan Gubar introduced the metaphor of the palimpsest: ancient parchment from which older text was scraped away so new records could be inscribed on top. For centuries, the Western literary canon operated under a similar erasure. Women’s creative vitality, philosophical inquiry, and radical anger were systematically rewritten, dismissed as hysteria, or forced behind masculine pseudonyms.
+            </p>
+            <p>
+              <em>Jane’s Diary</em> takes its name and mission from that submerged history. Named in homage to Jane Eyre, Charlotte Perkins Gilman’s elusive Jane, and the countless women filed under <em>“Anonymous”</em> or <em>“By a Lady,”</em> this journal treats literature not as a static museum of monumental male achievements, but as an ongoing battlefield over who has the right to speak, write, and be remembered.
+            </p>
+          </div>
+
+          <div class="pillars-grid">
+            <div class="feature-card pillar-card">
+              <span class="badge-pill">Pillar 01</span>
+              <h3 class="title-sm pillar-card__heading">Archival Recovery</h3>
+              <p class="body-sm text-body">
+                Rescuing historical primary documents, forgotten title pages, and suppressed editions to trace the material conditions under which women authored subversive literature.
+              </p>
+            </div>
+
+            <div class="feature-card pillar-card">
+              <span class="badge-pill">Pillar 02</span>
+              <h3 class="title-sm pillar-card__heading">Postcolonial &amp; Subaltern Critique</h3>
+              <p class="body-sm text-body">
+                Refusing Eurocentric feminist orthodoxies by foregrounding Dalit, indigenous, and Global South women’s literature where state violence and caste hegemony are contested on the terrain of the body.
+              </p>
+            </div>
+
+            <div class="feature-card pillar-card">
+              <span class="badge-pill">Pillar 03</span>
+              <h3 class="title-sm pillar-card__heading">Archival Recovery &amp; Pedagogy</h3>
+              <p class="body-sm text-body">
+                Curating high-resolution primary facsimiles in The Palimpsest Archive and developing structured university seminar tracks that transform static literature into active instruments of decolonial thought.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CLIENT SERVICES & EDITORIAL COMMISSIONS -->
+  <section class="section-band section-band--soft" aria-labelledby="services-heading">
     <div class="container">
       <div class="section-header">
         <span class="badge-pill">
-          <span class="badge-dot badge-dot--mint" aria-hidden="true"></span>
-          Interactive Verification Matrix
+          <span class="badge-dot badge-dot--sky" aria-hidden="true"></span>
+          Collaboration &amp; Commissions
         </span>
-        <h2 id="rubric-heading" class="display-lg section-title">
-          Digital Assignment Rubric Checklist
+        <h2 id="services-heading" class="display-lg section-title">
+          Editorial Services for Cultural Institutions &amp; Clients
         </h2>
         <p class="body-md section-lead">
-          Evaluators can check off each requirement below while reviewing the live deployment, or jump directly to the corresponding entry or interactive studio.
+          In addition to publishing regular dispatches, <em>Jane’s Diary</em> collaborates with cultural organizations, academic journals, creative agencies, and independent publications.
         </p>
       </div>
 
-      <div class="rubric-grid">
-        <label class="feature-card rubric-item">
-          <input type="checkbox" class="rubric-checkbox" checked />
-          <div class="rubric-item__body">
-            <div class="rubric-item__top">
-              <span class="badge-pill">Criterion 01</span>
-              <span class="caption">Historical &amp; Theoretical Breadth</span>
-            </div>
-            <h3 class="title-sm">Five Cornerstone Feminist Literary Movements Covered</h3>
-            <p class="body-sm">
-              Spans Romantic Proto-Feminism (1818), 1st-Wave Feminist Gothic (1892), Anti-Colonial Feminist Utopia (1905), Modernist Materialism (1929), Confessional Poetics (1965), Subaltern Studies (1978/1997), and Cyberfeminism (1985).
-            </p>
+      <div class="services-grid">
+        <div class="feature-card service-card">
+          <div class="service-card__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </div>
-        </label>
+          <h3 class="title-md service-card__title">Commissioned Long-Form Essays</h3>
+          <p class="body-sm text-body">
+            Deeply researched critical essays, literary reviews, and cultural think-pieces examining gender, contemporary media, and feminist intellectual history.
+          </p>
+          <ul class="service-card__list body-sm">
+            <li>Exhibition catalog essays and critical introductions</li>
+            <li>Book reviews and author retrospectives</li>
+            <li>Thematic cultural journalism and think-pieces</li>
+          </ul>
+        </div>
 
-        <label class="feature-card rubric-item">
-          <input type="checkbox" class="rubric-checkbox" checked />
-          <div class="rubric-item__body">
-            <div class="rubric-item__top">
-              <span class="badge-pill">Criterion 02</span>
-              <span class="caption">Close Reading &amp; Subtextual Analysis</span>
-            </div>
-            <h3 class="title-sm">Interactive Critical Lens (Surface vs. Subtext X-Ray)</h3>
-            <p class="body-sm">
-              Every essay entry features a global and per-passage Critical Lens switch contrasting verbatim public-domain passages (or fair-use slots) with feminist and psychoanalytic subtext prompts.
-            </p>
+        <div class="feature-card service-card">
+          <div class="service-card__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </div>
-        </label>
+          <h3 class="title-md service-card__title">Archival Research &amp; Curation</h3>
+          <p class="body-sm text-body">
+            Archival investigations into nineteenth- and twentieth-century women's manuscripts, pseudonym tracking, and open-access rights clearing.
+          </p>
+          <ul class="service-card__list body-sm">
+            <li>Rare text digitization and transcriptions</li>
+            <li>Provenance verification for historical plates</li>
+            <li>Bibliographic indexing in MLA 9th and Chicago styles</li>
+          </ul>
+        </div>
 
-        <label class="feature-card rubric-item">
-          <input type="checkbox" class="rubric-checkbox" checked />
-          <div class="rubric-item__body">
-            <div class="rubric-item__top">
-              <span class="badge-pill">Criterion 03</span>
-              <span class="caption">Digital Humanities Interactivity</span>
-            </div>
-            <h3 class="title-sm">Blackout Poetry Studio &amp; “By a Lady” Byline Recovery</h3>
-            <p class="body-sm">
-              Includes an interactive nineteenth-century pseudonym unmasking archive on the home page and a full Blackout Poetry Studio with high-DPI HTML5 Canvas PNG export.
-            </p>
+        <div class="feature-card service-card">
+          <div class="service-card__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </div>
-        </label>
+          <h3 class="title-md service-card__title">Lectures, Seminars &amp; Panels</h3>
+          <p class="body-sm text-body">
+            Engaging keynote lectures and seminar facilitation on feminist speculative fiction, the history of censorship, and digital humanities.
+          </p>
+          <ul class="service-card__list body-sm">
+            <li>Guest lectures for university literature departments</li>
+            <li>Panel moderation for literary festivals</li>
+            <li>Interactive digital humanities workshops</li>
+          </ul>
+        </div>
+      </div>
 
-        <label class="feature-card rubric-item">
-          <input type="checkbox" class="rubric-checkbox" checked />
-          <div class="rubric-item__body">
-            <div class="rubric-item__top">
-              <span class="badge-pill">Criterion 04</span>
-              <span class="caption">Accessibility &amp; Scholarly Citation</span>
-            </div>
-            <h3 class="title-sm">ElevenLabs Read-Aloud Synthesis &amp; MLA 9th Citations</h3>
-            <p class="body-sm">
-              Features an ElevenLabs-styled Web Speech API voice player with speed and voice selection on every essay, plus 1-click MLA 9th Works Cited copy boxes.
-            </p>
-          </div>
-        </label>
+      <div class="services-cta-banner">
+        <div>
+          <h3 class="title-md">Have an upcoming editorial project or commission?</h3>
+          <p class="body-sm text-muted">We welcome inquiries from publishers, cultural curators, and independent clients.</p>
+        </div>
+        <a href={withBase('/contact/')} class="button-primary">
+          Contact the Editorial Desk →
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- 3. HOW TO FILL IN YOUR ESSAYS GUIDE -->
-  <section id="edit-guide" class="section-band section-band--soft" aria-labelledby="guide-heading">
-    <div class="container">
-      <div class="section-header">
-        <span class="badge-pill">
-          <span class="badge-dot badge-dot--peach" aria-hidden="true"></span>
-          Author’s Workflow · Academic Integrity
-        </span>
-        <h2 id="guide-heading" class="display-lg section-title">
-          How to Fill In Your Original Essay Prose
-        </h2>
-        <p class="body-md section-lead">
-          To uphold academic integrity for this graded assignment, each entry is structured with scholarly section headings, guiding thesis prompts, and verified public-domain primary quotes—leaving the analytical prose ready for <strong>Shawn Shaibu Cherian</strong> to author directly.
-        </p>
-      </div>
-
-      <div class="guide-steps-grid">
-        <div class="feature-card guide-step-card">
-          <span class="badge-pill">Step 1 · Essay Body Sections</span>
-          <h3 class="display-sm guide-step-card__title">Edit the 5 Markdown Files</h3>
-          <p class="body-sm">
-            Open any file inside <code>src/content/essays/</code> in VS Code or your text editor and replace the blockquoted <code>[Author's Entry Section ...]</code> prompts with your own paragraphs:
-          </p>
-          <ul class="guide-file-list">
-            {ESSAY_ENTRIES.map((entry) => (
-              <li>
-                <code>src/content/essays/{entry.slug}.md</code>
-                <a href={withBase(`/entries/${entry.slug}/`)} class="button-tertiary-text">
-                  View Page →
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div class="feature-card guide-step-card">
-          <span class="badge-pill">Step 2 · Critical Lens &amp; Quotes</span>
-          <h3 class="display-sm guide-step-card__title">Fill In Subtext &amp; Fair-Use Slots</h3>
-          <p class="body-sm">
-            Open <code>src/data/entries.ts</code> to customize the <strong>Critical Lens (Subtext)</strong> analysis blocks:
-          </p>
-          <ul class="guide-bullet-list body-sm">
-            <li>
-              <strong>Public-Domain Works</strong> (Gilman 1892, Shelley 1818, Hossain 1905) already include verified verbatim quotes on the <em>Surface Text</em> tab. Replace <code>criticalLensPrompt</code> with your subtextual analysis.
-            </li>
-            <li>
-              <strong>Copyrighted Works</strong> (Haraway 1985, Devi/Spivak 1978, Roy 1997, Woolf 1929, Atwood 1985, Plath 1965) include a <code>[Primary Quote Placeholder]</code> slot where you can insert a brief fair-use quote and page number from your edition.
-            </li>
-          </ul>
-        </div>
-
-        <div class="feature-card guide-step-card">
-          <span class="badge-pill">Step 3 · Build &amp; Publish</span>
-          <h3 class="display-sm guide-step-card__title">Preview Locally or Push to GitHub</h3>
-          <p class="body-sm">
-            Run these commands in your terminal to preview your edits at <code>http://localhost:4321/janesdiary/</code> and verify zero build errors before pushing to GitHub Pages:
-          </p>
-          <pre class="guide-code-block"><code>npm run dev      # Live local preview at /janesdiary/
-npm run check    # Verify 0 TypeScript / Astro errors
-npm run build    # Build static site into dist/</code></pre>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. CONSOLIDATED MLA 9TH BIBLIOGRAPHY -->
-  <section id="works-cited-master" class="section-band" aria-labelledby="bib-heading">
+  <!-- 4. MASTER SCHOLARLY BIBLIOGRAPHY -->
+  <section id="bibliography" class="section-band" aria-labelledby="bib-heading">
     <div class="container">
       <div class="feature-card master-bib-card">
         <div class="master-bib-card__header">
           <div>
-            <span class="badge-pill">Master Bibliography · MLA 9th Edition</span>
+            <span class="badge-pill">Archival Bibliography · MLA 9th Edition</span>
             <h2 id="bib-heading" class="display-md master-bib-card__title">
-              Consolidated Works Cited Across All 5 Entries
+              Consolidated Scholarly References
             </h2>
+            <p class="body-sm text-muted">
+              Complete academic citations for all primary literary texts and critical theoretical frameworks analyzed across <em>Jane’s Diary</em>.
+            </p>
           </div>
 
           <button
@@ -249,11 +242,15 @@ npm run build    # Build static site into dist/</code></pre>
             class="button-primary no-print"
             data-bib={masterBibliographyText}
           >
-            <span id="copy-master-bib-label">Copy All MLA Citations</span>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <rect x="5.5" y="5.5" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M10.5 5.5V3.5C10.5 2.67157 9.82843 2 9 2H3.5C2.67157 2 2 2.67157 2 3.5V9C2 9.82843 2.67157 10.5 3.5 10.5H5.5" stroke="currentColor" stroke-width="1.4"/>
+            </svg>
+            <span id="copy-master-bib-label">Copy All Citations (MLA 9th)</span>
           </button>
         </div>
 
-        <div class="master-bib-list">
+        <div class="works-cited-list">
           {consolidatedCitations.map((citation) => (
             <p class="mla-hanging-indent">{citation}</p>
           ))}
@@ -264,31 +261,26 @@ npm run build    # Build static site into dist/</code></pre>
 </BaseLayout>
 
 <script>
-  function initAboutPage() {
-    const printBtn = document.getElementById('print-dossier-btn');
-    printBtn?.addEventListener('click', () => {
-      window.print();
-    });
+  function initMasterBibCopy() {
+    const copyBtn = document.getElementById('copy-master-bib-btn');
+    const copyLabel = document.getElementById('copy-master-bib-label');
+    if (!copyBtn || !copyLabel) return;
 
-    const copyBibBtn = document.getElementById('copy-master-bib-btn');
-    const copyBibLabel = document.getElementById('copy-master-bib-label');
-    copyBibBtn?.addEventListener('click', async () => {
-      const bib = copyBibBtn.getAttribute('data-bib') || '';
+    copyBtn.addEventListener('click', async () => {
+      const bibText = copyBtn.getAttribute('data-bib') || '';
       try {
-        await navigator.clipboard.writeText(bib);
-        if (copyBibLabel) {
-          copyBibLabel.textContent = 'Copied Master Bibliography';
-          setTimeout(() => {
-            copyBibLabel.textContent = 'Copy All MLA Citations';
-          }, 2400);
-        }
+        await navigator.clipboard.writeText(bibText);
+        copyLabel.textContent = 'All Citations Copied to Clipboard';
+        setTimeout(() => {
+          copyLabel.textContent = 'Copy All Citations (MLA 9th)';
+        }, 2500);
       } catch {
-        if (copyBibLabel) copyBibLabel.textContent = 'Select Text Below to Copy';
+        copyLabel.textContent = 'Select Text Below to Copy';
       }
     });
   }
 
-  initAboutPage();
+  initMasterBibCopy();
 </script>
 
 <style>
@@ -298,17 +290,17 @@ npm run build    # Build static site into dist/</code></pre>
   }
 
   .about-hero__orb-1 {
-    width: 380px;
-    height: 380px;
-    top: -90px;
-    right: 10%;
+    width: 320px;
+    height: 320px;
+    top: -80px;
+    right: 5%;
   }
 
   .about-hero__orb-2 {
-    width: 320px;
-    height: 320px;
-    bottom: -80px;
-    left: 8%;
+    width: 260px;
+    height: 260px;
+    top: 40px;
+    left: -40px;
   }
 
   .about-hero__inner {
@@ -319,10 +311,15 @@ npm run build    # Build static site into dist/</code></pre>
   .about-breadcrumb {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 14px;
+    gap: var(--space-xs);
+    font-size: 13px;
     color: var(--color-muted);
     margin-bottom: var(--space-lg);
+  }
+
+  .about-breadcrumb__link {
+    color: var(--color-muted);
+    transition: color 0.15s ease;
   }
 
   .about-breadcrumb__link:hover {
@@ -336,194 +333,236 @@ npm run build    # Build static site into dist/</code></pre>
 
   .about-hero__header {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: space-between;
+    gap: var(--space-xl);
     flex-wrap: wrap;
-    gap: var(--space-lg);
     margin-bottom: var(--space-xl);
   }
 
   .about-hero__header > div:first-child {
-    max-width: 740px;
+    max-width: 820px;
   }
 
   .about-hero__title {
     margin-top: var(--space-sm);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-base);
+  }
+
+  .about-hero__subtitle {
+    color: var(--color-body);
+    line-height: 1.6;
   }
 
   .about-hero__actions {
     display: flex;
+    align-items: center;
+    gap: var(--space-sm);
     flex-wrap: wrap;
-    gap: var(--space-xs);
+    padding-top: var(--space-base);
   }
 
-  .student-meta-card {
+  /* Journal Overview Card */
+  .journal-overview-card {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-xl);
     padding: var(--space-xl);
   }
 
-  .student-meta-grid {
+  .journal-overview-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--space-lg);
   }
 
-  .student-meta-item {
+  .journal-stat-item {
     display: flex;
     flex-direction: column;
     gap: 4px;
   }
 
-  .student-meta-item .caption-uppercase {
-    color: var(--color-muted);
+  /* Manifesto Section */
+  .manifesto-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: var(--space-xxl);
+    align-items: start;
   }
 
-  /* Rubric Checklist */
-  .section-title {
+  .manifesto-title {
     margin-top: var(--space-sm);
     margin-bottom: var(--space-xs);
   }
 
-  .rubric-grid {
+  .manifesto-pullquote {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1.35;
+    color: var(--color-ink);
+    background-color: var(--color-canvas-soft);
+    border-left: 3px solid var(--color-ink);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    padding: var(--space-lg) var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  .manifesto-prose p {
+    margin-bottom: var(--space-base);
+    line-height: 1.65;
+  }
+
+  .pillars-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-lg);
-  }
-
-  .rubric-item {
-    display: flex;
-    align-items: flex-start;
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-base);
-    cursor: pointer;
+    margin-top: var(--space-xl);
   }
 
-  .rubric-checkbox {
-    width: 20px;
-    height: 20px;
-    margin-top: 4px;
-    accent-color: var(--color-ink);
-    cursor: pointer;
+  .pillar-card {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
   }
 
-  .rubric-item__body {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  .pillar-card__heading {
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-xs);
   }
 
-  .rubric-item__top {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    flex-wrap: wrap;
-  }
-
-  /* Editing Guide */
-  .guide-steps-grid {
+  /* Services Grid */
+  .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-lg);
+    margin-bottom: var(--space-xxl);
   }
 
-  .guide-step-card {
+  .service-card {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
   }
 
-  .guide-step-card code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 12.5px;
+  .service-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-lg);
     background-color: var(--color-surface-strong);
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-
-  .guide-file-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: var(--space-xs);
-  }
-
-  .guide-file-list li {
+    color: var(--color-ink);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    padding: 8px 10px;
-    background-color: var(--color-canvas-soft);
-    border: 1px solid var(--color-hairline);
-    border-radius: var(--radius-md);
+    justify-content: center;
+    margin-bottom: var(--space-base);
   }
 
-  .guide-bullet-list {
+  .service-card__title {
+    margin-bottom: var(--space-xs);
+  }
+
+  .service-card__list {
+    margin-top: var(--space-base);
     padding-left: var(--space-lg);
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
+    gap: 6px;
+    color: var(--color-muted);
   }
 
-  .guide-code-block {
+  .services-cta-banner {
     background-color: var(--color-surface-dark);
-    color: var(--color-on-dark);
-    padding: var(--space-base);
-    border-radius: var(--radius-lg);
-    font-size: 13px;
-    line-height: 1.6;
-    overflow-x: auto;
-    margin-top: auto;
-  }
-
-  .guide-code-block code {
-    background: transparent;
-    color: inherit;
-    padding: 0;
-  }
-
-  /* Master Bibliography */
-  .master-bib-card__header {
+    color: var(--color-on-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl) var(--space-xxl);
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: var(--space-sm);
+    gap: var(--space-lg);
+  }
+
+  .services-cta-banner h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 4px;
+  }
+
+  .services-cta-banner p {
+    color: #a8a29e;
+  }
+
+  .services-cta-banner .button-primary {
+    background-color: #ffffff;
+    color: #0c0a09;
+  }
+
+  .services-cta-banner .button-primary:hover {
+    background-color: #f0efed;
+  }
+
+  /* Master Bibliography */
+  .master-bib-card {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+  }
+
+  .master-bib-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
     padding-bottom: var(--space-base);
-    margin-bottom: var(--space-lg);
     border-bottom: 1px solid var(--color-hairline);
   }
 
   .master-bib-card__title {
-    margin-top: 6px;
+    margin-top: var(--space-xs);
+    margin-bottom: 4px;
   }
 
-  .master-bib-list {
+  .works-cited-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: var(--space-base);
   }
 
   .mla-hanging-indent {
     padding-left: 32px;
     text-indent: -32px;
-    font-size: 15px;
+    font-family: var(--font-sans);
+    font-size: 14px;
     line-height: 1.6;
-    color: var(--color-ink);
+    color: var(--color-body);
   }
 
   @media (max-width: 1024px) {
-    .student-meta-grid {
+    .journal-overview-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-    .guide-steps-grid {
+    .manifesto-layout {
+      grid-template-columns: 1fr;
+    }
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+    .pillars-grid {
       grid-template-columns: 1fr;
     }
   }
 
-  @media (max-width: 768px) {
-    .rubric-grid,
-    .student-meta-grid {
+  @media (max-width: 640px) {
+    .journal-overview-grid {
       grid-template-columns: 1fr;
     }
   }

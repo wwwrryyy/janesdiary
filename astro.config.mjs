@@ -5,4 +5,7 @@ export default defineConfig({
   base: '/janesdiary',
   trailingSlash: 'always',
   output: 'static',
+  devToolbar: {
+    enabled: false,
+  },
 });

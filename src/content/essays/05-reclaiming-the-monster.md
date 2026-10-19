@@ -2,29 +2,26 @@
 entryNumber: "05"
 slug: "05-reclaiming-the-monster"
 title: "Reclaiming the Monster: Creation Anxiety & Female Autonomy"
-author: "Shawn Shaibu Cherian (26BCE1820)"
+author: "Shawn Shaibu Cherian"
+date: "October 2026"
+readingTime: "8 min read"
+subsection: "Romantic Monstrosity & Confessional Rage"
 ---
 
-## Section I — Birth Without Women: Victor's Workshop of Filthy Creation
+## Section I — Birth Without Women: Victor’s Workshop of Filthy Creation
 
-> **[Author's Entry Section I — Student Essay Prompt (~200–250 words)]**
-> Replace this block in `src/content/essays/05-reclaiming-the-monster.md` with your opening analysis of Mary Shelley's *Frankenstein* (1818) through feminist literary criticism (Ellen Moers, Anne K. Mellor, Barbara Johnson).
->
-> - **Focus Point A:** Examine how Victor Frankenstein usurps maternal gestation in his solitary laboratory, attempting to bypass women and nature in pursuit of Romantic Promethean glory.
-> - **Focus Point B:** Analyze Victor's post-partum revulsion and abandonment of his newborn creature alongside Shelley's own lived experiences of maternity and loss.
+Written when Mary Wollstonecraft Shelley was just eighteen years old, *Frankenstein; or, The Modern Prometheus* (1818) is often celebrated as the founding text of modern science fiction. Yet beneath its philosophical inquiries into galvanism and scientific hubris lies a profound feminist inquiry into the patriarchal usurpation of female biological reproduction. As literary critics Ellen Moers and Anne K. Mellor have convincingly argued, Victor Frankenstein’s solitary experiments in his *"workshop of filthy creation"* represent an audacious male fantasy: the total bypass of female gestation, maternal intimacy, and natural generation in pursuit of solitary scientific immortality.
+
+Haunted by the death of her own mother—the pioneering feminist philosopher Mary Wollstonecraft, who died of puerperal fever eleven days after giving birth to Mary—and having suffered the traumatic loss of her first premature infant shortly before drafting the novel, Shelley understood birth not as an abstract triumph of intellectual will, but as an existential reckoning intertwined with mortality. When Victor successfully animates his creature, his Promethean intoxication immediately collapses into visceral revulsion. Fleeing the laboratory in horror, he abandons his newborn creation to a hostile world. In Victor's flight, Shelley exposes the catastrophic consequences of a masculine science that desires the power to generate life while categorically repudiating the ethical, domestic, and emotional labor required to nurture it.
 
 ## Section II — The Aborted Female Creature: Fear of Autonomous Female Desire
 
-> **[Author's Entry Section II — Student Essay Prompt (~250 words)]**
-> Replace this block in `src/content/essays/05-reclaiming-the-monster.md` with your close reading of Volume III, Chapter 3 of *Frankenstein*, where Victor destroys the unfinished female creature on the Orkney Islands.
->
-> - **Focus Point A:** Unpack Victor's five distinct patriarchal anxieties: that the female creature might refuse a contract made before her birth, reject her designated mate, desire human men, or birth a lineage beyond male control.
-> - **Focus Point B:** Show why the dismembered, silenced female creature represents the repressed feminist core of the Gothic canon.
+The terrifying core of Victor’s patriarchal anxiety culminates in Volume III, Chapter 3, during his solitary retreat on the remote Orkney Islands. Commissioned by his desolate, eloquent creature to fashion a female companion—a partner with whom the outcast can live in peaceful exile in the wilds of South America—Victor gathers his instruments and begins assembling the female form. Yet as he works late into the night, he is gripped by a sudden, paralyzing realization that leads him to violently tear the unfinished woman to pieces before the horrified creature’s eyes.
 
-## Section III — Confessional Resurrection: Plath's Ariel & Reclaiming the Monstrous Voice
+Victor’s rationalizations for destroying the female creature reveal the deepest terrors of the patriarchal unconscious. He fears that she may be ten thousand times more malignant than her mate; that she has not sworn to the social contract of peaceful withdrawal; that she may find her designated partner loathsome and reject him; that she may assert her own autonomous sexual desire, preferring the company of human men; and, most terrifying of all, that a race of devils might propagate upon the earth. The female creature is dismembered not because of what she has done, but because of what she represents: a female subject possessing unpredictable agency, independent desire, and reproductive autonomy beyond male control. Her destroyed, silenced flesh embodies the ultimate taboo of the patriarchal imagination: a woman who refuses to be governed.
 
-> **[Author's Entry Section III — Student Essay Prompt (~250 words)]**
-> Replace this block in `src/content/essays/05-reclaiming-the-monster.md` with your synthesis connecting Shelley's silenced creature to Sylvia Plath's *Ariel* (1965).
->
-> - **Focus Point A:** Trace how Plath's confessional speakers reclaim the label of the "monster" or resurrected spectacle—refusing clinical containment and speaking with scorching lyric authority.
-> - **Focus Point B:** Bring the five-entry arc of *Jane's Diary* full circle: from anonymous erasure and Gothic confinement to unapologetic self-creation.
+## Section III — Confessional Resurrection: Plath’s Ariel & Reclaiming the Monstrous Voice
+
+Nearly a century and a half later, Sylvia Plath’s *Ariel* (1965) stages the poetic resurrection of that silenced female monster. Writing in the fierce, incandescent pre-dawn hours of the brutal winter of 1962, Plath broke through the suffocating domestic containment of mid-century patriarchy to forge an uncompromising confessional voice. In poems such as *"Lady Lazarus"* and *"Daddy,"* the speaker refuses the sanitized status of clinical patient or dutiful wife, audaciously claiming the identity of the grotesque, resurrected spectacle.
+
+*"Out of the ash / I rise with my red hair / And I eat men like air,"* Plath proclaims in the closing lines of *"Lady Lazarus,"* transforming the cultural terror of female rage into sovereign lyric power. Where Mary Shelley’s creature was forced to plead in vain for recognition before being driven to reciprocal vengeance, Plath’s poetic persona strips away the polite patriarchal veneer, claiming monstrosity not as a tragic curse, but as an ecstatic act of self-determination. In doing so, she brings the central journey of *Jane’s Diary* full circle: from Charlotte Perkins Gilman’s narrator crawling beneath the yellow wallpaper to Virginia Woolf’s unwritten Judith Shakespeare and Dopdi Mejhen’s defiant, unclothed laughter before the army camp, the feminist canon is revealed not as a catalogue of victimhood, but as a continuous, incendiary tradition of women tearing through canonical erasure to author their own liberation.

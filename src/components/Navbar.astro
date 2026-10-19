@@ -14,45 +14,50 @@ const { currentPath = '/' } = Astro.props;
       <a href={withBase('/')} class="top-nav__wordmark" aria-label="Jane's Diary Home">
         Jane’s Diary
       </a>
-      <a href={withBase('/about/')} class="badge-pill top-nav__reg" title="Shawn Shaibu Cherian · Reg. No. 26BCE1820 · VIT Chennai">
-        <span class="badge-dot badge-dot--mint" aria-hidden="true"></span>
-        26BCE1820
-      </a>
     </div>
 
     <nav class="top-nav__menu" aria-label="Primary Navigation">
       <a
-        href={withBase('/#entries')}
-        class:list={['top-nav__link', { 'is-active': currentPath.startsWith('/entries') }]}
+        href={withBase('/')}
+        class:list={['top-nav__link', { 'is-active': currentPath === '/' }]}
       >
-        Entries
+        Home
       </a>
       <a
-        href={withBase('/#bylines')}
-        class="top-nav__link"
+        href={withBase('/blogs/')}
+        class:list={['top-nav__link', { 'is-active': currentPath.startsWith('/blogs') || currentPath.startsWith('/entries') }]}
       >
-        Byline Archive
+        Blogs
       </a>
       <a
-        href={withBase('/blackout/')}
-        class:list={['top-nav__link', { 'is-active': currentPath.startsWith('/blackout') }]}
+        href={withBase('/archive/')}
+        class:list={['top-nav__link', { 'is-active': currentPath.startsWith('/archive') }]}
       >
-        Blackout Studio
+        Archive
+      </a>
+      <a
+        href={withBase('/syllabus/')}
+        class:list={['top-nav__link', { 'is-active': currentPath.startsWith('/syllabus') }]}
+      >
+        Syllabus
       </a>
       <a
         href={withBase('/about/')}
         class:list={['top-nav__link', { 'is-active': currentPath.startsWith('/about') }]}
       >
-        About &amp; Rubric
+        About
+      </a>
+      <a
+        href={withBase('/contact/')}
+        class:list={['top-nav__link', { 'is-active': currentPath.startsWith('/contact') }]}
+      >
+        Contact
       </a>
     </nav>
 
     <div class="top-nav__actions">
-      <a href={withBase('/about/#edit-guide')} class="button-outline top-nav__guide-btn">
-        Write / Edit Guide
-      </a>
-      <a href={withBase('/#entries')} class="button-primary top-nav__cta">
-        Explore Entries
+      <a href={withBase('/blogs/')} class="button-primary top-nav__cta">
+        Explore Blogs
       </a>
       <button
         type="button"
@@ -75,18 +80,19 @@ const { currentPath = '/' } = Astro.props;
   <div class="mobile-drawer" id="mobile-nav-drawer" hidden>
     <div class="container mobile-drawer__inner">
       <div class="mobile-drawer__meta">
-        <span class="caption">Shawn Shaibu Cherian · Reg. No. 26BCE1820 · VIT Chennai</span>
+        <span class="caption">Jane’s Diary · Founded &amp; Edited by Shawn Shaibu Cherian</span>
       </div>
       <nav class="mobile-drawer__links" aria-label="Mobile Navigation">
-        <a href={withBase('/#entries')} class="mobile-drawer__link">The 5 Cornerstone Entries</a>
-        <a href={withBase('/#bylines')} class="mobile-drawer__link">“By a Lady” Byline Archive</a>
-        <a href={withBase('/blackout/')} class="mobile-drawer__link">Blackout Poetry Studio</a>
-        <a href={withBase('/about/')} class="mobile-drawer__link">About &amp; DA Rubric</a>
-        <a href={withBase('/about/#edit-guide')} class="mobile-drawer__link">How to Fill In Your Essays</a>
+        <a href={withBase('/')} class="mobile-drawer__link">Home</a>
+        <a href={withBase('/blogs/')} class="mobile-drawer__link">Blogs</a>
+        <a href={withBase('/archive/')} class="mobile-drawer__link">Archive</a>
+        <a href={withBase('/syllabus/')} class="mobile-drawer__link">Syllabus</a>
+        <a href={withBase('/about/')} class="mobile-drawer__link">About</a>
+        <a href={withBase('/contact/')} class="mobile-drawer__link">Contact</a>
       </nav>
       <div class="mobile-drawer__actions">
-        <a href={withBase('/#entries')} class="button-primary">Explore All 5 Entries</a>
-        <a href={withBase('/blackout/')} class="button-outline">Open Blackout Studio</a>
+        <a href={withBase('/blogs/')} class="button-primary">Browse All Blogs</a>
+        <a href={withBase('/contact/')} class="button-outline">Get in Touch</a>
       </div>
     </div>
   </div>
@@ -159,14 +165,6 @@ const { currentPath = '/' } = Astro.props;
     color: var(--color-ink);
   }
 
-  .top-nav__reg {
-    text-decoration: none;
-    transition: background-color 0.15s ease;
-  }
-
-  .top-nav__reg:hover {
-    background-color: var(--color-hairline);
-  }
 
   .top-nav__menu {
     display: flex;

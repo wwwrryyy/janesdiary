@@ -12,13 +12,13 @@ interface Props {
 
 const {
   title,
-  description = "Jane's Diary: An Interactive Archive of Feminist Literature by Shawn Shaibu Cherian (26BCE1820), Vellore Institute of Technology (VIT), Chennai.",
+  description = "Jane's Diary: An Independent Journal of Feminist Literature & Archival Studies by Shawn Shaibu Cherian.",
   currentPath = '/',
 } = Astro.props;
 
 const fullTitle = title.includes("Jane's Diary") || title.includes("Jane’s Diary")
   ? title
-  : `${title} — Jane’s Diary (26BCE1820)`;
+  : `${title} — Jane’s Diary`;
 ---
 
 <!doctype html>
@@ -28,7 +28,7 @@ const fullTitle = title.includes("Jane's Diary") || title.includes("Jane’s Dia
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <meta name="author" content="Shawn Shaibu Cherian (26BCE1820)" />
+    <meta name="author" content="Shawn Shaibu Cherian" />
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -6,24 +6,24 @@ import { ESSAY_ENTRIES } from '../data/entries';
 <footer class="site-footer no-print" role="contentinfo">
   <div class="container">
     <div class="site-footer__grid">
-      <!-- Column 1: Brand & Academic Attribution -->
+      <!-- Column 1: Brand & Masthead -->
       <div class="site-footer__col site-footer__col--brand">
         <a href={withBase('/')} class="site-footer__wordmark">Jane’s Diary</a>
         <p class="site-footer__desc">
-          An interactive digital archive of feminist literature—scraping back canonical erasures from Romantic proto-feminism to postcolonial subaltern studies and cyberfeminism.
+          An independent journal &amp; digital archive of feminist literature—scraping back canonical erasures from Romantic proto-feminism to postcolonial subaltern studies and cyberfeminism.
         </p>
-        <div class="site-footer__student-box">
-          <span class="badge-pill">Digital Assignment</span>
-          <p class="site-footer__student-name">Shawn Shaibu Cherian</p>
-          <p class="site-footer__student-meta">Reg. No. 26BCE1820 · VIT Chennai</p>
+        <div class="site-footer__masthead-box">
+          <span class="badge-pill">Independent Journal</span>
+          <p class="site-footer__masthead-name">Shawn Shaibu Cherian</p>
+          <p class="site-footer__masthead-meta">Founding Editor &amp; Essayist</p>
         </div>
       </div>
 
-      <!-- Column 2: Cornerstone Entries I–III -->
+      <!-- Column 2: Essays 01–04 -->
       <div class="site-footer__col">
-        <h3 class="caption-uppercase site-footer__heading">Entries 01 – 03</h3>
+        <h3 class="caption-uppercase site-footer__heading">Essays 01 – 04</h3>
         <ul class="site-footer__list">
-          {ESSAY_ENTRIES.slice(0, 3).map((entry) => (
+          {ESSAY_ENTRIES.slice(0, 4).map((entry) => (
             <li>
               <a href={withBase(`/entries/${entry.slug}/`)} class="footer-link">
                 <span class="site-footer__num">{entry.number}.</span> {entry.title}
@@ -33,79 +33,74 @@ import { ESSAY_ENTRIES } from '../data/entries';
         </ul>
       </div>
 
-      <!-- Column 3: Cornerstone Entries IV–V -->
+      <!-- Column 3: Essays 05–08 -->
       <div class="site-footer__col">
-        <h3 class="caption-uppercase site-footer__heading">Entries 04 – 05</h3>
+        <h3 class="caption-uppercase site-footer__heading">Essays 05 – 08</h3>
         <ul class="site-footer__list">
-          {ESSAY_ENTRIES.slice(3, 5).map((entry) => (
+          {ESSAY_ENTRIES.slice(4, 8).map((entry) => (
             <li>
               <a href={withBase(`/entries/${entry.slug}/`)} class="footer-link">
                 <span class="site-footer__num">{entry.number}.</span> {entry.title}
               </a>
             </li>
           ))}
+        </ul>
+      </div>
+
+      <!-- Column 4: Archive & Syllabi -->
+      <div class="site-footer__col">
+        <h3 class="caption-uppercase site-footer__heading">Archive &amp; Syllabi</h3>
+        <ul class="site-footer__list">
+          <li>
+            <a href={withBase('/blogs/')} class="footer-link">
+              All 8 Thematic Subsections
+            </a>
+          </li>
+          <li>
+            <a href={withBase('/archive/')} class="footer-link">
+              The Palimpsest Archive (Facsimiles)
+            </a>
+          </li>
+          <li>
+            <a href={withBase('/syllabus/')} class="footer-link">
+              Curated Seminar Syllabi
+            </a>
+          </li>
           <li>
             <a href={withBase('/#bylines')} class="footer-link">
-              “By a Lady” Pseudonym Archive
+              Historical Pseudonym Decoder
+            </a>
+          </li>
+          <li>
+            <a href={withBase('/about/#bibliography')} class="footer-link">
+              Master Scholarly References
             </a>
           </li>
         </ul>
       </div>
 
-      <!-- Column 4: Interactive Humanities Lab -->
+      <!-- Column 5: Journal & Commissions -->
       <div class="site-footer__col">
-        <h3 class="caption-uppercase site-footer__heading">Interactive Studio</h3>
-        <ul class="site-footer__list">
-          <li>
-            <a href={withBase('/blackout/')} class="footer-link">
-              Blackout Poetry Studio (PNG Export)
-            </a>
-          </li>
-          <li>
-            <a href={withBase('/entries/01-madwoman-to-glitch/#voice-player')} class="footer-link">
-              ElevenLabs Voice Read-Aloud Bar
-            </a>
-          </li>
-          <li>
-            <a href={withBase('/entries/01-madwoman-to-glitch/#critical-lens')} class="footer-link">
-              Critical Lens X-Ray (Surface / Subtext)
-            </a>
-          </li>
-          <li>
-            <a href={withBase('/entries/01-madwoman-to-glitch/#works-cited')} class="footer-link">
-              MLA 9th Works Cited Generator
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Column 5: Evaluator & Rubric -->
-      <div class="site-footer__col">
-        <h3 class="caption-uppercase site-footer__heading">Evaluator &amp; Rubric</h3>
+        <h3 class="caption-uppercase site-footer__heading">Journal &amp; Inquiries</h3>
         <ul class="site-footer__list">
           <li>
             <a href={withBase('/about/')} class="footer-link">
-              DA Info &amp; Grading Rubric
+              Publication Manifesto
             </a>
           </li>
           <li>
-            <a href={withBase('/about/#edit-guide')} class="footer-link">
-              How to Fill In Your Essays
+            <a href={withBase('/about/#services-heading')} class="footer-link">
+              Commissions &amp; Lectures
             </a>
           </li>
           <li>
-            <a href={withBase('/about/#works-cited-master')} class="footer-link">
-              Consolidated Bibliography
+            <a href={withBase('/contact/')} class="footer-link">
+              Contact Editorial Desk
             </a>
           </li>
           <li>
-            <a
-              href="https://wwwrryyy.github.io/janesdiary/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="footer-link"
-            >
-              Live GitHub Pages URL ↗
+            <a href="mailto:shawnsc76@gmail.com" class="footer-link">
+              shawnsc76@gmail.com ✉
             </a>
           </li>
         </ul>
@@ -114,14 +109,20 @@ import { ESSAY_ENTRIES } from '../data/entries';
 
     <div class="site-footer__bottom">
       <p class="caption">
-        © {new Date().getFullYear()} Shawn Shaibu Cherian (26BCE1820) · Vellore Institute of Technology (VIT), Chennai. Built with Astro Static SSG for GitHub Pages.
+        © {new Date().getFullYear()} Jane’s Diary. Edited &amp; published by Shawn Shaibu Cherian. All rights reserved.
       </p>
       <div class="site-footer__bottom-links">
         <a href={withBase('/')} class="footer-link">Home</a>
         <span aria-hidden="true">·</span>
-        <a href={withBase('/blackout/')} class="footer-link">Blackout Studio</a>
+        <a href={withBase('/blogs/')} class="footer-link">Essays</a>
         <span aria-hidden="true">·</span>
-        <a href={withBase('/about/')} class="footer-link">Rubric &amp; Guide</a>
+        <a href={withBase('/archive/')} class="footer-link">Archive</a>
+        <span aria-hidden="true">·</span>
+        <a href={withBase('/syllabus/')} class="footer-link">Syllabus</a>
+        <span aria-hidden="true">·</span>
+        <a href={withBase('/about/')} class="footer-link">About</a>
+        <span aria-hidden="true">·</span>
+        <a href={withBase('/contact/')} class="footer-link">Contact</a>
       </div>
     </div>
   </div>
@@ -163,21 +164,21 @@ import { ESSAY_ENTRIES } from '../data/entries';
     margin-bottom: var(--space-base);
   }
 
-  .site-footer__student-box {
+  .site-footer__masthead-box {
     background-color: var(--color-surface-card);
     border: 1px solid var(--color-hairline);
     border-radius: var(--radius-lg);
     padding: var(--space-sm) var(--space-base);
   }
 
-  .site-footer__student-name {
+  .site-footer__masthead-name {
     font-size: 15px;
     font-weight: 500;
     color: var(--color-ink);
     margin-top: var(--space-xs);
   }
 
-  .site-footer__student-meta {
+  .site-footer__masthead-meta {
     font-size: 13px;
     color: var(--color-muted);
   }

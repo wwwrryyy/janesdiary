@@ -1,0 +1,526 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/url';
+---
+
+<BaseLayout
+  title="Contact & Editorial Desk"
+  description="Contact the editorial desk of Jane's Diary. Inquiries for writing commissions, archival research collaborations, guest lectures, and literary syndication."
+  currentPath="/contact"
+>
+  <!-- Hero Band -->
+  <section class="contact-hero orb-stage">
+    <div class="ambient-orb ambient-orb--sky contact-hero__orb-1" aria-hidden="true"></div>
+    <div class="ambient-orb ambient-orb--rose contact-hero__orb-2" aria-hidden="true"></div>
+
+    <div class="container">
+      <nav class="contact-breadcrumb" aria-label="Breadcrumb">
+        <a href={withBase('/')} class="contact-breadcrumb__link">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page" class="contact-breadcrumb__current">Contact</span>
+      </nav>
+
+      <div class="contact-hero__content">
+        <div class="badge-pill contact-hero__badge">
+          <span class="badge-dot badge-dot--sky" aria-hidden="true"></span>
+          Editorial Desk &amp; Commissions
+        </div>
+        <h1 class="display-xl contact-hero__title">
+          Initiate an editorial dialogue or commission.
+        </h1>
+        <p class="body-md contact-hero__lead">
+          <em>Jane’s Diary</em> welcomes correspondence from cultural institutions, academic departments, publishing houses, and independent clients seeking long-form critical essays, archival curation, and lecture seminars.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Grid -->
+  <section class="section-band bg-canvas-soft">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Left Column: Editorial Masthead & Desk Details -->
+        <div class="contact-info-col">
+          <div class="feature-card editor-card">
+            <div class="editor-card__header">
+              <div class="editor-avatar" aria-hidden="true">
+                SC
+              </div>
+              <div>
+                <span class="caption-uppercase text-muted">Founding Editor &amp; Essayist</span>
+                <h2 class="display-sm editor-card__name">Shawn Shaibu Cherian</h2>
+                <p class="caption text-muted">Jane’s Diary · Independent Literary Journal</p>
+              </div>
+            </div>
+
+            <div class="editor-card__details">
+              <div class="detail-row">
+                <span class="detail-label">Direct Desk Email</span>
+                <a href="mailto:shawnsc76@gmail.com" class="detail-value hover-underline">
+                  shawnsc76@gmail.com ✉
+                </a>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Editorial Scope</span>
+                <span class="detail-value">Feminist Criticism, Archival Recovery, Digital Humanities</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Client Services</span>
+                <span class="detail-value">Essay Commissions, Research, Curatorial Introductions</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Turnaround</span>
+                <span class="detail-value">Editorial responses within 48 business hours</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Digital Archive</span>
+                <a href="https://wwwrryyy.github.io/janesdiary/" target="_blank" rel="noopener noreferrer" class="detail-value hover-underline">
+                  wwwrryyy.github.io/janesdiary/ ↗
+                </a>
+              </div>
+            </div>
+
+            <div class="editor-card__actions">
+              <a href="mailto:shawnsc76@gmail.com?subject=Editorial%20Commission%20Inquiry%20-%20Jane's%20Diary" class="button-primary" style="width: 100%;">
+                Email Editorial Desk
+              </a>
+              <a href={withBase('/about/')} class="button-outline" style="width: 100%;">
+                Read Publication Manifesto
+              </a>
+            </div>
+          </div>
+
+          <!-- Editorial Ethics & Rights Policy Card -->
+          <div class="feature-card policy-card">
+            <div class="policy-card__header">
+              <span class="badge-pill">Permissions &amp; Rights</span>
+              <h3 class="title-sm">Syndication &amp; Archival Usage</h3>
+            </div>
+            <p class="body-sm text-body">
+              All critical essays published in <em>Jane’s Diary</em> are protected under international copyright. We routinely license essays for academic coursepacks, exhibition catalogs, and print anthologies.
+            </p>
+            <p class="caption text-muted" style="margin-top: 8px;">
+              For permissions, attach publication dates and print-run estimates to your message.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Client Inquiry Form -->
+        <div class="contact-form-col">
+          <div class="feature-card form-card">
+            <div class="form-card__header">
+              <span class="badge-pill">
+                <span class="badge-dot badge-dot--peach" aria-hidden="true"></span>
+                Inquiry Dispatch
+              </span>
+              <h2 class="display-sm" style="margin-top: 8px;">
+                Send an Editorial Message
+              </h2>
+              <p class="body-sm text-body">
+                Please provide details regarding your inquiry, publication timeline, or commission brief. Submitting prepares an immediate email dispatch to our editorial desk.
+              </p>
+            </div>
+
+            <form id="contact-inquiry-form" class="inquiry-form" onsubmit="return false;">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="client-name" class="form-label">Your Name</label>
+                  <input
+                    type="text"
+                    id="client-name"
+                    class="text-input"
+                    placeholder="e.g. Eleanor Vance"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="client-org" class="form-label">Organization / Publication (Optional)</label>
+                  <input
+                    type="text"
+                    id="client-org"
+                    class="text-input"
+                    placeholder="e.g. University Press / Literary Review"
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="client-email" class="form-label">Email Address</label>
+                  <input
+                    type="email"
+                    id="client-email"
+                    class="text-input"
+                    placeholder="name@organization.com"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="inquiry-type" class="form-label">Inquiry Purpose</label>
+                  <select id="inquiry-type" class="text-input select-input">
+                    <option value="Commission Long-Form Essay">Commission a Long-Form Essay</option>
+                    <option value="Archival Research Collaboration">Archival Research &amp; Curation</option>
+                    <option value="Lecture, Seminar or Panel Request">Lecture, Seminar or Panel Request</option>
+                    <option value="Syndication & Republication">Syndication &amp; Republication Rights</option>
+                    <option value="General Editorial Feedback">General Reader Correspondence</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inquiry-subject" class="form-label">Subject Line</label>
+                <input
+                  type="text"
+                  id="inquiry-subject"
+                  class="text-input"
+                  placeholder="e.g. Essay Commission: Victorian Gothic Confinement"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="inquiry-message" class="form-label">Message &amp; Project Overview</label>
+                <textarea
+                  id="inquiry-message"
+                  class="text-input textarea-input"
+                  rows="6"
+                  placeholder="Please outline the scope, deadline, word count, or nature of your inquiry..."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" id="submit-inquiry-btn" class="button-primary">
+                  Dispatch to Editorial Desk →
+                </button>
+                <button type="button" id="copy-summary-btn" class="button-outline">
+                  Copy Message Summary
+                </button>
+              </div>
+
+              <div id="form-feedback-banner" class="feedback-banner" hidden>
+                <span id="feedback-banner-text">Inquiry prepared. Opening email client...</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function initContactForm() {
+    const form = document.getElementById('contact-inquiry-form') as HTMLFormElement | null;
+    const copyBtn = document.getElementById('copy-summary-btn');
+    const banner = document.getElementById('form-feedback-banner');
+    const bannerText = document.getElementById('feedback-banner-text');
+
+    if (!form) return;
+
+    function buildSummaryText() {
+      const name = (document.getElementById('client-name') as HTMLInputElement)?.value.trim() || 'Anonymous';
+      const org = (document.getElementById('client-org') as HTMLInputElement)?.value.trim() || 'Independent';
+      const email = (document.getElementById('client-email') as HTMLInputElement)?.value.trim() || 'Not provided';
+      const type = (document.getElementById('inquiry-type') as HTMLSelectElement)?.value || 'General';
+      const subject = (document.getElementById('inquiry-subject') as HTMLInputElement)?.value.trim() || 'Jane’s Diary Inquiry';
+      const message = (document.getElementById('inquiry-message') as HTMLTextAreaElement)?.value.trim() || '';
+
+      return `--- Jane’s Diary Editorial Inquiry ---
+From: ${name} (${org})
+Email: ${email}
+Purpose: ${type}
+Subject: ${subject}
+
+Message:
+${message}
+---------------------------------------`;
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const type = (document.getElementById('inquiry-type') as HTMLSelectElement)?.value || 'Inquiry';
+      const subject = (document.getElementById('inquiry-subject') as HTMLInputElement)?.value.trim() || 'Editorial Inquiry';
+
+      const mailSubject = encodeURIComponent(`[Jane's Diary] ${type}: ${subject}`);
+      const mailBody = encodeURIComponent(buildSummaryText());
+
+      window.location.href = `mailto:shawnsc76@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+
+      if (banner && bannerText) {
+        banner.hidden = false;
+        bannerText.textContent = `Dispatch prepared for shawnsc76@gmail.com. If your mail client did not open automatically, please copy the summary text below.`;
+      }
+    });
+
+    copyBtn?.addEventListener('click', async () => {
+      const text = buildSummaryText();
+      try {
+        await navigator.clipboard.writeText(text);
+        if (banner && bannerText) {
+          banner.hidden = false;
+          bannerText.textContent = 'Inquiry summary copied to clipboard! You can paste it directly into an email.';
+        }
+      } catch {
+        alert('Could not copy automatically. Please select text manually.');
+      }
+    });
+  }
+
+  initContactForm();
+</script>
+
+<style>
+  .contact-hero {
+    padding: 64px 0 48px;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .contact-hero__orb-1 {
+    width: 320px;
+    height: 320px;
+    top: -60px;
+    right: 15%;
+  }
+
+  .contact-hero__orb-2 {
+    width: 260px;
+    height: 260px;
+    bottom: -40px;
+    left: -20px;
+  }
+
+  .contact-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 13px;
+    color: var(--color-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact-breadcrumb__link {
+    color: var(--color-muted);
+    transition: color 0.15s ease;
+  }
+
+  .contact-breadcrumb__link:hover {
+    color: var(--color-ink);
+  }
+
+  .contact-breadcrumb__current {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .contact-hero__badge {
+    margin-bottom: var(--space-sm);
+  }
+
+  .contact-hero__title {
+    margin-bottom: var(--space-base);
+    max-width: 820px;
+  }
+
+  .contact-hero__lead {
+    max-width: 680px;
+    color: var(--color-body);
+    line-height: 1.6;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: var(--space-xxl);
+    align-items: start;
+  }
+
+  /* Left Column: Editor Card */
+  .editor-card {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+  }
+
+  .editor-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-base);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-base);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .editor-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-ink);
+    color: var(--color-on-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 400;
+    flex-shrink: 0;
+  }
+
+  .editor-card__name {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .editor-card__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+  }
+
+  .detail-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .detail-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+
+  .detail-value {
+    font-size: 14px;
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .editor-card__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  /* Policy Card */
+  .policy-card {
+    margin-top: var(--space-xl);
+    background-color: var(--color-canvas-soft);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+  }
+
+  .policy-card__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Right Column: Form Card */
+  .form-card {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xxl);
+  }
+
+  .form-card__header {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-base);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .inquiry-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-base);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .text-input {
+    width: 100%;
+    height: 42px;
+    padding: 8px 14px;
+    border: 1px solid var(--color-hairline-strong);
+    border-radius: var(--radius-md);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .text-input:focus {
+    outline: none;
+    border-color: var(--color-ink);
+    box-shadow: 0 0 0 2px rgba(12, 10, 9, 0.08);
+  }
+
+  .textarea-input {
+    height: auto;
+    resize: vertical;
+    line-height: 1.5;
+  }
+
+  .select-input {
+    cursor: pointer;
+  }
+
+  .form-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    padding-top: var(--space-sm);
+  }
+
+  .feedback-banner {
+    padding: var(--space-base);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-strong);
+    border: 1px solid var(--color-hairline-strong);
+    font-size: 14px;
+    color: var(--color-ink);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+    .form-card {
+      padding: var(--space-lg);
+    }
+  }
+</style>

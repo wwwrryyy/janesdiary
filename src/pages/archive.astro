@@ -1,0 +1,579 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/url';
+
+interface ArchivalArtifact {
+  id: string;
+  title: string;
+  date: string;
+  era: 'nineteenth-century' | 'modernist' | 'civil-rights' | 'postcolonial';
+  eraLabel: string;
+  creator: string;
+  medium: string;
+  provenance: string;
+  imageSrc: string;
+  imageAlt: string;
+  description: string;
+  curatorNote: string;
+  relatedEssaySlug?: string;
+  relatedEssayTitle?: string;
+}
+
+const ARTIFACTS: ArchivalArtifact[] = [
+  {
+    id: 'frankenstein-1818',
+    title: 'Frankenstein; or, The Modern Prometheus (First Edition Title Page)',
+    date: '1818',
+    era: 'nineteenth-century',
+    eraLabel: '19th-Century Gothic',
+    creator: 'Mary Wollstonecraft Shelley (Published Anonymously)',
+    medium: 'Letterpress print on laid paper, 3 volumes',
+    provenance: 'Printed by Lackington, Hughes, Harding, Mavor, & Jones, Finsbury Square, London',
+    imageSrc: '/images/archival/frankenstein-1818-edition-title-page.jpg',
+    imageAlt: 'Title page of the 1818 first edition of Frankenstein',
+    description: 'The historic title page of Mary Shelley’s masterwork, printed without her name when she was just twenty years old. Dedicated to her father, William Godwin, the volume was initially attributed by reviewers to Percy Bysshe Shelley.',
+    curatorNote: 'Notice the anonymous attribution: "In Three Volumes." The excision of the female author’s name exemplifies how nineteenth-century patriarchal publishing erased young women’s intellectual labor.',
+    relatedEssaySlug: '05-reclaiming-the-monster',
+    relatedEssayTitle: 'Reclaiming the Monster: Creation Anxiety & Female Autonomy',
+  },
+  {
+    id: 'shelley-portrait-1840',
+    title: 'Mary Wollstonecraft Shelley (National Portrait Gallery)',
+    date: '1840',
+    era: 'nineteenth-century',
+    eraLabel: '19th-Century Gothic',
+    creator: 'Richard Rothwell',
+    medium: 'Oil on canvas (74.9 × 62.2 cm)',
+    provenance: 'Exhibited at the Royal Academy 1840; bequest of Sir Percy Florence Shelley, 1899',
+    imageSrc: '/images/archival/mary-wollstonecraft-shelley.jpg',
+    imageAlt: 'Oil portrait of Mary Shelley by Richard Rothwell',
+    description: 'The definitive lifetime portrait of Mary Wollstonecraft Shelley, painted when she was in her early forties, depicting her quiet, mournful intellectual resolve after decades of personal bereavement.',
+    curatorNote: 'Rothwell captures Shelley after she had overseen the posthumous editing of Percy Shelley’s poetical works, proving herself one of the era’s most astute literary editors despite persistent Victorian condescension.',
+    relatedEssaySlug: '05-reclaiming-the-monster',
+    relatedEssayTitle: 'Reclaiming the Monster: Creation Anxiety & Female Autonomy',
+  },
+  {
+    id: 'gilman-portrait-1900',
+    title: 'Charlotte Perkins Gilman at the Turn of the Century',
+    date: 'circa 1900',
+    era: 'nineteenth-century',
+    eraLabel: '19th-Century Gothic',
+    creator: 'Charles Fletcher Lummis / Restored by Adam Cuerden',
+    medium: 'Gelatin silver photographic print',
+    provenance: 'Schlesinger Library on the History of Women in America, Radcliffe Institute, Harvard',
+    imageSrc: '/images/archival/charlotte-perkins-gilman-c-1900.jpg',
+    imageAlt: 'Studio photographic portrait of Charlotte Perkins Gilman',
+    description: 'Portrait of economist, sociologist, and author Charlotte Perkins Gilman around the time of her major theoretical treatises Women and Economics (1898) and Concerning Children (1900).',
+    curatorNote: 'Gilman sent a copy of The Yellow Wallpaper to Dr. Silas Weir Mitchell, the inventor of the rest cure that nearly drove her mad. He reportedly altered his treatment protocols after reading it.',
+    relatedEssaySlug: '01-madwoman-to-glitch',
+    relatedEssayTitle: 'The Madwoman in the Attic vs. The Glitch in the Machine',
+  },
+  {
+    id: 'willow-bough-1887',
+    title: 'William Morris "Willow Bough" Domestic Wallpaper Specimen',
+    date: '1887',
+    era: 'nineteenth-century',
+    eraLabel: '19th-Century Gothic',
+    creator: 'William Morris / Morris & Company',
+    medium: 'Woodblock print on paper (Metropolitan Museum of Art)',
+    provenance: 'The Metropolitan Museum of Art, New York (Purchase, Edward C. Moore Jr. Gift)',
+    imageSrc: '/images/archival/willow-bough.jpg',
+    imageAlt: 'Intricate botanical pattern of green willow leaves on paper',
+    description: 'A pristine specimen of late-Victorian aesthetic wallpaper. The intertwining, suffocating botanical vines illustrate the decorative domestic panopticon that Gilman’s protagonist scrutinized in her nursery chamber.',
+    curatorNote: 'Victorian domestic architecture used intricate wallpaper patterns to enforce middle-class domestic decorum. In Gilman’s hands, the pattern becomes a carceral cage hiding a crawling, captive woman.',
+    relatedEssaySlug: '01-madwoman-to-glitch',
+    relatedEssayTitle: 'The Madwoman in the Attic vs. The Glitch in the Machine',
+  },
+  {
+    id: 'woolf-portrait-1902',
+    title: 'Virginia Woolf (Beresford Studio Portrait)',
+    date: '1902',
+    era: 'modernist',
+    eraLabel: 'Early 20th-Century Modernist',
+    creator: 'George Charles Beresford',
+    medium: 'Platinum print photograph',
+    provenance: 'National Portrait Gallery, London',
+    imageSrc: '/images/archival/george-charles-beresford-virginia-woolf-in-1902.jpg',
+    imageAlt: 'Profile platinum print portrait of young Virginia Woolf in 1902',
+    description: 'Early photographic portrait of twenty-year-old Virginia Stephen (later Woolf), taken at George Charles Beresford’s Brompton Road studio in London.',
+    curatorNote: 'Woolf’s materialist insight was born in this Edwardian era: that without an independent income of five hundred pounds a year and a room with a lock on the door, intellectual freedom remains an impossibility for women.',
+    relatedEssaySlug: '03-room-of-ones-own-digital',
+    relatedEssayTitle: 'A Room of One’s Own in the Algorithm Economy',
+  },
+  {
+    id: 'kolkata-postcard-1900',
+    title: 'Colonial Bengal Urban Streetscape & Purdah Architecture',
+    date: 'circa 1900',
+    era: 'modernist',
+    eraLabel: 'Early 20th-Century Modernist',
+    creator: 'W. Roessler, Kolkata',
+    medium: 'Collotype postcard plate',
+    provenance: 'Historical Photographic Archives, Kolkata',
+    imageSrc: '/images/archival/kolkata-0.jpg',
+    imageAlt: 'Historical collotype postcard view of Kolkata streets around 1900',
+    description: 'The physical city of Calcutta at the turn of the twentieth century, where strict purdah and zenana enclosures separated elite Muslim women from the public sphere—the social reality Begum Rokeya inverted in Sultana’s Dream.',
+    curatorNote: 'Rokeya wrote Sultana’s Dream in English to surprise her husband upon his return from circuit duty. She proved that South Asian women could master imperial language while demanding radical technological autonomy.',
+    relatedEssaySlug: '04-speculative-wombs-utopia',
+    relatedEssayTitle: 'Speculative Wombs & Dystopian Blueprints',
+  },
+  {
+    id: 'audre-lorde-1980',
+    title: 'Audre Lorde (Warrior Poet Portrait)',
+    date: 'circa 1980',
+    era: 'civil-rights',
+    eraLabel: 'Civil Rights & Womanism',
+    creator: 'K. Kendall',
+    medium: 'Black and white photograph',
+    provenance: 'Spelman College Archives / Women’s Research and Resource Center',
+    imageSrc: '/images/archival/audre-lorde.jpg',
+    imageAlt: 'Audre Lorde in conversation, smiling with serene strength',
+    description: 'Portrait of Audre Lorde during the foundational years of Sister Outsider (1984), where she formulated her critiques of white liberal feminism, racism, homophobia, and the radical reclamation of the erotic as power.',
+    curatorNote: '“The master’s tools will never dismantle the master’s house.” Lorde’s words remain the cornerstone warning against co-optation by patriarchal institutions.',
+    relatedEssaySlug: '06-womanist-poetics-somatic-memory',
+    relatedEssayTitle: 'The Master’s Tools & The Flesh of Memory',
+  },
+  {
+    id: 'toni-morrison-1986',
+    title: 'Toni Morrison During the Composition of Beloved',
+    date: '1986',
+    era: 'civil-rights',
+    eraLabel: 'Civil Rights & Womanism',
+    creator: 'John Mathew Smith',
+    medium: '35mm color photograph',
+    provenance: 'Literary Historical Photographic Archive, New York',
+    imageSrc: '/images/archival/toni-morrison.jpg',
+    imageAlt: 'Toni Morrison in contemplative profile',
+    description: 'Toni Morrison shortly before the 1987 publication of Beloved, the novel that confronted the unspeakable national trauma of chattel slavery through the somatic concept of rememory.',
+    curatorNote: 'Morrison’s novel was dedicated to the "Sixty Million and more" lost to the Middle Passage, providing an imaginative counter-monument where official state archives recorded only property inventories.',
+    relatedEssaySlug: '06-womanist-poetics-somatic-memory',
+    relatedEssayTitle: 'The Master’s Tools & The Flesh of Memory',
+  },
+  {
+    id: 'ursula-le-guin-portland',
+    title: 'Ursula K. Le Guin (The Carrier Bag Theorist)',
+    date: 'circa 2009',
+    era: 'postcolonial',
+    eraLabel: 'Ecofeminism & Decolonial Thought',
+    creator: 'Marian Wood Kolisch / Oregon State University',
+    medium: 'Color photographic portrait',
+    provenance: 'Special Collections & Archives Research Center, Oregon State University Libraries',
+    imageSrc: '/images/archival/ursula-le-guin.jpg',
+    imageAlt: 'Ursula K. Le Guin seated peacefully, gazing warmly into the lens',
+    description: 'Portrait of author and theorist Ursula K. Le Guin, whose 1986 essay The Carrier Bag Theory of Fiction transformed literary criticism by elevating the gatherer’s net above the hunter’s spear.',
+    curatorNote: 'Le Guin reminded us that before weapons of conquest were invented, humans needed something to carry home the oats and wild seeds. Her theory restores literature to an art of sustenance rather than slaughter.',
+    relatedEssaySlug: '07-carrier-bag-ecofeminist-commons',
+    relatedEssayTitle: 'The Carrier Bag vs. The Spear: Collecting the Earth',
+  },
+  {
+    id: 'vandana-shiva-2007',
+    title: 'Dr. Vandana Shiva (Guardian of the Seed Commons)',
+    date: '2007',
+    era: 'postcolonial',
+    eraLabel: 'Ecofeminism & Decolonial Thought',
+    creator: 'Daniel Schwen',
+    medium: 'Digital photograph',
+    provenance: 'Navdanya Biodiversity Conservation Research Center, Dehradun',
+    imageSrc: '/images/archival/vandana-shiva.jpg',
+    imageAlt: 'Dr. Vandana Shiva smiling warmly with an orange shawl',
+    description: 'Physicist, ecofeminist philosopher, and activist Dr. Vandana Shiva, whose work with Navdanya has protected thousands of indigenous seed varieties across India from patent monopolies.',
+    curatorNote: 'Shiva’s book Staying Alive: Women, Ecology and Development (1988) exposed how corporate industrial agriculture replicates patriarchal domination over female labor and the biosphere.',
+    relatedEssaySlug: '07-carrier-bag-ecofeminist-commons',
+    relatedEssayTitle: 'The Carrier Bag vs. The Spear: Collecting the Earth',
+  },
+  {
+    id: 'gloria-anzaldua-1987',
+    title: 'Gloria Anzaldúa (The Mestiza at the Border)',
+    date: 'circa 1987',
+    era: 'postcolonial',
+    eraLabel: 'Ecofeminism & Decolonial Thought',
+    creator: 'Archival Collection Plate',
+    medium: 'Monochrome photographic plate',
+    provenance: 'Benson Latin American Collection, University of Texas at Austin',
+    imageSrc: '/images/archival/gloria-anzaldua.jpg',
+    imageAlt: 'Gloria Anzaldúa smiling warmly with glasses and dark curly hair',
+    description: 'Gloria Anzaldúa around the release of Borderlands / La Frontera: The New Mestiza (1987), the text that shattered academic monocultures through code-switching and nepantla consciousness.',
+    curatorNote: 'Anzaldúa declared: “I am my language. Until I am free to write bilingually... my tongue will be illegitimate.” She established the border as a fertile site of decolonial epistemologies.',
+    relatedEssaySlug: '08-borderlands-queer-mestiza',
+    relatedEssayTitle: 'La Facultad at the Edge of Empire',
+  },
+  {
+    id: 'cassandra-austen-1810',
+    title: 'Jane Austen (The Only Authenticated Lifetime Sketch)',
+    date: 'circa 1810',
+    era: 'nineteenth-century',
+    eraLabel: '19th-Century Gothic',
+    creator: 'Cassandra Austen',
+    medium: 'Pencil and watercolor on paper (11.4 × 8.3 cm)',
+    provenance: 'National Portrait Gallery, London (Bequeathed by Jane Austen’s great-nephew, 1884)',
+    imageSrc: '/images/archival/cassandraausten-janeausten-c-1810-hires.jpg',
+    imageAlt: 'Small watercolor portrait sketch of Jane Austen in blue dress and mob cap',
+    description: 'The sole confirmed lifetime portrait of Jane Austen, drawn by her sister Cassandra. Austen published all four of her lifetime novels anonymously under the modest byline "By a Lady."',
+    curatorNote: 'Austen received no public acclaim in her lifetime; Sense and Sensibility was signed simply "By a Lady," while Pride and Prejudice was signed "By the Author of Sense and Sensibility." This modest sketch remains the journal’s spiritual patron.',
+  },
+];
+---
+
+<BaseLayout
+  title="The Palimpsest Archive — Jane's Diary"
+  description="A curated visual repository of recovered primary artifacts, first editions, rare title pages, and historical portraits documenting two centuries of feminist literary defiance."
+  currentPath="/archive/"
+>
+  <!-- 1. HERO BAND -->
+  <section class="archive-hero orb-stage" aria-labelledby="archive-heading">
+    <div class="ambient-orb ambient-orb--lavender archive-hero__orb-1" aria-hidden="true"></div>
+    <div class="ambient-orb ambient-orb--mint archive-hero__orb-2" aria-hidden="true"></div>
+
+    <div class="container archive-hero__inner">
+      <nav class="archive-breadcrumb" aria-label="Breadcrumb">
+        <a href={withBase('/')} class="archive-breadcrumb__link">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page" class="archive-breadcrumb__current">The Palimpsest Archive</span>
+      </nav>
+
+      <div class="archive-hero__header">
+        <span class="badge-pill">
+          <span class="badge-dot badge-dot--lavender" aria-hidden="true"></span>
+          Primary Material &amp; Provenance
+        </span>
+        <h1 id="archive-heading" class="display-xl archive-hero__title">
+          Recovered plates, suppressed title pages, &amp; literary artifacts.
+        </h1>
+        <p class="body-md archive-hero__lead">
+          Explore our permanent archival repository documenting 200 years of feminist literary defiance—from anonymous 1818 gothic title pages and Edwardian studio portraits to Civil Rights womanist tracts and postcolonial seed defense records.
+        </p>
+
+        <!-- Filter Controls -->
+        <div class="archive-filter-bar">
+          <span class="caption-uppercase archive-filter-label">Filter by Historical Movement:</span>
+          <div class="archive-filter-pills" role="tablist" aria-label="Filter archival artifacts">
+            <button type="button" class="archive-filter-pill is-active" data-filter="all" role="tab" aria-selected="true">
+              All Artifacts ({ARTIFACTS.length})
+            </button>
+            <button type="button" class="archive-filter-pill" data-filter="nineteenth-century" role="tab" aria-selected="false">
+              19th-Century Gothic (5)
+            </button>
+            <button type="button" class="archive-filter-pill" data-filter="modernist" role="tab" aria-selected="false">
+              Modernist (2)
+            </button>
+            <button type="button" class="archive-filter-pill" data-filter="civil-rights" role="tab" aria-selected="false">
+              Civil Rights &amp; Womanism (2)
+            </button>
+            <button type="button" class="archive-filter-pill" data-filter="postcolonial" role="tab" aria-selected="false">
+              Ecofeminism &amp; Borderlands (3)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ARTIFACTS GALLERY GRID -->
+  <section class="section-band" aria-labelledby="gallery-heading">
+    <div class="container">
+      <h2 id="gallery-heading" class="sr-only">Archival Artifacts Gallery</h2>
+
+      <div class="archive-grid" id="artifacts-grid">
+        {ARTIFACTS.map((artifact) => (
+          <article
+            class="feature-card artifact-card"
+            data-era={artifact.era}
+            id={`artifact-${artifact.id}`}
+          >
+            <div class="artifact-card__frame">
+              <img
+                src={withBase(artifact.imageSrc)}
+                alt={artifact.imageAlt}
+                class="artifact-card__img"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="artifact-card__badge">{artifact.eraLabel}</span>
+            </div>
+
+            <div class="artifact-card__content">
+              <div class="artifact-card__meta">
+                <span class="caption-uppercase artifact-card__date">{artifact.date}</span>
+                <span class="caption artifact-card__creator">{artifact.creator}</span>
+              </div>
+
+              <h3 class="display-xs artifact-card__title">
+                {artifact.title}
+              </h3>
+
+              <p class="body-sm artifact-card__desc">
+                {artifact.description}
+              </p>
+
+              <blockquote class="artifact-card__note">
+                <strong>Curator’s Note:</strong> {artifact.curatorNote}
+              </blockquote>
+
+              <div class="artifact-card__footer">
+                <p class="caption text-muted artifact-card__provenance">
+                  <strong>Provenance:</strong> {artifact.provenance}
+                </p>
+
+                {artifact.relatedEssaySlug && (
+                  <a
+                    href={withBase(`/entries/${artifact.relatedEssaySlug}/`)}
+                    class="button-outline artifact-card__link"
+                  >
+                    Read Related Essay →
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function initArchiveFilters() {
+    const filterPills = document.querySelectorAll<HTMLButtonElement>('.archive-filter-pill');
+    const cards = document.querySelectorAll<HTMLElement>('.artifact-card');
+
+    filterPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach((p) => {
+          p.classList.remove('is-active');
+          p.setAttribute('aria-selected', 'false');
+        });
+        pill.classList.add('is-active');
+        pill.setAttribute('aria-selected', 'true');
+
+        const filter = pill.getAttribute('data-filter') || 'all';
+
+        cards.forEach((card) => {
+          const cardEra = card.getAttribute('data-era');
+          if (filter === 'all' || cardEra === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initArchiveFilters);
+  } else {
+    initArchiveFilters();
+  }
+</script>
+
+<style>
+  .archive-hero {
+    padding: var(--space-xxxl) 0 var(--space-xl);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .archive-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 13px;
+    color: var(--color-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .archive-breadcrumb__link {
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .archive-breadcrumb__link:hover {
+    color: var(--color-ink);
+  }
+
+  .archive-breadcrumb__current {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .archive-hero__header {
+    max-width: 880px;
+  }
+
+  .archive-hero__title {
+    margin-top: var(--space-base);
+    margin-bottom: var(--space-base);
+    line-height: 1.1;
+  }
+
+  .archive-hero__lead {
+    color: var(--color-body);
+    line-height: 1.6;
+    margin-bottom: var(--space-xl);
+  }
+
+  .archive-filter-bar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding-top: var(--space-base);
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .archive-filter-label {
+    color: var(--color-muted);
+  }
+
+  .archive-filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .archive-filter-pill {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-hairline);
+    color: var(--color-body);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .archive-filter-pill:hover {
+    background-color: var(--color-surface-strong);
+    color: var(--color-ink);
+  }
+
+  .archive-filter-pill.is-active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
+  .archive-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+  }
+
+  @media (max-width: 900px) {
+    .archive-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .artifact-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .artifact-card__frame {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    background-color: var(--color-canvas-soft);
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .artifact-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    transition: transform 0.4s ease;
+  }
+
+  .artifact-card:hover .artifact-card__img {
+    transform: scale(1.02);
+  }
+
+  .artifact-card__badge {
+    position: absolute;
+    top: var(--space-base);
+    left: var(--space-base);
+    background-color: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(8px);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-hairline);
+    color: var(--color-ink);
+  }
+
+  .artifact-card__content {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .artifact-card__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-xs);
+    gap: var(--space-base);
+  }
+
+  .artifact-card__date {
+    color: var(--color-muted);
+  }
+
+  .artifact-card__creator {
+    color: var(--color-body);
+    text-align: right;
+  }
+
+  .artifact-card__title {
+    margin-bottom: var(--space-sm);
+    color: var(--color-ink);
+  }
+
+  .artifact-card__desc {
+    color: var(--color-body);
+    line-height: 1.55;
+    margin-bottom: var(--space-base);
+  }
+
+  .artifact-card__note {
+    background-color: var(--color-canvas-soft);
+    border-left: 3px solid var(--color-primary);
+    padding: var(--space-sm) var(--space-base);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-body);
+    margin: 0 0 var(--space-base) 0;
+  }
+
+  .artifact-card__footer {
+    margin-top: auto;
+    padding-top: var(--space-base);
+    border-top: 1px solid var(--color-hairline);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .artifact-card__provenance {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .artifact-card__link {
+    align-self: flex-start;
+    font-size: 13px;
+    padding: 6px 16px;
+    height: auto;
+  }
+</style>

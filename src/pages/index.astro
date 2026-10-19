@@ -6,7 +6,7 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
 ---
 
 <BaseLayout
-  title="Jane’s Diary — An Interactive Archive of Feminist Literature"
+  title="Jane’s Diary"
   currentPath="/"
 >
   <!-- 1. HERO BAND -->
@@ -16,16 +16,6 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
     <div class="ambient-orb ambient-orb--lavender hero-orb-3" aria-hidden="true"></div>
 
     <div class="container hero-band__inner">
-      <div class="hero-band__eyebrow">
-        <span class="badge-pill">
-          <span class="badge-dot badge-dot--mint" aria-hidden="true"></span>
-          English Digital Assignment · VIT Chennai
-        </span>
-        <span class="caption hero-band__author-tag">
-          Shawn Shaibu Cherian · Reg. No. 26BCE1820
-        </span>
-      </div>
-
       <h1 id="hero-heading" class="display-mega hero-band__title">
         A diary for the voices the canon filed under <em>Anonymous</em>.
       </h1>
@@ -35,39 +25,18 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
       </p>
 
       <div class="hero-band__cta-row">
-        <a href={withBase('/#entries')} class="button-primary">
-          Read the 5 Entries
+        <a href={withBase('/blogs/')} class="button-primary">
+          Explore the 5 Essays
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <a href={withBase('/blackout/')} class="button-outline">
-          Try Blackout Studio
+        <a href={withBase('/archive/')} class="button-outline">
+          The Palimpsest Archive
         </a>
-      </div>
-
-      <div class="hero-band__metrics" role="list" aria-label="Archive Highlights">
-        <div class="hero-metric" role="listitem">
-          <span class="caption-uppercase hero-metric__label">05 Cornerstone Entries</span>
-          <span class="caption">1818 Romantic Gothic to 1997 Postcolonial Subaltern</span>
-        </div>
-        <div class="hero-metric" role="listitem">
-          <span class="caption-uppercase hero-metric__label">Critical Lens X-Ray</span>
-          <span class="caption">Toggle Surface Prose vs. Feminist Subtext</span>
-        </div>
-        <div class="hero-metric" role="listitem">
-          <span class="caption-uppercase hero-metric__label">Voice Synthesis Bar</span>
-          <span class="caption">ElevenLabs-style Web Speech Read-Aloud</span>
-        </div>
-        <div class="hero-metric" role="listitem">
-          <span class="caption-uppercase hero-metric__label">Blackout Studio</span>
-          <span class="caption">Interactive Erasure &amp; High-DPI PNG Export</span>
-        </div>
       </div>
     </div>
   </section>
-
-  <hr class="hairline-divider" />
 
   <!-- 2. THE 5 CORNERSTONE ENTRIES GRID -->
   <section id="entries" class="section-band" aria-labelledby="entries-heading">
@@ -75,13 +44,13 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
       <div class="section-header">
         <span class="badge-pill">
           <span class="badge-dot badge-dot--peach" aria-hidden="true"></span>
-          Curated Syllabus · 5 Cornerstone Entries
+          Cornerstone Essays · 8 Subsections
         </span>
         <h2 id="entries-heading" class="display-lg section-title">
-          Five inquiries into confinement, body, room, utopia, and creation.
+          Eight critical inquiries spanning two centuries of feminist defiance.
         </h2>
         <p class="body-md section-lead">
-          Each entry combines structured critical essay sections (ready for author prose in <code>src/content/essays/</code>), an interactive <strong>Critical Lens (Surface vs. Subtext)</strong> reader, an ElevenLabs-inspired <strong>Read-Aloud Voice Bar</strong>, and MLA 9th bibliography.
+          From 1818 Romantic creation anxiety to 1980s Black womanist rememory, ecofeminist seed sovereignty, and queer decolonial borderlands—paired with authentic archival facsimiles and scholarly apparatus.
         </p>
       </div>
 
@@ -96,6 +65,17 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
                   Entry No. {entry.number}
                 </span>
                 <span class="caption entry-card__era">{entry.era}</span>
+              </div>
+
+              <div class="entry-card__thumb-frame">
+                <img
+                  src={withBase(entry.archivalImage.src)}
+                  alt={entry.archivalImage.alt}
+                  class="entry-card__thumb-img"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="entry-card__subsection-tag">{entry.subsection}</span>
               </div>
 
               <h3 class="display-sm entry-card__title">
@@ -120,9 +100,9 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
               </div>
 
               <div class="entry-card__footer">
-                <span class="caption">{entry.readingTime} · {entry.criticalLensPassages.length} Critical Lens Passages</span>
+                <span class="caption">{entry.readingTime} · {entry.subsection}</span>
                 <a href={withBase(`/entries/${entry.slug}/`)} class="button-outline entry-card__btn">
-                  Open Entry {entry.number}
+                  Read Essay {entry.number}
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
@@ -132,37 +112,36 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
           </article>
         ))}
 
-        <!-- Evaluator & Rubric Companion Card (6th slot in 2/3-up grid) -->
-        <aside class="feature-card entry-card entry-card--evaluator">
+        <!-- Editorial Commissions & Inquiries Card (6th slot in 2/3-up grid) -->
+        <aside class="feature-card entry-card entry-card--editorial">
           <div class="entry-card__content">
             <div class="entry-card__top">
               <span class="badge-pill">
                 <span class="badge-dot badge-dot--lavender" aria-hidden="true"></span>
-                Evaluator Guide
+                Editorial Desk
               </span>
-              <span class="caption">Reg. No. 26BCE1820</span>
+              <span class="caption">Commissions &amp; Lectures</span>
             </div>
 
             <h3 class="display-sm entry-card__title">
-              Academic Rubric &amp; Author’s Editing Guide
+              Commission an Essay or Literary Review
             </h3>
 
             <p class="body-sm entry-card__subtitle">
-              Inspect the Digital Assignment grading criteria, consolidated MLA 9th Works Cited, and step-by-step instructions for replacing the structured student essay prompts in <code>src/content/essays/</code>.
+              <em>Jane’s Diary</em> accepts commissions from cultural institutions, academic presses, and independent publications for deeply researched essays, curatorial texts, and keynote seminars.
             </p>
 
             <div class="entry-card__works">
-              <span class="caption-uppercase entry-card__works-heading">Student Details</span>
+              <span class="caption-uppercase entry-card__works-heading">Editorial Focus</span>
               <p class="body-sm">
-                <strong>Shawn Shaibu Cherian</strong><br />
-                Reg. No. 26BCE1820 · VIT Chennai
+                Feminist literary criticism, postcolonial subalternity, archival primary text analysis, and digital humanities.
               </p>
             </div>
 
             <div class="entry-card__footer">
-              <span class="caption">Print-ready academic stylesheet</span>
-              <a href={withBase('/about/')} class="button-primary entry-card__btn">
-                View DA Rubric
+              <span class="caption">Edited by Shawn Shaibu Cherian</span>
+              <a href={withBase('/contact/')} class="button-primary entry-card__btn">
+                Contact Editorial Desk →
               </a>
             </div>
           </div>
@@ -248,63 +227,56 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
     </div>
   </section>
 
-  <!-- 4. BLACKOUT POETRY STUDIO TEASER CARD -->
-  <section class="section-band" aria-labelledby="blackout-teaser-heading">
+  <!-- 4. CURATED SYLLABI & READING ROOMS BAND -->
+  <section class="section-band" aria-labelledby="syllabus-teaser-heading">
     <div class="container">
-      <div class="gradient-orb-card blackout-teaser">
-        <div class="ambient-orb ambient-orb--peach blackout-teaser__orb-1" aria-hidden="true"></div>
-        <div class="ambient-orb ambient-orb--rose blackout-teaser__orb-2" aria-hidden="true"></div>
+      <div class="gradient-orb-card syllabus-teaser">
+        <div class="ambient-orb ambient-orb--peach syllabus-teaser__orb-1" aria-hidden="true"></div>
+        <div class="ambient-orb ambient-orb--lavender syllabus-teaser__orb-2" aria-hidden="true"></div>
 
-        <div class="blackout-teaser__inner">
-          <div class="blackout-teaser__copy">
+        <div class="syllabus-teaser__inner">
+          <div class="syllabus-teaser__copy">
             <span class="badge-pill">
-              <span class="badge-dot badge-dot--rose" aria-hidden="true"></span>
-              Interactive Literary Erasure Lab
+              <span class="badge-dot badge-dot--peach" aria-hidden="true"></span>
+              Pedagogy &amp; Curricular Consultation
             </span>
-            <h2 id="blackout-teaser-heading" class="display-lg blackout-teaser__title">
-              Erase patriarchal prose into feminist verse.
+            <h2 id="syllabus-teaser-heading" class="display-lg syllabus-teaser__title">
+              Curated seminar syllabi, reading lists, &amp; critical inquiries.
             </h2>
-            <p class="body-md blackout-teaser__desc">
-              Step into the <strong>Blackout Poetry Studio</strong>. Select verified public-domain passages from Charlotte Perkins Gilman’s <em>The Yellow Wallpaper</em> (1892), Mary Shelley’s <em>Frankenstein</em> (1818), or Rokeya Sakhawat Hossain’s <em>Sultana’s Dream</em> (1905). Redact individual words in warm charcoal ink and export your emergent poem as a high-DPI archival PNG card.
+            <p class="body-md syllabus-teaser__desc">
+              Four structured academic seminar modules developed by founding editor Shawn Shaibu Cherian for university literature departments, cultural foundations, and research circles. Each track includes primary readings, theoretical anchors, and seminar discussion prompts.
             </p>
-            <div class="blackout-teaser__ctas">
-              <a href={withBase('/blackout/')} class="button-primary">
-                Launch Blackout Studio
+            <div class="syllabus-teaser__ctas">
+              <a href={withBase('/syllabus/')} class="button-primary">
+                Explore All 4 Syllabus Tracks
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <path d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>
-              <a href={withBase('/about/')} class="button-outline">
-                Read DA Rubric &amp; Guide
+              <a href={withBase('/archive/')} class="button-outline">
+                The Palimpsest Archive
               </a>
             </div>
           </div>
 
-          <div class="blackout-teaser__preview" aria-hidden="true">
-            <div class="blackout-mini-card">
-              <div class="blackout-mini-card__header">
-                <span class="caption-uppercase">Specimen · Gilman (1892)</span>
-                <span class="caption">Isolate Mode</span>
+          <div class="syllabus-teaser__preview" aria-hidden="true">
+            <div class="syllabus-mini-card">
+              <div class="syllabus-mini-card__header">
+                <span class="badge-pill">Track 01</span>
+                <span class="caption">4-Week Intensive</span>
               </div>
-              <p class="blackout-mini-card__words">
-                <span class="redacted">By</span>
-                <span class="exposed">moonlight</span>
-                <span class="redacted">the moon</span>
-                <span class="exposed">shines</span>
-                <span class="redacted">in all night when there is a moon I would not know it was the same paper. At</span>
-                <span class="exposed">night</span>
-                <span class="redacted">in any kind of light, it</span>
-                <span class="exposed">becomes</span>
-                <span class="exposed">bars!</span>
-                <span class="redacted">The outside pattern I mean, and</span>
-                <span class="exposed">the</span>
-                <span class="exposed">woman</span>
-                <span class="redacted">behind it</span>
-                <span class="exposed">rises.</span>
-              </p>
-              <div class="blackout-mini-card__footer">
-                <span class="caption">Jane’s Diary · 26BCE1820</span>
-                <span class="badge-pill">PNG Ready</span>
+              <h3 class="title-sm syllabus-mini-card__title">The Architecture of Confinement</h3>
+              <p class="body-xs text-muted">Gilman (1892) · Foucault · Gilbert &amp; Gubar (1979) · Haraway (1985)</p>
+              <div class="syllabus-mini-card__divider"></div>
+              <div class="syllabus-mini-card__header">
+                <span class="badge-pill">Track 04</span>
+                <span class="caption">Colloquium</span>
+              </div>
+              <h3 class="title-sm syllabus-mini-card__title">Unruly Grammars &amp; Borderlands</h3>
+              <p class="body-xs text-muted">Audre Lorde (1984) · Toni Morrison (1987) · Gloria Anzaldúa (1987)</p>
+              <div class="syllabus-mini-card__footer">
+                <span class="caption">Jane’s Diary · Pedagogy</span>
+                <span class="badge-pill">Print / PDF Ready</span>
               </div>
             </div>
           </div>
@@ -412,20 +384,6 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
     align-items: center;
   }
 
-  .hero-band__eyebrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-lg);
-  }
-
-  .hero-band__author-tag {
-    color: var(--color-body-strong);
-    font-weight: 500;
-  }
-
   .hero-band__title {
     max-width: 840px;
     margin-bottom: var(--space-lg);
@@ -448,27 +406,7 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
     justify-content: center;
     flex-wrap: wrap;
     gap: var(--space-sm);
-    margin-bottom: var(--space-xxl);
-  }
-
-  .hero-band__metrics {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-base);
-    padding-top: var(--space-xl);
-    border-top: 1px solid var(--color-hairline);
-    text-align: left;
-  }
-
-  .hero-metric {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .hero-metric__label {
-    color: var(--color-ink);
+    margin-bottom: 0;
   }
 
   /* Section Headings */
@@ -532,6 +470,44 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
     font-weight: 500;
   }
 
+  .entry-card__thumb-frame {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    height: 140px;
+    margin-bottom: var(--space-base);
+    background: var(--color-surface-strong);
+    border: 1px solid var(--color-hairline);
+  }
+
+  .entry-card__thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: sepia(12%) contrast(102%);
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+
+  .entry-card:hover .entry-card__thumb-img {
+    transform: scale(1.03);
+    filter: sepia(0%) contrast(105%);
+  }
+
+  .entry-card__subsection-tag {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(12, 10, 9, 0.75);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+    backdrop-filter: blur(4px);
+  }
+
   .entry-card__title {
     margin-bottom: var(--space-sm);
   }
@@ -583,7 +559,7 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
     border-top: 1px solid var(--color-hairline);
   }
 
-  .entry-card--evaluator {
+  .entry-card--editorial {
     background-color: var(--color-canvas-soft);
     border-style: dashed;
     border-color: var(--color-hairline-strong);
@@ -696,25 +672,27 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
   }
 
   /* Blackout Teaser Card */
-  .blackout-teaser {
+  .syllabus-teaser {
     padding: var(--space-xxl);
+    position: relative;
+    overflow: hidden;
   }
 
-  .blackout-teaser__orb-1 {
+  .syllabus-teaser__orb-1 {
     width: 360px;
     height: 360px;
     top: -100px;
     right: 18%;
   }
 
-  .blackout-teaser__orb-2 {
+  .syllabus-teaser__orb-2 {
     width: 320px;
     height: 320px;
     bottom: -100px;
     right: -40px;
   }
 
-  .blackout-teaser__inner {
+  .syllabus-teaser__inner {
     position: relative;
     z-index: 1;
     display: grid;
@@ -723,81 +701,63 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
     align-items: center;
   }
 
-  .blackout-teaser__title {
+  .syllabus-teaser__title {
     margin-top: var(--space-base);
     margin-bottom: var(--space-sm);
   }
 
-  .blackout-teaser__desc {
+  .syllabus-teaser__desc {
     margin-bottom: var(--space-xl);
   }
 
-  .blackout-teaser__ctas {
+  .syllabus-teaser__ctas {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
   }
 
-  .blackout-mini-card {
+  .syllabus-mini-card {
     background-color: var(--color-surface-card);
     border: 1px solid var(--color-hairline);
     border-radius: var(--radius-xl);
     padding: var(--space-lg);
     box-shadow: var(--shadow-hover);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
   }
 
-  .blackout-mini-card__header {
+  .syllabus-mini-card__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: var(--space-sm);
-    margin-bottom: var(--space-base);
-    border-bottom: 1px solid var(--color-hairline);
+    margin-bottom: 2px;
   }
 
-  .blackout-mini-card__words {
-    font-family: var(--font-display);
-    font-size: 21px;
-    line-height: 1.65;
+  .syllabus-mini-card__title {
     color: var(--color-ink);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: var(--space-base);
   }
 
-  .blackout-mini-card__words .redacted {
-    background-color: var(--color-ink);
-    color: var(--color-ink);
-    border-radius: 4px;
-    padding: 0 6px;
-    user-select: none;
+  .syllabus-mini-card__divider {
+    height: 1px;
+    background-color: var(--color-hairline);
+    margin: var(--space-sm) 0;
   }
 
-  .blackout-mini-card__words .exposed {
-    background-color: var(--color-surface-strong);
-    color: var(--color-ink);
-    border-radius: 4px;
-    padding: 0 6px;
-    border-bottom: 1.5px solid var(--color-ink);
-  }
-
-  .blackout-mini-card__footer {
+  .syllabus-mini-card__footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: var(--space-sm);
     border-top: 1px solid var(--color-hairline);
+    margin-top: var(--space-xs);
   }
 
   @media (max-width: 1024px) {
-    .hero-band__metrics {
-      grid-template-columns: repeat(2, 1fr);
-    }
     .bylines-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-    .blackout-teaser__inner {
+    .syllabus-teaser__inner {
       grid-template-columns: 1fr;
     }
   }
@@ -807,15 +767,12 @@ import { BYLINE_ARCHIVE } from '../data/bylines';
     .bylines-grid {
       grid-template-columns: 1fr;
     }
-    .blackout-teaser {
+    .syllabus-teaser {
       padding: var(--space-lg);
     }
   }
 
   @media (max-width: 640px) {
-    .hero-band__metrics {
-      grid-template-columns: 1fr;
-    }
     .entry-card__footer {
       flex-direction: column;
       align-items: flex-start;

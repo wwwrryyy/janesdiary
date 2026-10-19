@@ -1,0 +1,650 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/url';
+import { ESSAY_ENTRIES } from '../data/entries';
+
+// Group entries by subsection
+const subsections = ESSAY_ENTRIES.map((entry) => ({
+  name: entry.subsection,
+  slug: entry.subsectionSlug,
+  description: entry.subsectionDescription,
+  entry,
+}));
+---
+
+<BaseLayout
+  title="Essays & Dispatches"
+  description="Explore the five cornerstone feminist literature essays organized by historical and theoretical movements—with authentic archival portraits and complete scholarly references."
+  currentPath="/blogs"
+>
+  <!-- Hero Band -->
+  <section class="blogs-hero section-pad">
+    <div class="gradient-orb gradient-orb--lavender" aria-hidden="true"></div>
+    <div class="gradient-orb gradient-orb--mint" aria-hidden="true" style="top: 20%; right: 5%;"></div>
+
+    <div class="container">
+      <div class="blogs-hero__content">
+        <div class="badge-pill blogs-hero__badge">
+          <span class="badge-dot badge-dot--mint" aria-hidden="true"></span>
+          Archive &amp; Subsections
+        </div>
+        <h1 class="display-mega blogs-hero__title">
+          Critical essays, organized by movement.
+        </h1>
+        <p class="body-md blogs-hero__lead">
+          Eight cornerstone axes of feminist literary criticism bridging two centuries—from 1818 Romantic creation anxiety to postcolonial subaltern resistance, modern creator economics, Black womanist poetics, and queer borderlands.
+        </p>
+
+        <!-- Search & Filter Controls -->
+        <div class="blogs-controls">
+          <div class="blogs-search-wrap">
+            <svg class="blogs-search-icon" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M9 16C12.866 16 16 12.866 16 9C16 5.13401 12.866 2 9 2C5.13401 2 2 5.13401 2 9C2 12.866 5.13401 16 9 16Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18 18L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <input
+              type="search"
+              id="blogs-search-input"
+              class="text-input blogs-search-input"
+              placeholder="Search by author, title, theory, or keyword (e.g. Lorde, Anzaldúa, Le Guin, Woolf)..."
+              aria-label="Search blog entries"
+            />
+          </div>
+
+          <!-- Filter Pills -->
+          <div class="blogs-filter-pills" role="tablist" aria-label="Filter entries by subsection">
+            <button type="button" class="blogs-filter-pill is-active" data-filter="all" role="tab" aria-selected="true">
+              All Subsections (8)
+            </button>
+            <button type="button" class="blogs-filter-pill" data-filter="gothic-confinement" role="tab" aria-selected="false">
+              Victorian Gothic
+            </button>
+            <button type="button" class="blogs-filter-pill" data-filter="subaltern-bodies" role="tab" aria-selected="false">
+              Postcolonial Bodies
+            </button>
+            <button type="button" class="blogs-filter-pill" data-filter="materialist-modernism" role="tab" aria-selected="false">
+              Materialist Modernism
+            </button>
+            <button type="button" class="blogs-filter-pill" data-filter="speculative-dystopias" role="tab" aria-selected="false">
+              Speculative Utopias
+            </button>
+            <button type="button" class="blogs-filter-pill" data-filter="romantic-monstrosity" role="tab" aria-selected="false">
+              Romantic Monstrosity
+            </button>
+            <button type="button" class="blogs-filter-pill" data-filter="black-feminism-somatic" role="tab" aria-selected="false">
+              Black Feminist Thought
+            </button>
+            <button type="button" class="blogs-filter-pill" data-filter="ecofeminism-carrier-bag" role="tab" aria-selected="false">
+              Ecofeminism &amp; Commons
+            </button>
+            <button type="button" class="blogs-filter-pill" data-filter="borderlands-mestiza" role="tab" aria-selected="false">
+              Borderlands &amp; Mestiza
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subsections Feed -->
+  <section class="blogs-feed section-pad bg-canvas-soft">
+    <div class="container">
+      <div id="no-results-msg" class="blogs-no-results" hidden>
+        <p class="title-md">No entries found matching your search.</p>
+        <p class="body-sm text-muted">Try searching for an author name like “Woolf”, “Shelley”, “Gilman”, or an era like “Gothic”.</p>
+        <button type="button" id="reset-search-btn" class="button-outline" style="margin-top: 16px;">
+          Reset Search
+        </button>
+      </div>
+
+      <div class="subsections-list">
+        {subsections.map(({ name, slug, description, entry }, index) => (
+          <article
+            class="subsection-block"
+            id={slug}
+            data-subsection={slug}
+            data-search={`${entry.title} ${entry.subtitle} ${entry.era} ${name} ${entry.primaryWorks.map(w => `${w.title} ${w.author}`).join(' ')} ${entry.editorialAbstract}`.toLowerCase()}
+          >
+            <!-- Subsection Header -->
+            <header class="subsection-block__header">
+              <div class="subsection-block__badge-row">
+                <span class="badge-pill">
+                  <span class={`badge-dot badge-dot--${entry.orb}`} aria-hidden="true"></span>
+                  Subsection {String(index + 1).padStart(2, '0')}
+                </span>
+                <span class="caption text-muted">{entry.era}</span>
+              </div>
+              <h2 class="display-md subsection-block__title">
+                {name}
+              </h2>
+              <p class="body-md text-body subsection-block__desc">
+                {description}
+              </p>
+            </header>
+
+            <!-- Comprehensive Editorial Card -->
+            <div class="subsection-card feature-card">
+              <div class="subsection-card__grid">
+                <!-- Visual / Archival Media Column -->
+                <div class="subsection-card__media">
+                  <div class="archival-frame">
+                    <img
+                      src={withBase(entry.archivalImage.src)}
+                      alt={entry.archivalImage.alt}
+                      class="archival-frame__img"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div class="archival-frame__overlay" aria-hidden="true"></div>
+                  </div>
+                  <figcaption class="archival-caption">
+                    <span class="archival-caption__text">{entry.archivalImage.caption}</span>
+                    <span class="archival-caption__credit">{entry.archivalImage.credit}</span>
+                  </figcaption>
+
+                  {entry.archivalImage.secondarySrc && (
+                    <div class="archival-secondary">
+                      <div class="archival-secondary__frame">
+                        <img
+                          src={withBase(entry.archivalImage.secondarySrc)}
+                          alt={entry.archivalImage.secondaryAlt || 'Archival plate'}
+                          class="archival-secondary__img"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                      <span class="caption text-muted">{entry.archivalImage.secondaryCaption}</span>
+                    </div>
+                  )}
+                </div>
+
+                <!-- Textual & Critical Column -->
+                <div class="subsection-card__content">
+                  <div class="subsection-card__meta-bar">
+                    <span class="badge-pill">
+                      Entry No. {entry.number}
+                    </span>
+                    <span class="caption text-muted">{entry.readingTime}</span>
+                    <span class="caption text-muted">Published {entry.publishedAt}</span>
+                  </div>
+
+                  <h3 class="display-sm subsection-card__headline">
+                    <a href={withBase(`/entries/${entry.slug}/`)} class="hover-underline">
+                      {entry.title}
+                    </a>
+                  </h3>
+
+                  <p class="body-md subsection-card__subtitle">
+                    {entry.subtitle}
+                  </p>
+
+                  <p class="body-sm text-body subsection-card__abstract">
+                    {entry.editorialAbstract}
+                  </p>
+
+                  <!-- Primary Texts Analyzed -->
+                  <div class="subsection-card__works">
+                    <h4 class="caption-uppercase text-muted">Primary Works Analyzed</h4>
+                    <ul class="works-pill-list">
+                      {entry.primaryWorks.map((work) => (
+                        <li class="work-pill">
+                          <span class="work-pill__title"><em>{work.title}</em> ({work.year})</span>
+                          <span class="work-pill__author">by {work.author}</span>
+                          <span class="caption text-muted work-pill__status">· {work.copyrightStatus}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <!-- CTAs & Tools -->
+                  <div class="subsection-card__actions">
+                    <a href={withBase(`/entries/${entry.slug}/`)} class="button-primary">
+                      Read Full Essay →
+                    </a>
+                    <a href={withBase(`/entries/${entry.slug}/#works-cited`)} class="button-outline">
+                      Works Cited
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Studio Callout -->
+  <section class="section-pad bg-canvas">
+    <div class="container">
+      <div class="gradient-orb-card">
+        <div class="gradient-orb gradient-orb--peach" aria-hidden="true" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        <div class="gradient-orb-card__inner text-center">
+          <span class="badge-pill">Archival Research &amp; Pedagogy</span>
+          <h2 class="display-md" style="margin-top: 16px;">
+            Primary Facsimiles &amp; Curated Seminar Syllabi
+          </h2>
+          <p class="body-md text-body" style="max-width: 640px; margin: 12px auto 28px;">
+            Deepen your critical study with our companion resources: examine recovered primary title pages and historical documents in The Palimpsest Archive, or explore four comprehensive seminar reading tracks.
+          </p>
+          <div class="hero-band__ctas" style="justify-content: center;">
+            <a href={withBase('/archive/')} class="button-primary">
+              The Palimpsest Archive
+            </a>
+            <a href={withBase('/syllabus/')} class="button-outline">
+              Curated Seminar Syllabi
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function initBlogsFilter() {
+    const searchInput = document.getElementById('blogs-search-input') as HTMLInputElement | null;
+    const filterPills = document.querySelectorAll<HTMLButtonElement>('.blogs-filter-pill');
+    const articles = document.querySelectorAll<HTMLElement>('.subsection-block');
+    const noResultsMsg = document.getElementById('no-results-msg');
+    const resetBtn = document.getElementById('reset-search-btn');
+
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    function updateView() {
+      let visibleCount = 0;
+
+      articles.forEach((article) => {
+        const subsection = article.dataset.subsection || '';
+        const searchContent = article.dataset.search || '';
+
+        const matchesFilter = activeFilter === 'all' || subsection === activeFilter;
+        const matchesSearch = !searchQuery || searchContent.includes(searchQuery);
+
+        if (matchesFilter && matchesSearch) {
+          article.style.display = 'block';
+          visibleCount++;
+        } else {
+          article.style.display = 'none';
+        }
+      });
+
+      if (noResultsMsg) {
+        noResultsMsg.hidden = visibleCount > 0;
+      }
+    }
+
+    // Filter pill click handlers
+    filterPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach((p) => {
+          p.classList.remove('is-active');
+          p.setAttribute('aria-selected', 'false');
+        });
+        pill.classList.add('is-active');
+        pill.setAttribute('aria-selected', 'true');
+        activeFilter = pill.dataset.filter || 'all';
+        updateView();
+      });
+    });
+
+    // Search input handler
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = (e.target as HTMLInputElement).value.trim().toLowerCase();
+        updateView();
+      });
+    }
+
+    // Reset button
+    if (resetBtn && searchInput) {
+      resetBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchQuery = '';
+        filterPills.forEach((p) => {
+          if (p.dataset.filter === 'all') {
+            p.classList.add('is-active');
+            p.setAttribute('aria-selected', 'true');
+          } else {
+            p.classList.remove('is-active');
+            p.setAttribute('aria-selected', 'false');
+          }
+        });
+        activeFilter = 'all';
+        updateView();
+      });
+    }
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBlogsFilter);
+  } else {
+    initBlogsFilter();
+  }
+</script>
+
+<style>
+  .blogs-hero {
+    position: relative;
+    background: var(--color-canvas);
+    border-bottom: 1px solid var(--color-hairline);
+    overflow: hidden;
+  }
+
+  .blogs-hero__content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .blogs-hero__badge {
+    margin-bottom: 16px;
+  }
+
+  .blogs-hero__title {
+    margin-bottom: 20px;
+  }
+
+  .blogs-hero__lead {
+    color: var(--color-body);
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .blogs-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .blogs-search-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .blogs-search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-muted);
+    pointer-events: none;
+  }
+
+  .blogs-search-input {
+    width: 100%;
+    padding-left: 44px;
+    padding-right: 20px;
+    height: 48px;
+    font-size: 15px;
+    border-radius: var(--radius-pill);
+    background: var(--color-surface-card);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+
+  .blogs-filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .blogs-filter-pill {
+    background: var(--color-surface-card);
+    color: var(--color-body);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-pill);
+    padding: 8px 16px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .blogs-filter-pill:hover {
+    color: var(--color-ink);
+    border-color: var(--color-hairline-strong);
+    background: var(--color-surface-strong);
+  }
+
+  .blogs-filter-pill.is-active {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    border-color: var(--color-primary);
+  }
+
+  .subsections-list {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .subsection-block {
+    scroll-margin-top: 100px;
+  }
+
+  .subsection-block__header {
+    margin-bottom: 24px;
+  }
+
+  .subsection-block__badge-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .subsection-block__title {
+    margin-bottom: 8px;
+  }
+
+  .subsection-block__desc {
+    max-width: 720px;
+  }
+
+  .subsection-card {
+    padding: 32px;
+  }
+
+  .subsection-card__grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 36px;
+    align-items: start;
+  }
+
+  .archival-frame {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface-strong);
+    border: 1px solid var(--color-hairline);
+    aspect-ratio: 4 / 5;
+  }
+
+  .archival-frame__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: sepia(12%) contrast(102%);
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+
+  .subsection-card:hover .archival-frame__img {
+    transform: scale(1.02);
+    filter: sepia(0%) contrast(105%);
+  }
+
+  .archival-caption {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .archival-caption__text {
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--color-body);
+  }
+
+  .archival-caption__credit {
+    font-size: 11px;
+    color: var(--color-muted);
+  }
+
+  .archival-secondary {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--color-hairline);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .archival-secondary__frame {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--color-hairline);
+    flex-shrink: 0;
+  }
+
+  .archival-secondary__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .subsection-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .subsection-card__meta-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .subsection-card__headline {
+    line-height: 1.25;
+  }
+
+  .hover-underline {
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .hover-underline:hover {
+    color: var(--color-muted);
+    text-decoration: underline;
+  }
+
+  .subsection-card__subtitle {
+    color: var(--color-body);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .subsection-card__abstract {
+    padding: 16px;
+    background: var(--color-canvas-soft);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--color-ink);
+  }
+
+  .subsection-card__works {
+    margin: 8px 0;
+  }
+
+  .works-pill-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .work-pill {
+    background: var(--color-surface-strong);
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .work-pill__title {
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .work-pill__author {
+    color: var(--color-body);
+  }
+
+  .subsection-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .button-tertiary {
+    background: transparent;
+    border: none;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .button-tertiary:hover {
+    color: var(--color-muted);
+  }
+
+  .blogs-no-results {
+    text-align: center;
+    padding: 64px 20px;
+    background: var(--color-surface-card);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-hairline);
+  }
+
+  @media (max-width: 900px) {
+    .subsection-card__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .archival-frame {
+      aspect-ratio: 16 / 9;
+      max-height: 280px;
+    }
+  }
+</style>
